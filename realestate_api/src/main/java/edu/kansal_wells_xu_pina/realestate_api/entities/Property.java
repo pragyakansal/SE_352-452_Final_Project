@@ -27,23 +27,23 @@ public class Property {
     @Column(nullable = false)
     private Integer size;
 
-//    @ManyToOne
-//    @JoinColumn(name = "agent_id")
-//    @JsonIgnore
-//    private User agent;
+    @ManyToOne
+    @JoinColumn(name = "agent_id")
+    @JsonIgnore
+    private User agent;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PropertyImage> images;
 
     public Property() { }
 
-    public Property(String title, Double price, String description, String location, Integer size) {
+    public Property(String title, Double price, String description, String location, Integer size, User agent) {
         this.title = title;
         this.price = price;
         this.description = description;
         this.location = location;
         this.size = size;
-//        this.agent = agent;
+        this.agent = agent;
     }
 
     public Long getId() {
@@ -89,12 +89,12 @@ public class Property {
         this.size = size;
     }
 
-//    public User getAgent() {
-//        return agent;
-//    }
-//    public void setAgent(User agent) {
-//        this.agent = agent;
-//    }
+    public User getAgent() {
+        return agent;
+    }
+    public void setAgent(User agent) {
+        this.agent = agent;
+    }
 
     public List<PropertyImage> getImages() {
         return images;
