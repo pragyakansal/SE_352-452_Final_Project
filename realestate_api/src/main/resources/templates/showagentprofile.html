@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgentProfile</title>
+</head>
+<body>
+<h1>My Profile</h1>
+<h5 th:text="|First Name:${agent.firstName}|">Placeholder</h5>
+<h5 th:text="|Last Name:${agent.lastName}|">Placeholder</h5>
+<h5 th:text="|Email:${agent.email}|">Placeholder</h5>
+<h5 th:text="|Role:${agent.role}|">Placeholder</h5>
+
+
+<!--/*//TO-DO This Edit profile button endpoint will need to be updated*/-->
+<button></button><a th:href=@{/agent/editprofile}>Edit Profile</a></button>
+
+<!--/*//TO-DO This Dashboard button endpoint will need to be updated*/-->
+<button></button><a th:href=@{/agent/dashboard}>Back to Dashboard</a></button>
+
+</body>
+</html>

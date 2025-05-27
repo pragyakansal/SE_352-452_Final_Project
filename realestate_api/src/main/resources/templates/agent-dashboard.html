@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agent Dashboard</title>
+</head>
+<body>
+
+<h1 th:text="|Welcome, User ${agent.name}!|">Placeholder</h1>
+<h4 th:text="|Your role:${agent.role}|">Placeholder</h4>
+<h2>Agent Dashboard</h2>
+
+<a th:href=@{/agent/myprofile/(id=${agent.id})}>View Profile</a>
+<br>
+<a th:href=@{/agent/managelistings}>Manage Listings</a>
+<a th:href=@{/agent/addproperty}>Add New Property</a>
+
+<br>
+<br>
+
+<!--/*//TO-DO This logout button endpoint will need to be updated*/-->
+<button></button><a th:href=@{/agent/logout}>Logout</a></button>
+
+</body>
+</html>
