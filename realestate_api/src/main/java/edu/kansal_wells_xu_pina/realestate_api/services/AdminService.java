@@ -6,6 +6,6 @@ import java.util.List;
 public interface AdminService {
     List<User> getAllUsers();
     String deleteUserByEmailAddress(String email);
-    User createAgentUser(User agentUser);
-    User updateAdminProfile(User adminUser);
+    User createAgentUser(User newAgentUser);
+    User updateAdminProfile(User updatedAdminUser);
 }

@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -30,10 +32,10 @@ public class AdminController {
         return "edit-profile-form";
     }
 
-    @PutMapping("/edit-profile")
+    /* @PutMapping("/edit-profile")
     public User editAdminProfile(@RequestBody User adminUser) throws NotFoundException {
 
-    }
+    } */
 
     @GetMapping("/manage-users")
     public String manageUsers(Model model) throws NotFoundException {
@@ -48,9 +50,16 @@ public class AdminController {
         return message;
     }
 
+    @GetMapping("/create-agent")
+    public String displayCreateAgentForm(Model model) {
+        model.addAttribute("agentUser", new User());
+        return "create-agent-form";
+    }
+
     @PostMapping("/create-agent")
-    public String createAgent(@RequestBody User agentUser) throws AlreadyExistsException {
+    public String createAgent(@ModelAttribute User agentUser, Model model) throws AlreadyExistsException {
         User newUser = adminService.createAgentUser(agentUser);
+        model.addAttribute("message", "Agent was created successfully");
         return "create-agent-form";
     }
 

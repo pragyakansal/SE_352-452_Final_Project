@@ -5,7 +5,7 @@ import java.util.List;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
-import edu.kansal_wells_xu_pina.realestate_api.exceptions.BadParameterException;
+import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidUserParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.AlreadyExistsException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,47 +67,47 @@ public class AdminServiceImpl implements AdminService {
 
     private void validateEditProfileFormFields(User adminUser) {
         if (adminUser.getFirstName() == null || adminUser.getFirstName().trim().isEmpty()) {
-            throw new BadParameterException("The admin's first name should not be null or empty. Please try again with a valid input.");
+            throw new InvalidUserParameterException("The admin's first name should not be null or empty. Please try again with a valid input.");
         }
 
         if (adminUser.getLastName() == null || adminUser.getLastName().trim().isEmpty()) {
-            throw new BadParameterException("The admin's last name should not be null or empty. Please try again with a valid input.");
+            throw new InvalidUserParameterException("The admin's last name should not be null or empty. Please try again with a valid input.");
         }
 
         if (adminUser.getEmail() == null || adminUser.getEmail().trim().isEmpty()) {
-            throw new BadParameterException("The admin's email must contain an @ symbol, and it should not be null or empty. " +
+            throw new InvalidUserParameterException("The admin's email must contain an @ symbol, and it should not be null or empty. " +
                     " Please try again with a valid input.");
         }
 
         // Correct format for email
         String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
         if (!adminUser.getEmail().matches(emailRegex)) {
-            throw new BadParameterException("The email format is incorrect. Please try again with a valid input.");
+            throw new InvalidUserParameterException("The email format is incorrect. Please try again with a valid input.");
         }
     }
 
     private void validateAgentFields(User agentUser) {
         if (agentUser.getFirstName() == null || agentUser.getFirstName().trim().isEmpty()) {
-            throw new BadParameterException("The agent's first name should not be null or empty. Please try again with a valid input.");
+            throw new InvalidUserParameterException("The agent's first name should not be null or empty. Please try again with a valid input.");
         }
 
         if (agentUser.getLastName() == null || agentUser.getLastName().trim().isEmpty()) {
-            throw new BadParameterException("The agent's last name should not be null or empty. Please try again with a valid input.");
+            throw new InvalidUserParameterException("The agent's last name should not be null or empty. Please try again with a valid input.");
         }
 
         if (agentUser.getEmail() == null || agentUser.getEmail().trim().isEmpty()) {
-            throw new BadParameterException("The agent's email must contain an @ symbol, and it should not be null or empty. " +
+            throw new InvalidUserParameterException("The agent's email must contain an @ symbol, and it should not be null or empty. " +
                     " Please try again with a valid input.");
         }
 
         // Correct format for email
         String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
         if (!agentUser.getEmail().matches(emailRegex)) {
-            throw new BadParameterException("The email format is incorrect. Please try again with a valid input.");
+            throw new InvalidUserParameterException("The email format is incorrect. Please try again with a valid input.");
         }
 
         if (agentUser.getPassword() == null || agentUser.getPassword().length() < 7 || agentUser.getPassword().length() > 14 || !agentUser.getPassword().matches(".*[^a-zA-Z0-9].*")) {
-            throw new BadParameterException("The agent's password must contain at least 7 characters and at most 14 characters, " +
+            throw new InvalidUserParameterException("The agent's password must contain at least 7 characters and at most 14 characters, " +
                     " and it must have at least one special character. Please try again with a valid input.");
         }
     }
