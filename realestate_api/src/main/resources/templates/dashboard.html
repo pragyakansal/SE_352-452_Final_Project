@@ -8,13 +8,13 @@
 </head>
 <body>
 <h1>
-    Welcome, <span th:text="${user.roles}"></span> User
+    Welcome, <span th:text="${user.role}"></span> User
 </h1>
 <h2>
-    Your role: <span th:text="${user.roles}"></span>
+    Your role: <span th:text="${user.role}"></span>
 </h2>
 <h3>
-    <span th:text="${user.roles}"></span> Dashboard
+    <span th:text="${user.role}"></span> Dashboard
 </h3>
 
 <a th:href="@{/login}">

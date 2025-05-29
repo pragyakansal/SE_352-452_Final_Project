@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
+
 
 @Entity
 @Table(name = "users")
@@ -27,25 +29,30 @@ public class User {
     @Column
     private LocalDateTime createdAt;
 
-    @ManyToMany(fetch = FetchType.EAGER)  // EAGER fetch to load roles during login
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
+
+    /* @ManyToMany(fetch = FetchType.EAGER)  // EAGER fetch to load roles during login
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> role = new HashSet<>();*/
 
 
     // --- Constructors ---
     public User() {}
 
-    public User(String firstName, String lastName,String email,String password, LocalDateTime timestamp, Set<Role> roles) {
+    public User(String firstName, String lastName,String email,String password, LocalDateTime timestamp, Role role) {
         this.firstName=firstName;
         this.lastName=lastName;
         this.email=email;
         this.password=password;
         this.createdAt=timestamp;
-        this.roles = roles;
+        this.role = role;
     }
 
     // --- Getters and Setters ---
@@ -66,11 +73,11 @@ public class User {
 
     public void setPassword(String password) { this.password = password; }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
+    public void setRoles(Role role) { this.role = role; }
     public String getLastName() {
         return lastName;
     }

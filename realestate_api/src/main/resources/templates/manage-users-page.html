@@ -18,10 +18,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user : ${users}" th:if="${artist != null}">
+    <tr th:each="user : ${users}" th:if="${user != null}">
         <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
         <td th:text="${user.email}"></td>
-        <td th:text="${user.roles}"></td>
+        <td th:text="${user.role}"></td>
     </tr>
     </tbody>
 </table>

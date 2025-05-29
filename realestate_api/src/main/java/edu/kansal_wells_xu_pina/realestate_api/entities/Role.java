@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+/* @Entity
 @Table(name = "roles")
 public class Role {
     @Id
@@ -14,11 +14,11 @@ public class Role {
     @Column(nullable = false, unique = true)
     private String name; // e.g., "ROLE_USER", "ROLE_ADMIN"
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+    /* @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new HashSet<>(); */
 
     // --- Constructors ---
-    public Role() {}
+  /*  public Role() {}
 
     public Role(String name) {
         this.name = name;
@@ -48,3 +48,4 @@ public class Role {
 
     public void setUsers(Set<User> users) { this.users = users; }
 }
+*/
