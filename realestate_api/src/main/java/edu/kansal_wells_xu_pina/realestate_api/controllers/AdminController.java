@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller
 @RequestMapping("/admin")
@@ -22,11 +23,13 @@ public class AdminController {
         this.adminService = adminService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/dashboard")
     public String adminDashboard() {
         return "dashboard";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit-profile")
     public String displayEditProfileForm() {
         return "edit-profile-form";
@@ -37,6 +40,7 @@ public class AdminController {
 
     } */
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/manage-users")
     public String manageUsers(Model model) throws NotFoundException {
         List<User> allUsers = adminService.getAllUsers();
@@ -44,18 +48,21 @@ public class AdminController {
         return "manage-users-page";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{email}")
     public String deleteUserByEmailAddress(@PathVariable("email") String email) throws NotFoundException {
         String message = adminService.deleteUserByEmailAddress(email);
         return message;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/create-agent")
     public String displayCreateAgentForm(Model model) {
         model.addAttribute("agentUser", new User());
         return "create-agent-form";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create-agent")
     public String createAgent(@ModelAttribute User agentUser, Model model) throws AlreadyExistsException {
         User newUser = adminService.createAgentUser(agentUser);
