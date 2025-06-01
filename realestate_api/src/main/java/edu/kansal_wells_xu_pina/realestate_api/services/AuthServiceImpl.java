@@ -3,9 +3,11 @@ import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidUserParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.AlreadyExistsException;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
-public class AuthServiceImpl {
+public class AuthServiceImpl implements AuthService {
 
     private UserRepository userRepository;
 
