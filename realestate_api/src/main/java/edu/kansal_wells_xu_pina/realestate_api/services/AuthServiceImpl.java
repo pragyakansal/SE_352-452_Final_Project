@@ -3,8 +3,10 @@ import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidUserParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.AlreadyExistsException;
-import org.springframework.stereotype.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -16,7 +18,6 @@ public class AuthServiceImpl implements AuthService {
         this.userRepository = userRepository;
     }
 
-    @Override
     public User registerUser(User newUser) {
         User existingUser = userRepository.findByEmail(newUser.getEmail());
         if (existingUser != null) {
@@ -27,7 +28,6 @@ public class AuthServiceImpl implements AuthService {
         return newUser;
     }
 
-    @Override
     public User loginUser(User user) {
         User existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser == null) {

@@ -4,7 +4,7 @@ package edu.kansal_wells_xu_pina.realestate_api.controllers;
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.services.AgentService;
 import org.aspectj.weaver.loadtime.Agent;
-// import org.aspectj.weaver.loadtime.Admin;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,15 +70,7 @@ public class AgentController {
     }
 
 
-    // TO-DO: Complete logic to implement delete property functionality
-    /*
-    @PreAuthorize("hasRole('AGENT')")
-    @GetMapping("/deleteproperty/{id}")
-    public String deleteProperty(@PathVariable Long id, Model model) {
-        model.addAttribute("message", "Property deleted successfully!");
-        return "temp";
-    }
-     */
+
 
 
 }

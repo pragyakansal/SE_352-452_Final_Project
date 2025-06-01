@@ -1,12 +1,11 @@
 package edu.kansal_wells_xu_pina.realestate_api.initializers;
 
 import edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;
-import edu.kansal_wells_xu_pina.realestate_api.entities.Role;
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.entities.User;
+import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;
-import edu.kansal_wells_xu_pina.realestate_api.repositories.RoleRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class DataInitializer {
@@ -30,32 +28,22 @@ public class DataInitializer {
     private final PropertyRepository propertyRepo;
     private final PropertyImageRepository imageRepo;
     private final UserRepository userRepo;
-    private final RoleRepository roleRepo;
     private final PasswordEncoder passwordEncoder;
-
     @Autowired
     public DataInitializer(PropertyRepository propertyRepo,
                            UserRepository userRepo,
-                           RoleRepository roleRepo,
                            PropertyImageRepository imageRepo,
                            PasswordEncoder passwordEncoder) {
         this.propertyRepo = propertyRepo;
         this.userRepo = userRepo;
-        this.roleRepo = roleRepo;
         this.imageRepo = imageRepo;
         this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
     public void init() {
-        if (userRepo.count() == 0 && roleRepo.count() == 0) {
-            Role roleAdmin = new Role("ROLE_ADMIN");
-            Role roleAgent = new Role("ROLE_AGENT");
-            Role roleBuyer = new Role("ROLE_BUYER");
+        if (userRepo.count() == 0) {
 
-            roleRepo.save(roleAdmin);
-            roleRepo.save(roleAgent);
-            roleRepo.save(roleBuyer);
 
             User u1 = new User(
                     "Default",
@@ -63,7 +51,7 @@ public class DataInitializer {
                     "admin@example.com",
                     passwordEncoder.encode("admin.123"),
                     LocalDateTime.now(),
-                    Set.of(roleAdmin)
+                    Role.ADMIN
             );
 
             User u2 = new User("Default",
@@ -71,7 +59,7 @@ public class DataInitializer {
                     "agent@example.com",
                     passwordEncoder.encode("agent.123"),
                     LocalDateTime.now(),
-                    Set.of(roleAgent)
+                   Role.AGENT
             );
             User u3 = new User(
                     "Default",
@@ -79,7 +67,7 @@ public class DataInitializer {
                     "buyer@example.com",
                     passwordEncoder.encode("buy.123"),
                     LocalDateTime.now(),
-                    Set.of(roleBuyer)
+                    Role.BUYER
             );
             userRepo.saveAll(List.of(u1, u2, u3));
 

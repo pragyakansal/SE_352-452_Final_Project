@@ -35,10 +35,6 @@ public class AdminController {
         return "edit-profile-form";
     }
 
-    /* @PutMapping("/edit-profile")
-    public User editAdminProfile(@RequestBody User adminUser) throws NotFoundException {
-
-    } */
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/manage-users")

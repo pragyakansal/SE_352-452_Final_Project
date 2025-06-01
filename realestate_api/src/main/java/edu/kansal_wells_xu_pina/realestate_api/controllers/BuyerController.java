@@ -35,24 +35,5 @@ public class BuyerController {
         return "buyer/propertydetail";
     }
 
-//    @PreAuthorize("hasRole('BUYER')")
-//    @GetMapping({"/dashboard", "/"})
-//    public String agentDashboard(Model model) {
-//        model.addAttribute("buyer", buyerService.getCurrentBuyer());
-//        return "buyer/dashboard";
-//    }
-//
-//    @PreAuthorize("hasRole('BUYER')")
-//    @GetMapping("/profile")
-//    public String showProfile(Model model) {
-//        model.addAttribute("buyer", buyerService.getCurrentBuyer());
-//        return "buyer/show-profile";
-//    }
-//
-//    @PreAuthorize("hasRole('BUYER')")
-//    @GetMapping("/profile/edit")
-//    public String editProfile(Model model) {
-//        model.addAttribute("buyer", buyerService.getCurrentBuyer());
-//        return "buyer/edit-profile";
-//    }
+
 }
