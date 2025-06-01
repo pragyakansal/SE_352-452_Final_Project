@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1 th:text="${property.title}">Property Title</h1>
+    <p><strong>Price:</strong> <span th:text="${property.price}">$0.00</span></p>
+    <p><strong>Location:</strong> <span th:text="${property.location}">Location</span></p>
+    <p><strong>Size:</strong> <span th:text="${property.size}">0</span> sq ft</p>
+    <p><strong>Description:</strong></p>
+    <p th:text="${property.description}">Full description here...</p>
+
+    <div><strong>Images:</strong></div>
+    <div class="images" th:if="${property.images}">
+        <img th:each="img : ${property.images}"
+             th:src="@{/images/{folder}/{file}(
+                folder=${property.title},
+                file=${img.imageFileName}
+             )}"
+             alt="Property Image" />
+    </div>
+
+    <a th:href="@{/buyer/listings}">&larr; Back to Listings</a>
+</div>
+</body>
+</html>
