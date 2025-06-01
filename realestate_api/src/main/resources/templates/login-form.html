@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!-- <link rel="stylesheet" th:href="@{/css/styles.css}"/> -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
 <form action="/admin/create-agent" method="post">
@@ -19,6 +19,9 @@
     </div>
     <a th:href="@{/admin/dashboard}">
         <button>Login</button>
+    </a>
+    <a th:href="@{/landing-page/register}">
+        <span>Don't have an account? Register here. </span>
     </a>
 </form>
 </body>
