@@ -1,5 +1,9 @@
 package edu.kansal_wells_xu_pina.realestate_api.config;
+
 import edu.kansal_wells_xu_pina.realestate_api.services.CustomUserDetailsService;
+import edu.kansal_wells_xu_pina.realestate_api.utils.GlobalRateLimiterFilter;
+import edu.kansal_wells_xu_pina.realestate_api.utils.JwtAuthenticationFilter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,30 +17,55 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomUserDetailsService userDetailsService;
+    private final GlobalRateLimiterFilter globalRateLimiterFilter;
 
     @Autowired
-    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
+                          CustomUserDetailsService userDetailsService,
+                          GlobalRateLimiterFilter globalRateLimiterFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.userDetailsService = userDetailsService;
+        this.globalRateLimiterFilter = globalRateLimiterFilter;
     }
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // First, rate limit EVERY request as early as possible:
+                .addFilterBefore(globalRateLimiterFilter, UsernamePasswordAuthenticationFilter.class)
+
+                // Then, process JWT authentication:
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/landing-page/**").permitAll()
+                        .requestMatchers("/register/**").permitAll()
+                        .requestMatchers("/login/**").permitAll()
+                        .requestMatchers("/dashboard/**").hasAnyRole("USER","MANAGER","ADMIN")
+                         .requestMatchers("/dashboard/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/agent/**").hasAnyRole("AGENT",
+                                "ADMIN")
+                        .requestMatchers("/buyer/**").hasRole("BUYER")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(new CustomAuthenticationEntryPoint())  // Handles 401 errors
                         .accessDeniedHandler(new CustomAccessDeniedHandler())
-                );
+                )
+                .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
+
 
         return http.build();
     }
