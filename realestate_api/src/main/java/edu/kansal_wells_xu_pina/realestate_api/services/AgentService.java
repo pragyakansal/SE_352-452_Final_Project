@@ -10,11 +10,22 @@ import java.util.List;
 import java.util.TreeMap;
 
 @Service
-public class AgentService {
+public interface AgentService {
+
+    List<Property> getAllProperties(Long agentId);
+    Property addProperty(Long agentId, Property property);
+    Property editProperty(Property property);
+    Agent getAgent();
+
+
+
+
+    /*
 
     private final TreeMap<String, Agent> agentMap = new TreeMap<>();
 
     public AgentService() {
+
     }
 
     public Agent getCurrentAgent() {
@@ -52,6 +63,8 @@ public class AgentService {
         return null;
     }
 
+
+    */
 
 
 
