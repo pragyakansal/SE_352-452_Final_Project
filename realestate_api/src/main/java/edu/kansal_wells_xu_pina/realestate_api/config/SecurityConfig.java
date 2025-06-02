@@ -49,10 +49,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/landing-page/**").permitAll()
-                        .requestMatchers("/register/**").permitAll()
-                        .requestMatchers("/login/**").permitAll()
+                        .requestMatchers("/register").permitAll()
+                        .requestMatchers("/login").permitAll()
                         .requestMatchers("/dashboard/**").hasAnyRole("USER","MANAGER","ADMIN")
-                         .requestMatchers("/dashboard/**").permitAll()
+                        //.requestMatchers("/dashboard/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/agent/**").hasAnyRole("AGENT",
                                 "ADMIN")
@@ -63,8 +63,8 @@ public class SecurityConfig {
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())  // Handles 401 errors
                         .accessDeniedHandler(new CustomAccessDeniedHandler())
-                )
-                .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
+                );
+                //.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 
         return http.build();

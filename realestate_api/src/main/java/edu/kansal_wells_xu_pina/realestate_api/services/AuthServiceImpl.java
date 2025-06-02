@@ -5,17 +5,28 @@ import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.AlreadyExistsException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import edu.kansal_wells_xu_pina.realestate_api.services.CustomUserDetailsService;
+import edu.kansal_wells_xu_pina.realestate_api.utils.JwtUtil;
+import edu.kansal_wells_xu_pina.realestate_api.utils.JwtAuthResponse;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
+    private CustomUserDetailsService customUserDetailsService;
+    private JwtUtil jwtUtil;
 
     @Autowired
-    public AuthServiceImpl(UserRepository userRepository) {
+    public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, CustomUserDetailsService customUserDetailsService, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.customUserDetailsService = customUserDetailsService;
+        this.jwtUtil = jwtUtil;
     }
 
     public User registerUser(User newUser) {
@@ -25,22 +36,26 @@ public class AuthServiceImpl implements AuthService {
                     " to your existing account or create an account with a new email.");
         }
         validateUserRegistrationFields(newUser);
-        return newUser;
+
+        // NEW CHANGES
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        return userRepository.save(newUser);
     }
 
-    public User loginUser(User user) {
+    public JwtAuthResponse loginUser(User user) {
         User existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser == null) {
             throw new InvalidUserParameterException("A user with the email: " + user.getEmail() + " could not be found in the database. " +
                     " Please try again and login with an email that is already registered within our system.");
         }
 
-        // Temporary password check until security part is implemented
-        // TO-DO (for Edith): compare encrypted passwords instead of plaintext passwords
-        if (!existingUser.getPassword().matches(user.getPassword())) {
+        // NEW CHANGES
+        if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
             throw new InvalidUserParameterException("The password entered is incorrect. Please try again with the correct password.");
         }
-        return existingUser;
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername(user.getEmail());
+        String jwt = jwtUtil.generateToken(userDetails);
+        return new JwtAuthResponse(jwt);
     }
 
     private void validateUserRegistrationFields(User newUser) {
