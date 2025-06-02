@@ -48,16 +48,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/landing-page/**").permitAll()
-                        .requestMatchers("/register/**").permitAll()
-                        .requestMatchers("/login/**").permitAll()
-                        .requestMatchers("/dashboard/**").hasAnyRole("USER","MANAGER","ADMIN")
-                         .requestMatchers("/dashboard/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/agent/**").hasAnyRole("AGENT",
-                                "ADMIN")
-                        .requestMatchers("/buyer/**").hasRole("BUYER")
-                        .anyRequest().authenticated()
+
+
                 )
                 .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(ex -> ex
