@@ -46,6 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             token = header.substring(7);
             try {
                 username = jwtUtil.extractUsername(token);
+                log.info("Extracted username from token: {}", username);
             } catch (Exception e) {
                 log.error("JWT parsing failed: {}", e.getMessage());
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

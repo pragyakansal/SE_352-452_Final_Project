@@ -39,12 +39,14 @@ public class GlobalRateLimiterFilter extends OncePerRequestFilter {
             if (window.requestCount > MAX_REQUESTS) {
                 response.setStatus(429);
                 response.setContentType("application/json");
-                String s = String.format("""
-                    {
-                      "error": "Rate Limit Exceeded",
-                      "message": "Exceeded %d calls per %d seconds. Please slow down."
-                    }
-                """, MAX_REQUESTS, WINDOW_MS/1000);
+                String s = String.format(
+                        "{\n" +
+                                "  \"error\": \"Rate Limit Exceeded\",\n" +
+                                "  \"message\": \"Exceeded %d calls per %d seconds. Please slow down.\"\n" +
+                                "}",
+                        MAX_REQUESTS, WINDOW_MS / 1000
+                );
+
                 response.getWriter().write(s);
                 return;
             }
