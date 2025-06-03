@@ -1,4 +1,4 @@
-package edu.kansal_wells_xu_pina.realestate_api.utils;
+package edu.kansal_wells_xu_pina.realestate_api.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.core.userdetails.UserDetails;

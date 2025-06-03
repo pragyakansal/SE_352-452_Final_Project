@@ -39,7 +39,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // First, rate limit EVERY request as early as possible:
+               /// First, rate limit EVERY request as early as possible:
                 .addFilterBefore(globalRateLimiterFilter, UsernamePasswordAuthenticationFilter.class)
 
                 // Then, process JWT authentication:
@@ -48,16 +48,18 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/landing-page/**").permitAll()
+                       .requestMatchers("/landing-page/**").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/dashboard/**").hasAnyRole("USER","MANAGER","ADMIN")
-                        //.requestMatchers("/dashboard/**").permitAll()
+                        .requestMatchers("/dashboard/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/agent/**").hasAnyRole("AGENT",
                                 "ADMIN")
                         .requestMatchers("/buyer/**").hasRole("BUYER")
                         .anyRequest().authenticated()
+
+
                 )
                 .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(ex -> ex

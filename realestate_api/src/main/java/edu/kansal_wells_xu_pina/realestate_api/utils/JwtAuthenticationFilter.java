@@ -1,5 +1,5 @@
 package edu.kansal_wells_xu_pina.realestate_api.utils;
-import edu.kansal_wells_xu_pina.realestate_api.utils.JwtUtil;
+import edu.kansal_wells_xu_pina.realestate_api.jwt.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
