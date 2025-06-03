@@ -37,15 +37,15 @@ public class AuthController {
     // Finish implementation
     @PostMapping("/register")
     public String userRegistration(@ModelAttribute User user, Model model) {
-        authService.registerUser(user);
+//        authService.registerUser(user);
         return "redirect:/common-dashboard";
     }
 
     // Finish implementation
-    @PostMapping("/login")
-    public ResponseEntity<JwtAuthResponse> loginUser(@RequestBody User user) {
-        JwtAuthResponse jwtAuthResponse = authService.loginUser(user);
-        return ResponseEntity.ok(jwtAuthResponse);
-        //return "redirect:/common-dashboard";
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<JwtAuthResponse> loginUser(@RequestBody User user) {
+//        JwtAuthResponse jwtAuthResponse = authService.loginUser(user);
+//        return ResponseEntity.ok(jwtAuthResponse);
+//        return "redirect:/common-dashboard";
+//    }
 }

@@ -34,6 +34,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.startsWith("/landing-page/") ||
+               path.equals("/") ||
+               path.equals("/register") ||
+               path.equals("/login") ||
+               path.startsWith("/buyer/");
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
@@ -46,7 +56,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             token = header.substring(7);
             try {
                 username = jwtUtil.extractUsername(token);
-                log.info("Extracted username from token: {}", username);
             } catch (Exception e) {
                 log.error("JWT parsing failed: {}", e.getMessage());
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

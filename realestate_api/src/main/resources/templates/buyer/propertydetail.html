@@ -2,28 +2,123 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${property.title}">Property Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .property-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            cursor: pointer;
+            background: #f8f9fa;
+        }
+        .modal-dialog {
+            max-width: 90vw;
+        }
+        .carousel-item img {
+            max-height: 80vh;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            margin: 0 auto;
+            display: block;
+        }
+        .carousel-control-prev,
+        .carousel-control-next {
+            background: rgba(0, 0, 0, 0.3);
+            width: 50px;
+        }
+        .thumbnail {
+            width: 60px;
+            height: 45px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid #ddd;
+        }
+        .thumbnail.active {
+            border-color: #0d6efd;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <h1 th:text="${property.title}">Property Title</h1>
-    <p><strong>Price:</strong> <span th:text="${property.price}">$0.00</span></p>
-    <p><strong>Location:</strong> <span th:text="${property.location}">Location</span></p>
-    <p><strong>Size:</strong> <span th:text="${property.size}">0</span> sq ft</p>
-    <p><strong>Description:</strong></p>
-    <p th:text="${property.description}">Full description here...</p>
+    <div class="container mt-4">
+        <h1 th:text="${property.title}">Property Title</h1>
+        
+        <div class="mb-4">
+            <h2>Property Details</h2>
+            <p><strong>Price:</strong> <span th:text="${'$' + #numbers.formatDecimal(property.price, 1, 'COMMA', 2, 'POINT')}">$0.00</span></p>
+            <p><strong>Location:</strong> <span th:text="${property.location}">Location</span></p>
+            <p><strong>Size:</strong> <span th:text="${property.size}">0</span> sq ft</p>
+            <p><strong>Description:</strong></p>
+            <p th:text="${property.description}">Full description here...</p>
+        </div>
+        
+        <div th:if="${property.images != null and !property.images.empty}" class="mb-4">
+            <img th:src="@{/images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
+                 class="property-image" 
+                 data-bs-toggle="modal"
+                 data-bs-target="#imageModal">
+            
+            <div class="d-flex gap-2 mt-2">
+                <img th:each="img, statusVar : ${property.images}"
+                     th:src="@{/images/{folder}/{file}(folder=${property.title},file=${img.imageFileName})}"
+                     class="thumbnail"
+                     th:classappend="${statusVar.first} ? 'active' : ''"
+                     data-bs-toggle="modal"
+                     data-bs-target="#imageModal"
+                     th:data-bs-slide-to="${statusVar.index}"
+            </div>
+        </div>
 
-    <div><strong>Images:</strong></div>
-    <div class="images" th:if="${property.images}">
-        <img th:each="img : ${property.images}"
-             th:src="@{/images/{folder}/{file}(
-                folder=${property.title},
-                file=${img.imageFileName}
-             )}"
-             alt="Property Image" />
+        <a th:href="@{/buyer/listings}" class="btn btn-primary">Back to Listings</a>
     </div>
 
-    <a th:href="@{/buyer/listings}">&larr; Back to Listings</a>
-</div>
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"></button>
+                    <div id="modalCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div th:each="img, statusVar : ${property.images}" 
+                                 th:class="${statusVar.first} ? 'carousel-item active' : 'carousel-item'">
+                                <img th:src="@{/images/{folder}/{file}(folder=${property.title},file=${img.imageFileName})}" class="d-block w-100">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#modalCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#modalCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalCarousel = new bootstrap.Carousel(document.getElementById('modalCarousel'));
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const mainImage = document.querySelector('.property-image');
+            
+            document.getElementById('modalCarousel').addEventListener('slid.bs.carousel', function (e) {
+                const activeIndex = e.to;
+                mainImage.src = thumbnails[activeIndex].src;
+                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                thumbnails[activeIndex].classList.add('active');
+            });
+            
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    const slideTo = this.getAttribute('data-bs-slide-to');
+                    modalCarousel.to(slideTo);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
