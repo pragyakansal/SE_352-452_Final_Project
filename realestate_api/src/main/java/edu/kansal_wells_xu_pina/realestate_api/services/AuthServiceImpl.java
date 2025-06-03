@@ -3,32 +3,55 @@ import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidUserParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.AlreadyExistsException;
-
+import edu.kansal_wells_xu_pina.realestate_api.dtos.JwtResponse;
+import edu.kansal_wells_xu_pina.realestate_api.jwt.JwtUtil;
+import edu.kansal_wells_xu_pina.realestate_api.utils.JwtAuthResponse;
+import edu.kansal_wells_xu_pina.realestate_api.dtos.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import edu.kansal_wells_xu_pina.realestate_api.services.CustomUserDetailsService;
-import edu.kansal_wells_xu_pina.realestate_api.utils.JwtUtil;
-import edu.kansal_wells_xu_pina.realestate_api.utils.JwtAuthResponse;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.AuthenticationManager;
 
 @Service
 public class AuthServiceImpl implements AuthService {
-
+    private final JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private CustomUserDetailsService customUserDetailsService;
-    private JwtUtil jwtUtil;
 
     @Autowired
-    public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, CustomUserDetailsService customUserDetailsService, JwtUtil jwtUtil) {
+    public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, CustomUserDetailsService customUserDetailsService, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.customUserDetailsService = customUserDetailsService;
         this.jwtUtil = jwtUtil;
+        this.authenticationManager = authenticationManager;
     }
+    @Override
+    public JwtResponse authenticateAndGenerateToken(LoginRequest request) {
+        try {
+            Authentication auth = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+            );
+            SecurityContextHolder.getContext().setAuthentication(auth);
 
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+            String token = jwtUtil.generateToken(userDetails);
+
+            return new JwtResponse(token);
+        } catch (AuthenticationException e) {
+            throw new BadCredentialsException("Invalid email  or password");
+        }
+    }
+    @PreAuthorize("hasAnyRole('USER', 'MANAGER','ADMIN')")
     public User registerUser(User newUser) {
         User existingUser = userRepository.findByEmail(newUser.getEmail());
         if (existingUser != null) {
