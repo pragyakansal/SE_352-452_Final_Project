@@ -37,17 +37,22 @@ public class JwtUtil {
         log.info("Generating JWT token for user: {}", userDetails.getUsername());
         log.debug("Token expiration: {}", expiryDate);
 
+        // Get the role from the first authority (we only have one role per user)
+        String role = userDetails.getAuthorities().stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .map(authority -> authority.replace("ROLE_", ""))
+                .orElseThrow(() -> new IllegalStateException("User has no authorities"));
+
         String token = Jwts.builder()
                 .subject(userDetails.getUsername())
-                .claim("roles", userDetails.getAuthorities().stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .toList())
+                .claim("role", role)  // Store single role instead of list
                 .issuedAt(now)
                 .expiration(expiryDate)
                 .signWith(getSigningKey())
                 .compact();
 
-        log.debug("Generated token: {}", token);
+        log.debug("Generated token with role: {}", role);
         return token;
     }
 
@@ -62,9 +67,9 @@ public class JwtUtil {
 
     public List<String> extractRoles(String token) {
         Claims claims = extractAllClaims(token);
-        List<String> roles = claims.get("roles", List.class);
-        log.debug("Extracted roles from token: {}", roles);
-        return roles;
+        String role = claims.get("role", String.class);
+        log.debug("Extracted role from token: {}", role);
+        return List.of(role);  // Return single role as a list for compatibility
     }
 
     public String extractUsername(String token) {

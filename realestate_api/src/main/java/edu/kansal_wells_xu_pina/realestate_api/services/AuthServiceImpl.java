@@ -55,10 +55,16 @@ public class AuthServiceImpl implements AuthService {
             SecurityContextHolder.getContext().setAuthentication(auth);
             log.info("Security context set for user: {}", user.getEmail());
             
-            // Generate JWT token
-            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+            // Get the actual user from the database to ensure we have the correct role
+            User dbUser = userRepository.findByEmail(user.getEmail());
+            if (dbUser == null) {
+                throw new BadCredentialsException("User not found");
+            }
+            
+            // Generate JWT token using the database user's role
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(dbUser.getEmail());
             String token = jwtUtil.generateToken(userDetails);
-            log.info("JWT token generated for user: {}", user.getEmail());
+            log.info("JWT token generated for user: {} with role: {}", user.getEmail(), dbUser.getRole());
 
             // Create and configure the JWT cookie
             Cookie jwtCookie = new Cookie("jwt", token);
@@ -110,7 +116,13 @@ public class AuthServiceImpl implements AuthService {
             );
             SecurityContextHolder.getContext().setAuthentication(auth);
 
-            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+            // Get the actual user from the database to ensure we have the correct role
+            User dbUser = userRepository.findByEmail(user.getEmail());
+            if (dbUser == null) {
+                throw new BadCredentialsException("User not found");
+            }
+
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(dbUser.getEmail());
             String token = jwtUtil.generateToken(userDetails);
 
             return new JwtResponse(token);

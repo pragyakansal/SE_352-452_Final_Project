@@ -7,14 +7,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
-
+    private static final Logger log = LoggerFactory.getLogger(CustomUserDetailsServiceImpl.class);
     private final UserRepository userRepository;
 
     @Autowired
@@ -25,10 +26,14 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with email: " + email);
+        }
 
-        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+        log.info("Created authorities for user {}: {}", email, authorities);
+        
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(), user.getPassword(), authorities);
     }

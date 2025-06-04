@@ -38,7 +38,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-
         log.info("JwtAuthenticationFilter invoked for URI: {}", request.getRequestURI());
 
         String path = request.getRequestURI();
@@ -80,6 +79,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (token == null) {
             log.warn("No JWT token found in request cookies for URI: {}", request.getRequestURI());
+            filterChain.doFilter(request, response);
             return;
         }
 
@@ -98,21 +98,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     var authorities = roles.stream()
                             .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                             .collect(Collectors.toList());
+                    log.info("Created authorities: {}", authorities);
 
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             userDetails, null, authorities);
-
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     log.info("Authentication successfully set for user: {}", email);
                 } else {
                     log.warn("Token validation failed for user: {}", email);
-                    return;
                 }
             }
         } catch (Exception e) {
-            log.error("Error processing JWT token: {}", e.getMessage(), e);
-            return;
+            log.error("Error processing JWT token", e);
         }
 
         filterChain.doFilter(request, response);
