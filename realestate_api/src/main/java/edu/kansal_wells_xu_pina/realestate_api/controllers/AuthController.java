@@ -87,7 +87,6 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    @PreAuthorize("hasAnyRole('AGENT', 'BUYER', 'ADMIN')")
     public String logout(HttpServletResponse response) {
         authService.clearJwtCookie(response);
         return "redirect:/landing-page/login";
