@@ -42,6 +42,8 @@ public class DataInitializer {
 
     @PostConstruct
     public void init() {
+        System.out.println("Running Data Initializer...");
+
         if (userRepo.count() == 0) {
 
 
