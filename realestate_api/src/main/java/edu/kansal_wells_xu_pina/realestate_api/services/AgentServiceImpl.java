@@ -44,7 +44,13 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public User EditAgentProfile(Long agentId, UpdateProfileRequest request) {
+    public UpdateProfileRequest getAgentDtoById(Long id) {
+        User agent = getAgentById(id);
+        return new UpdateProfileRequest(agent.getFirstName(), agent.getLastName(), agent.getEmail());
+    }
+
+    @Override
+    public User editAgentProfile(Long agentId, UpdateProfileRequest request) {
         User agent = getAgentById(agentId);
        if (request.getFirstName() != null) {
             agent.setFirstName(request.getFirstName());
@@ -75,7 +81,7 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public Property AddProperty(Long agentId, Property property) {
+    public Property addProperty(Long agentId, Property property) {
         User agent = getAgentById(agentId);
         property.setAgent(agent);
         return propertyRepository.save(property);

@@ -13,10 +13,11 @@ import java.util.List;
 public interface AgentService {
 
     User getAgentById(Long id);
-    User EditAgentProfile(Long AgentId, UpdateProfileRequest request);
+    UpdateProfileRequest getAgentDtoById(Long id);
+    User editAgentProfile(Long AgentId, UpdateProfileRequest request);
     List<Property> getAgentProperties(Long agentId);
     Property getAgentPropertyById(Long agentId, Long propertyId);
-    Property AddProperty(Long agentId, Property property);
+    Property addProperty(Long agentId, Property property);
     Property EditProperty(Long agentId, Long propertyId, Property property);
     // void DeleteProperty(Long agentId, Long propertyId);
 
