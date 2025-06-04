@@ -1,16 +1,17 @@
 package edu.kansal_wells_xu_pina.realestate_api.controllers;
 
-
-/* import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
+import edu.kansal_wells_xu_pina.realestate_api.dtos.UpdateProfileRequest;
+import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
+import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.services.AgentService;
 import org.aspectj.weaver.loadtime.Agent;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*; */
+import org.springframework.web.bind.annotation.*;
 
-/*
+
 @Controller
 @RequestMapping("/agent")
 public class AgentController {
@@ -19,47 +20,53 @@ public class AgentController {
 
     public AgentController(AgentService agentService) {this.agentService = agentService;}
 
-
     @PreAuthorize("hasRole('AGENT')")
     @GetMapping({"/dashboard", "/"})
-    public String agentDashboard(Model model) {
-        model.addAttribute("agent", agentService.getCurrentAgent());
-        return "agent-dashboard";
+    public String agentDashboard() {
+        return "common-dashboard";
     }
 
     @PreAuthorize("hasRole('AGENT')")
-    @GetMapping("/myprofile/{id}")
+    @GetMapping("/{id}/myprofile")
     public String myAgentProfile(@PathVariable Long id, Model model) {
-        model.addAttribute("agent", agentService.getCurrentAgent());
-        return "showagentprofile";
+        model.addAttribute("agent", agentService.getAgentById(id));
+        return "agentprofile";
     }
 
-
-    @PreAuthorize("hasRole('AGENT' + ' or hasRole('ADMIN')")
-    @GetMapping({"editprofile", "/editprofile/{id}"})
+    @PreAuthorize("hasRole('AGENT')")
+    @GetMapping("/{id}/editprofile")
     public String editAgentProfile(@PathVariable(required = false) Long id, Model model) {
         if (id != null && id > 0) {
-            model.addAttribute("agent", agentService.getAgent(id));
+            model.addAttribute("agent", agentService.getAgentDtoById(id));
         } else {
-            model.addAttribute("agent", new Agent());
+            model.addAttribute("agent", new UpdateProfileRequest());
         }
-        return "edditagentprofile";
+        return "editagentprofile";
     }
 
 
     @PreAuthorize("hasRole('AGENT')")
-    @GetMapping("/managelistings")
-    public String manageListings(Model model) {
-        model.addAttribute("properties", agentService.getAllProperties());
-        return "agentmanagelistings";
+    @GetMapping("/{id}/managelistings")
+    public String manageListings(@PathVariable Long id, Model model) {
+        model.addAttribute("properties", agentService.getAgentProperties(id));
+        // return "managelistings";
+        return "temp";
     }
 
     // TO-DO: template for agentaddproperty.html and addProperty method to handle the form submission
     @PreAuthorize("hasRole('AGENT')")
-    @GetMapping("/addproperty")
-    public String addProperty(Model model) {
+    @GetMapping("/{id}/addproperty")
+    public String addPropertyForm(@PathVariable Long id, Model model) {
         model.addAttribute("property", new Property());
         return "agentaddproperty";
+    }
+
+    @PreAuthorize("hasRole('AGENT')")
+    @PostMapping("/{id}/addproperty")
+    public String addProperty(@PathVariable Long id, @ModelAttribute Property property, Model model) {
+        agentService.addProperty(id, property);
+        model.addAttribute("property", property);
+        return "redirect:/agent/" + id + "/managelistings";
     }
 
 
@@ -71,4 +78,4 @@ public class AgentController {
     }
 
 
-} */
+}
