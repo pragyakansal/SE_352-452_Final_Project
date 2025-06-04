@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
 </head>
 <body>
-
-<h1 th:text="|Welcome, User ${agent.name}!|">Placeholder</h1>
-<h4 th:text="|Your role:${agent.role}|">Placeholder</h4>
-<h2>Agent Dashboard</h2>
-
-<br>
-<br>
-
-<ul>
-    <li><a th:href="@{/profile}"></a>My Profile</li>
-    <!-- BUYERS -->
-    <li sec:authorize="hasRole('BUYER')><a th:href=@{/buyers/properties}">Browse Properties</a></li>
-
-    <!-- AGENTS -->
-    <li sec:authorize="hasRole('AGENT')><a th:href=@{/agents/listings/manage}">Manage Listings</a></li>
-    <li sec:authorize="hasRole('AGENT')><a th:href=@{/agents/listings/create-new}">Manage Listings</a></li>
-
-    <!-- ADMINS -->
-    <li sec:authorize="hasRole('ADMIN')><a th:href=@{/admins/manage-users}">Manage Listings</a></li>
-    <li sec:authorize="hasRole('ADMIN')><a th:href=@{/admins/create-agent}">Create Agent</a></li>
-
-</ul>
-
-<!--/*//TO-DO This logout button endpoint will need to be updated*/-->
-<button></button><a th:href=@{/agent/logout}>Logout</a></button>
-
+    <h1 th:text="${message}">Welcome to Dashboard</h1>
+    <h4 th:text="${#authentication.name}">User</h4>
+    <h2>Dashboard</h2>
+    <br>
+    <br>
+    <ul>
+        <li><a th:href="@{/profile}">My Profile</a></li>
+        <!-- BUYERS -->
+        <li sec:authorize="hasRole('BUYER')">
+            <a th:href="@{/buyers/properties}">Browse Properties</a>
+        </li>
+        <!-- AGENTS -->
+        <li sec:authorize="hasRole('AGENT')">
+            <a th:href="@{/agents/listings/manage}">Manage Listings</a>
+        </li>
+        <li sec:authorize="hasRole('AGENT')">
+            <a th:href="@{/agents/listings/create-new}">Create New Listing</a>
+        </li>
+        <!-- ADMINS -->
+        <li sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admins/manage-users}">Manage Users</a>
+        </li>
+        <li sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admins/create-agent}">Create Agent</a>
+        </li>
+    </ul>
+    <form th:action="@{/landing-page/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>

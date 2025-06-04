@@ -18,13 +18,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
     private final CustomUserDetailsService userDetailsService;
+
     private final GlobalRateLimiterFilter globalRateLimiterFilter;
 
     @Autowired
@@ -36,43 +38,29 @@ public class SecurityConfig {
         this.globalRateLimiterFilter = globalRateLimiterFilter;
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-               /// First, rate limit EVERY request as early as possible:
+                // First, rate limit EVERY request as early as possible:
                 .addFilterBefore(globalRateLimiterFilter, UsernamePasswordAuthenticationFilter.class)
 
                 // Then, process JWT authentication:
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 
-
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/landing-page/**", "/register", "/login", "/images/**", "/css/**").permitAll()
-                        /* .requestMatchers("/landing-page/**").permitAll()
-                        .requestMatchers("/register").permitAll()
-                        .requestMatchers("/login").permitAll()
-                        .requestMatchers("/images/**","/css/**").permitAll() */
-                        //.requestMatchers("/landing-page/dashboard").hasAnyRole("BUYER", "AGENT", "ADMIN")
-                        //.requestMatchers("/landing-page/dashboard").permitAll()
-                        //.requestMatchers("/dashboard/**").permitAll()
+                        .requestMatchers("/", "/landing-page/", "/landing-page/login", "/landing-page/register", "/register", "/login", "/images/**", "/css/**").permitAll()
+                        .requestMatchers("/landing-page/dashboard").hasAnyRole("BUYER", "AGENT", "ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/agent/**").hasAnyRole("AGENT",
-                                "ADMIN")
+                        .requestMatchers("/agent/**").hasAnyRole("AGENT")
                         .requestMatchers("/buyer/**").permitAll()
                         .anyRequest().authenticated()
-
-
                 )
                 .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())  // Handles 401 errors
                         .accessDeniedHandler(new CustomAccessDeniedHandler())
                 );
-                //.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
 
         return http.build();
     }
@@ -90,6 +78,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }
