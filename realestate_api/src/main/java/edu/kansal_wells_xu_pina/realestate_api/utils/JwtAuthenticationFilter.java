@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,11 +40,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
+        log.info("JwtAuthenticationFilter invoked for URI: {}", request.getRequestURI());
+
         String header = request.getHeader("Authorization");
         String token = null;
         String username = null;
 
-        if (header != null && header.startsWith("Bearer ")) {
+        String path = request.getRequestURI();
+
+        if (path.startsWith("/landing-page/login") || path.startsWith("/css") || path.startsWith("/landing-page/register") || path.startsWith("/images")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        /* if (header != null && header.startsWith("Bearer ")) {
             token = header.substring(7);
             try {
                 username = jwtUtil.extractUsername(token);
@@ -58,7 +69,50 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 response.getWriter().write("Invalid JWT Token - Missing username");
                 return;
             }
+        } */
+
+        if (header != null && header.startsWith("Bearer ")) {
+            token = header.substring(7);
+        } else {
+            // 2. If not in header, try session
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                token = (String) session.getAttribute("jwt");
+            }
+
+            // 3. Optionally, try cookies (if you stored JWT there)
+            if (token == null && request.getCookies() != null) {
+                for (Cookie cookie : request.getCookies()) {
+                    log.info("Found cookie: {}={}", cookie.getName(), cookie.getValue());
+                    if ("jwt".equals(cookie.getName())) {
+                        token = cookie.getValue();
+                        log.info("JWT found in cookie: {}", token);
+                        break;
+                    }
+                }
+            }
         }
+
+        if (token != null) {
+            log.info("JWT token found: {}", token);
+            try {
+                username = jwtUtil.extractUsername(token);
+                log.info("Extracted username from token: {}", username);
+            } catch (Exception e) {
+                log.error("JWT parsing failed: {}", e.getMessage());
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("Invalid JWT Token");
+                return;
+            }
+
+            if (username == null) {
+                log.warn("Token provided but username could not be extracted.");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("Invalid JWT Token - Missing username");
+                return;
+            }
+        }
+
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -76,9 +130,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                log.info("Authentication successfully set for user: {}", username);
             }
         }
 
+        log.info("Current authentication context: {}", SecurityContextHolder.getContext().getAuthentication());
         filterChain.doFilter(request, response);
     }
 }

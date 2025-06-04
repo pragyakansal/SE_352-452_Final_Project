@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableMethodSecurity
@@ -39,21 +40,24 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                /// First, rate limit EVERY request as early as possible:
                 .addFilterBefore(globalRateLimiterFilter, UsernamePasswordAuthenticationFilter.class)
 
                 // Then, process JWT authentication:
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 
-                .csrf(AbstractHttpConfigurer::disable)
+
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/").permitAll()
-                        .requestMatchers("/landing-page/**").permitAll()
+                        .requestMatchers("/", "/landing-page/**", "/register", "/login", "/images/**", "/css/**").permitAll()
+                        /* .requestMatchers("/landing-page/**").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers("/images/**","/css/**").permitAll()
-                        .requestMatchers("/dashboard/**").hasAnyRole("USER","MANAGER","ADMIN")
-                        .requestMatchers("/dashboard/**").permitAll()
+                        .requestMatchers("/images/**","/css/**").permitAll() */
+                        //.requestMatchers("/landing-page/dashboard").hasAnyRole("BUYER", "AGENT", "ADMIN")
+                        //.requestMatchers("/landing-page/dashboard").permitAll()
+                        //.requestMatchers("/dashboard/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/agent/**").hasAnyRole("AGENT",
                                 "ADMIN")
@@ -86,4 +90,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 }

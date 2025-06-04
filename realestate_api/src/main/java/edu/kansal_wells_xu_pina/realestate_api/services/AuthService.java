@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 public interface AuthService {
 
     JwtResponse authenticateAndGenerateToken(LoginRequest request);
+    JwtAuthResponse loginUser(User user);
+    User registerUser(User user);
 
 
 }
