@@ -14,21 +14,21 @@
         <li><a th:href="@{/profile}">My Profile</a></li>
         <!-- BUYERS -->
         <li sec:authorize="hasRole('BUYER')">
-            <a th:href="@{/buyers/properties}">Browse Properties</a>
+            <a th:href="@{/buyer/properties}">Browse Properties</a>
         </li>
         <!-- AGENTS -->
         <li sec:authorize="hasRole('AGENT')">
-            <a th:href="@{/agents/listings/manage}">Manage Listings</a>
+            <a th:href="@{/agent/listings/manage}">Manage Listings</a>
         </li>
         <li sec:authorize="hasRole('AGENT')">
-            <a th:href="@{/agents/listings/create-new}">Create New Listing</a>
+            <a th:href="@{/agent/listings/create-new}">Create New Listing</a>
         </li>
         <!-- ADMINS -->
         <li sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/admins/manage-users}">Manage Users</a>
+            <a th:href="@{/admin/manage-users}">Manage Users</a>
         </li>
         <li sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/admins/create-agent}">Create Agent</a>
+            <a th:href="@{/admin/create-agent}">Create Agent</a>
         </li>
     </ul>
     <form th:action="@{/landing-page/logout}" method="post">
