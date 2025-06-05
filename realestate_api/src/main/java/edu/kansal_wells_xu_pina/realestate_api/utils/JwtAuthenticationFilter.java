@@ -94,12 +94,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 if (jwtUtil.validateToken(token, userDetails)) {
                     String role = jwtUtil.extractRole(token);
-                    log.info("Extracted roles from token: {}", role);
+                    log.info("Extracted role from token: {}", role);
 
-                    List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
-                    /* var authorities = role.stream()
-                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                            .collect(Collectors.toList()); */
+                    var authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
                     log.info("Created authorities: {}", authorities);
 
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(

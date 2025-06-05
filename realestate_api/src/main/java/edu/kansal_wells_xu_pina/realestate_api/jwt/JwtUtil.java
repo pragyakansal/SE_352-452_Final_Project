@@ -69,7 +69,7 @@ public class JwtUtil {
         Claims claims = extractAllClaims(token);
         String role = claims.get("role", String.class);
         log.debug("Extracted role from token: {}", role);
-        return List.of(role);  // Return single role as a list for compatibility
+        return role;  // Return the role string directly
     }
 
     public String extractUsername(String token) {
