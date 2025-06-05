@@ -29,12 +29,13 @@ public class AdminController {
         return "common-dashboard";
     }
 
+    /* Redundant profile endpoint - now using common profile management
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit-profile")
     public String displayEditProfileForm() {
         return "edit-profile-form";
     }
-
+    */
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/manage-users")

@@ -7,5 +7,5 @@ public interface AdminService {
     List<User> getAllUsers();
     String deleteUserByEmailAddress(String email);
     User createAgentUser(User newAgentUser);
-    User updateAdminProfile(User updatedAdminUser);
+//    User updateAdminProfile(User updatedAdminUser);
 }

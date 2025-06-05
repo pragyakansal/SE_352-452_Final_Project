@@ -11,7 +11,7 @@
     <br>
     <br>
     <ul>
-        <li><a th:href="@{/profile}">My Profile</a></li>
+        <li><a th:href="@{/landing-page/profile}">My Profile</a></li>
         <!-- BUYERS -->
         <li sec:authorize="hasRole('BUYER')">
             <a th:href="@{/buyer/listings}">Browse Properties</a>

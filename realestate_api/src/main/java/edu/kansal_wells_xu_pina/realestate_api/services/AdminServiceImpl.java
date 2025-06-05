@@ -52,6 +52,7 @@ public class AdminServiceImpl implements AdminService {
         return userRepository.save(newAgentUser);
     }
 
+    /* Redundant profile method - now using common profile management
     @Override
     @Transactional
     public User updateAdminProfile(User updatedAdminUser) {
@@ -62,29 +63,29 @@ public class AdminServiceImpl implements AdminService {
         }
         validateEditProfileFormFields(updatedAdminUser);
         return userRepository.save(updatedAdminUser);
-
     }
+    */
 
-    private void validateEditProfileFormFields(User adminUser) {
-        if (adminUser.getFirstName() == null || adminUser.getFirstName().trim().isEmpty()) {
-            throw new InvalidUserParameterException("The admin's first name should not be null or empty. Please try again with a valid input.");
-        }
+    // private void validateEditProfileFormFields(User adminUser) {
+    //     if (adminUser.getFirstName() == null || adminUser.getFirstName().trim().isEmpty()) {
+    //         throw new InvalidUserParameterException("The admin's first name should not be null or empty. Please try again with a valid input.");
+    //     }
 
-        if (adminUser.getLastName() == null || adminUser.getLastName().trim().isEmpty()) {
-            throw new InvalidUserParameterException("The admin's last name should not be null or empty. Please try again with a valid input.");
-        }
+    //     if (adminUser.getLastName() == null || adminUser.getLastName().trim().isEmpty()) {
+    //         throw new InvalidUserParameterException("The admin's last name should not be null or empty. Please try again with a valid input.");
+    //     }
 
-        if (adminUser.getEmail() == null || adminUser.getEmail().trim().isEmpty()) {
-            throw new InvalidUserParameterException("The admin's email must contain an @ symbol, and it should not be null or empty. " +
-                    " Please try again with a valid input.");
-        }
+    //     if (adminUser.getEmail() == null || adminUser.getEmail().trim().isEmpty()) {
+    //         throw new InvalidUserParameterException("The admin's email must contain an @ symbol, and it should not be null or empty. " +
+    //                 " Please try again with a valid input.");
+    //     }
 
-        // Correct format for email
-        String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
-        if (!adminUser.getEmail().matches(emailRegex)) {
-            throw new InvalidUserParameterException("The email format is incorrect. Please try again with a valid input.");
-        }
-    }
+    //     // Correct format for email
+    //     String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+    //     if (!adminUser.getEmail().matches(emailRegex)) {
+    //         throw new InvalidUserParameterException("The email format is incorrect. Please try again with a valid input.");
+    //     }
+    // }
 
     private void validateAgentFields(User agentUser) {
         if (agentUser.getFirstName() == null || agentUser.getFirstName().trim().isEmpty()) {
