@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <div class="container">
+        <h1>My Profile</h1>
+        
+        <div th:if="${message}" class="success-message" th:text="${message}"></div>
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+        <div>
+            <div>
+                <label>First Name:</label>
+                <span th:text="${user.firstName}">First Name</span>
+            </div>
+            <div>
+                <label>Last Name:</label>
+                <span th:text="${user.lastName}">Last Name</span>
+            </div>
+            <div>
+                <label>Email:</label>
+                <span th:text="${user.email}">Email</span>
+            </div>
+            <div>
+                <label>Role:</label>
+                <span th:text="${user.role}">Role</span>
+            </div>
+        </div>
+
+        <div>
+            <a th:href="@{/landing-page/profile/edit}" class="button">Edit Profile</a>
+            <a th:href="@{/landing-page/dashboard}" class="button">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html> 

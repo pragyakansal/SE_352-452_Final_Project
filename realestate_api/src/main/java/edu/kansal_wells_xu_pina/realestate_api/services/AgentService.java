@@ -13,8 +13,10 @@ import java.util.List;
 public interface AgentService {
 
     User getAgentById(Long id);
+    /* Redundant profile methods - now using common profile management
     UpdateProfileRequest getAgentDtoById(Long id);
     User editAgentProfile(Long AgentId, UpdateProfileRequest request);
+    */
     List<Property> getAgentProperties(Long agentId);
     Property getAgentPropertyById(Long agentId, Long propertyId);
     Property addProperty(Long agentId, Property property);

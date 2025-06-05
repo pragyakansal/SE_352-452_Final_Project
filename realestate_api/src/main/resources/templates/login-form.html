@@ -5,44 +5,32 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
-<!--<div class="login-container">-->
-<!--<form action="/landing-page/login" method="post">-->
-<!--    <h2>Login to an Existing Account</h2>-->
-<!--    <div class="input">-->
-<!--        <label for="email" class="form-label"></label>-->
-<!--        <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>-->
-<!--    </div>-->
-<!--    <div class="input">-->
-<!--        <label for="password" class="form-label"></label>-->
-<!--        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>-->
-<!--    </div>-->
-<!--    <button type="submit">Login</button>-->
-<!--    <a th:href="@{/landing-page/register}">-->
-<!--        <span>Don't have an account? Register here. </span>-->
-<!--    </a>-->
-<!--</form>-->
-<!--</div>-->
-    <div class="login-container">
+<body id="login-page">
         <form method="post" th:action="@{/landing-page/login}" th:object="${user}">
-            <h2>Login to an Existing Account</h2>
-            <div class="input">
-                <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email" name="email" th:field="*{email}" placeholder="Email" required>
-            </div>
-            <div class="input">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" th:field="*{password}" placeholder="Password" required>
+            <div class="container">
+            <h2>Login</h2>
+            <div class="form-controls-container">
+                <div class="input">
+                    <!-- <label for="email">Email:</label> -->
+                    <input type="text" class="form-control" id="email" name="email" th:field="*{email}" placeholder="Email" required>
+                </div>
+                <div class="input">
+                   <!-- <label for="password">Password:</label> -->
+                    <input type="password" class="form-control" id="password" name="password" th:field="*{password}" placeholder="Password" required>
+                </div>
             </div>
             <div class="error-message" th:if="${error}" th:text="${error}"></div>
             <button type="submit">Login</button>
             <div class="register-link">
-                <a th:href="@{/landing-page/register}">
+                <a th:href="@{/landing-page/register}" class="link">
                     Don't have an account? Register here.
                 </a>
             </div>
+        </div>
         </form>
-    </div>
 </body>
 </html>

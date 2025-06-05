@@ -5,12 +5,13 @@ import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.services.AgentService;
 import org.aspectj.weaver.loadtime.Agent;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.access.AccessDeniedException;
 
 @Controller
 @RequestMapping("/agent")
@@ -26,6 +27,7 @@ public class AgentController {
         return "common-dashboard";
     }
 
+    /* Redundant profile endpoints - now using common profile management
     @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/{id}/myprofile")
     public String myAgentProfile(@PathVariable Long id, Model model) {
@@ -43,7 +45,7 @@ public class AgentController {
         }
         return "editagentprofile";
     }
-
+    */
 
     @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/{id}/managelistings")

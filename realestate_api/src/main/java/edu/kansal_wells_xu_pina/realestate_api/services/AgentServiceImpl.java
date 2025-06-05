@@ -43,26 +43,26 @@ public class AgentServiceImpl implements AgentService {
         return user;
     }
 
-    @Override
-    public UpdateProfileRequest getAgentDtoById(Long id) {
-        User agent = getAgentById(id);
-        return new UpdateProfileRequest(agent.getFirstName(), agent.getLastName(), agent.getEmail());
-    }
-
-    @Override
-    public User editAgentProfile(Long agentId, UpdateProfileRequest request) {
-        User agent = getAgentById(agentId);
-       if (request.getFirstName() != null) {
-            agent.setFirstName(request.getFirstName());
-        }
-        if (request.getLastName() != null) {
-            agent.setLastName(request.getLastName());
-        }
-        if (request.getEmail() != null) {
-            agent.setEmail(request.getEmail());
-        }
-        return userRepository.save(agent);
-    }
+//    @Override
+//    public UpdateProfileRequest getAgentDtoById(Long id) {
+//        User agent = getAgentById(id);
+//        return new UpdateProfileRequest(agent.getFirstName(), agent.getLastName(), agent.getEmail());
+//    }
+//
+//    @Override
+//    public User editAgentProfile(Long agentId, UpdateProfileRequest request) {
+//        User agent = getAgentById(agentId);
+//       if (request.getFirstName() != null) {
+//            agent.setFirstName(request.getFirstName());
+//        }
+//        if (request.getLastName() != null) {
+//            agent.setLastName(request.getLastName());
+//        }
+//        if (request.getEmail() != null) {
+//            agent.setEmail(request.getEmail());
+//        }
+//        return userRepository.save(agent);
+//    }
 
     @Override
     public List<Property> getAgentProperties(Long agentId) {

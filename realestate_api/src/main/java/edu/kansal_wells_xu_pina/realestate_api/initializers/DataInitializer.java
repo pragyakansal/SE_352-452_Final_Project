@@ -134,7 +134,7 @@ public class DataInitializer {
         String folderName = property.getTitle();
 
         String projectRoot = System.getProperty("user.dir");
-        Path folder = Paths.get(projectRoot, "src/main/resources/images", folderName);
+        Path folder = Paths.get(projectRoot, "src/main/resources/static/images", folderName);
         if (!Files.exists(folder)) {
             // no images for this property
             return;

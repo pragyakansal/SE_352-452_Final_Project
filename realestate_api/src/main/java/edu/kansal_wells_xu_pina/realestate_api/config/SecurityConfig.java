@@ -49,11 +49,11 @@ public class SecurityConfig {
 
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/landing-page/", "/landing-page/login", "/landing-page/register", "/register", "/login", "/images/**", "/css/**").permitAll()
-                        .requestMatchers("/landing-page/dashboard").hasAnyRole("BUYER", "AGENT", "ADMIN")
+                        .requestMatchers("/", "/landing-page/", "/landing-page/login", "/landing-page/register", "/landing-page/logout", "/register", "/login", "/images/**", "/css/**").permitAll()
+                        .requestMatchers("/landing-page/dashboard", "/landing-page/profile/**").hasAnyRole("BUYER", "AGENT", "ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/agent/**").hasAnyRole("AGENT")
-                        .requestMatchers("/buyer/**").permitAll()
+                        .requestMatchers("/agent/**").hasRole("AGENT")
+                        .requestMatchers("/buyer/**").hasRole("BUYER")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

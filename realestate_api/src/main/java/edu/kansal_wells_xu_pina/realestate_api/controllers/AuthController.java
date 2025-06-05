@@ -12,6 +12,8 @@ import edu.kansal_wells_xu_pina.realestate_api.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import edu.kansal_wells_xu_pina.realestate_api.dtos.UpdateProfileRequest;
+import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidUserParameterException;
 
 @Controller
 @RequestMapping("/landing-page")
@@ -75,21 +77,67 @@ public class AuthController {
     @GetMapping("/dashboard")
     @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
     public String displayDashboard(Model model) {
-        try {
-            userService.prepareDashboardModel(model);
-            model.addAttribute("message", "Welcome to the dashboard");
-            return "common-dashboard";
-        } catch (Exception e) {
-            log.error("Error preparing dashboard", e);
-            model.addAttribute("error", "Error loading dashboard");
-            return "error";
-        }
+        userService.prepareDashboardModel(model);
+        model.addAttribute("message", "Welcome to the dashboard");
+        return "common-dashboard";
     }
 
     @GetMapping("/logout")
-    @PreAuthorize("hasAnyRole('AGENT', 'BUYER', 'ADMIN')")
     public String logout(HttpServletResponse response) {
         authService.clearJwtCookie(response);
         return "redirect:/landing-page/login";
+    }
+
+    @GetMapping("/profile")
+    @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
+    public String viewProfile(Model model) {
+        try {
+            User user = userService.getUserProfile();
+            model.addAttribute("user", user);
+            return "common-profile";
+        } catch (Exception e) {
+            log.error("Error loading profile", e);
+            model.addAttribute("error", "Error loading profile");
+            return "common-profile";
+        }
+    }
+
+    @GetMapping("/profile/edit")
+    @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
+    public String editProfileForm(Model model) {
+        try {
+            User user = userService.getUserProfile();
+            UpdateProfileRequest request = new UpdateProfileRequest(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail()
+            );
+            model.addAttribute("profileRequest", request);
+            return "common-edit-profile";
+        } catch (Exception e) {
+            log.error("Error loading edit profile form", e);
+            model.addAttribute("error", "Error loading edit profile form");
+            return "common-edit-profile";
+        }
+    }
+
+    @PostMapping("/profile/edit")
+    @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
+    public String updateProfile(@ModelAttribute UpdateProfileRequest request, Model model) {
+        try {
+            User updatedUser = userService.updateUserProfile(request);
+            model.addAttribute("user", updatedUser);
+            model.addAttribute("message", "Profile updated successfully");
+            return "common-profile";
+        } catch (InvalidUserParameterException e) {
+            log.error("Invalid profile update request", e);
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("profileRequest", request);
+            return "common-edit-profile";
+        } catch (Exception e) {
+            log.error("Error updating profile", e);
+            model.addAttribute("error", "Error updating profile");
+            return "common-edit-profile";
+        }
     }
 }
