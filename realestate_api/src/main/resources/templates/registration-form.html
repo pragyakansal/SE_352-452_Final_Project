@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body id="registration-page">
-<form action="/admin/create-agent" method="post">
+<form method="post" th:action="@{/landing-page/register}" th:object="${user}">
 <div class="container">
     <h2>Register (For Buyers Only) </h2>
     <div class="form-controls-container">
@@ -31,9 +31,9 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
         </div>
     </div>
-    <a th:href="@{/admin/dashboard}">
-        <button>Register</button>
-    </a>
+    <div class="success-message" th:if="${successMessage}" th:text="${successMessage}"></div>
+    <div class="error-message" th:if="${error}" th:text="${error}"></div>
+    <button type="submit" class="button">Register</button>
     <a th:href="@{/landing-page/login}" class="link">
         <span>Already have an account? Login here.</span>
     </a>

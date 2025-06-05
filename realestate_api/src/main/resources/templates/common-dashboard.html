@@ -19,7 +19,7 @@
             <li><a th:href="@{/profile}">My Profile</a></li>
             <!-- BUYERS -->
             <li sec:authorize="hasRole('BUYER')">
-                <a th:href="@{/buyer/properties}">Browse Properties</a>
+                <a th:href="@{/buyer/listings}">Browse Properties</a>
             </li>
             <!-- AGENTS -->
             <li sec:authorize="hasRole('AGENT')">
@@ -36,9 +36,7 @@
                 <a th:href="@{/admin/create-agent}">Create Agent</a>
             </li>
         </ul>
-        <form th:action="@{/landing-page/logout}" method="post">
-            <button type="submit">Logout</button>
-        </form>
+        <li><a class="section-spacing" th:href="@{/landing-page/logout}">Log Out</a></li>
     </div>
 </body>
 </html>

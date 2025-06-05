@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -92,12 +93,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 log.info("Loaded user details for: {}", email);
 
                 if (jwtUtil.validateToken(token, userDetails)) {
-                    List<String> roles = jwtUtil.extractRoles(token);
-                    log.info("Extracted roles from token: {}", roles);
+                    String role = jwtUtil.extractRole(token);
+                    log.info("Extracted roles from token: {}", role);
 
-                    var authorities = roles.stream()
+                    List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
+                    /* var authorities = role.stream()
                             .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                            .collect(Collectors.toList());
+                            .collect(Collectors.toList()); */
                     log.info("Created authorities: {}", authorities);
 
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
