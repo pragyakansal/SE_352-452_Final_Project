@@ -6,32 +6,32 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
-    <div class="profile-container">
+    <div class="container">
         <h1>My Profile</h1>
         
         <div th:if="${message}" class="success-message" th:text="${message}"></div>
         <div th:if="${error}" class="error-message" th:text="${error}"></div>
 
-        <div class="profile-info">
-            <div class="info-group">
+        <div>
+            <div>
                 <label>First Name:</label>
                 <span th:text="${user.firstName}">First Name</span>
             </div>
-            <div class="info-group">
+            <div>
                 <label>Last Name:</label>
                 <span th:text="${user.lastName}">Last Name</span>
             </div>
-            <div class="info-group">
+            <div>
                 <label>Email:</label>
                 <span th:text="${user.email}">Email</span>
             </div>
-            <div class="info-group">
+            <div>
                 <label>Role:</label>
                 <span th:text="${user.role}">Role</span>
             </div>
         </div>
 
-        <div class="profile-actions">
+        <div>
             <a th:href="@{/landing-page/profile/edit}" class="button">Edit Profile</a>
             <a th:href="@{/landing-page/dashboard}" class="button">Back to Dashboard</a>
         </div>

@@ -16,24 +16,24 @@
         <br>
         <br>
         <ul>
-            <li><a th:href="@{/landing-page/profile}">My Profile</a></li>
+            <li><a th:href="@{/landing-page/profile}" class="link">My Profile</a></li>
             <!-- BUYERS -->
             <li sec:authorize="hasRole('BUYER')">
-                <a th:href="@{/buyer/listings}">Browse Properties</a>
+                <a th:href="@{/buyer/listings}" class="link">Browse Properties</a>
             </li>
             <!-- AGENTS -->
             <li sec:authorize="hasRole('AGENT')">
-                <a th:href="@{/agent/listings/manage}">Manage Listings</a>
+                <a th:href="@{/agent/listings/manage}" class="link">Manage Listings</a>
             </li>
             <li sec:authorize="hasRole('AGENT')">
-                <a th:href="@{/agent/listings/create-new}">Create New Listing</a>
+                <a th:href="@{/agent/listings/create-new}" class="link">Create New Listing</a>
             </li>
             <!-- ADMINS -->
             <li sec:authorize="hasRole('ADMIN')">
-                <a th:href="@{/admin/manage-users}">Manage Users</a>
+                <a th:href="@{/admin/manage-users}" class="link">Manage Users</a>
             </li>
             <li sec:authorize="hasRole('ADMIN')">
-                <a th:href="@{/admin/create-agent}">Create Agent</a>
+                <a th:href="@{/admin/create-agent}" class="link">Create Agent</a>
             </li>
         </ul>
         <form th:action="@{/landing-page/logout}">
