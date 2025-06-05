@@ -4,21 +4,101 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
 }
 
-#landing-page-container {
+#landing-page, #login-page, #registration-page {
+    background-image: url('/images/landing-page-bg-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#dashboard-page {
+    background-image: url('/images/dashboard-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
     width: 400px;
     padding: 30px;
-    background-color: white;
-    border: 1px solid #ccc;
+    border: 0.5px solid #ccc;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    border-radius: 15px;
     text-align: center;
+    gap: 20px;
+}
+
+.header {
+    font-size: 30px;
+}
+
+.form-controls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-control {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    width: 300px;
+}
+
+.form-control::placeholder {
+    font-family: "Inter", sans-serif;
+}
+
+#buttons {
+    display: flex;
+    gap: 20px;
 }
 
 button {
-    background-color: #007BFF;
+    width: 75px;
+    background-color: #515adb;
+    border: none;
+    border-radius: 20px;
     color: white;
+    font-family: "Inter", sans-serif;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.link {
+    color: white;
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+}
+
+.link:hover {
+    transform: scale(1.05);
+}
+
+.error-message {
+    background-color: #e86f83;
+    border: 1px solid #d42c48;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
 }
 
 .listings-container {

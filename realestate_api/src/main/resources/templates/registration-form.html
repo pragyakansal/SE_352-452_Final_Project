@@ -5,32 +5,39 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body id="registration-page">
 <form action="/admin/create-agent" method="post">
-    <h2>Register For An Account (Buyers Only) </h2>
-    <div class="input">
-        <label for="firstName" class="form-label"></label>
-        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
-    </div>
-    <div class="input">
-        <label for="lastName" class="form-label"></label>
-        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
-    </div>
-    <div class="input">
-        <label for="email" class="form-label"></label>
-        <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
-    </div>
-    <div class="input">
-        <label for="password" class="form-label"></label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+<div class="container">
+    <h2>Register (For Buyers Only) </h2>
+    <div class="form-controls-container">
+        <div class="input">
+            <label for="firstName" class="form-label"></label>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
+        </div>
+        <div class="input">
+            <label for="lastName" class="form-label"></label>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
+        </div>
+        <div class="input">
+            <label for="email" class="form-label"></label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="input">
+            <label for="password" class="form-label"></label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
     </div>
     <a th:href="@{/admin/dashboard}">
         <button>Register</button>
     </a>
-    <a th:href="@{/landing-page/login}">
+    <a th:href="@{/landing-page/login}" class="link">
         <span>Already have an account? Login here.</span>
     </a>
+</div>
 </form>
 </body>
 </html>
