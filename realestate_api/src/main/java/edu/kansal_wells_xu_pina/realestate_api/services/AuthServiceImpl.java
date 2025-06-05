@@ -91,23 +91,6 @@ public class AuthServiceImpl implements AuthService {
         log.info("JWT cookie cleared");
     }
 
-//    @Override
-//    public JwtResponse authenticateAndGenerateToken(LoginRequest request) {
-//        try {
-//            Authentication auth = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-//            );
-//            SecurityContextHolder.getContext().setAuthentication(auth);
-//
-//            UserDetails userDetails = (UserDetails) auth.getPrincipal();
-//            String token = jwtUtil.generateToken(userDetails);
-//
-//            return new JwtResponse(token);
-//        } catch (AuthenticationException e) {
-//            throw new BadCredentialsException("Invalid email  or password");
-//        }
-//    }
-
     @Override
     public JwtResponse authenticateAndGenerateToken(User user) {
         try {

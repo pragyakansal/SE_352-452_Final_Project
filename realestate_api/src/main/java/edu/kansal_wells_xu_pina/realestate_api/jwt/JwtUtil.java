@@ -41,7 +41,7 @@ public class JwtUtil {
         String role = userDetails.getAuthorities().stream()
                 .findFirst()
                 .map(GrantedAuthority::getAuthority)
-                .map(authority -> authority.replace("ROLE_", ""))
+                //.map(authority -> authority.replace("ROLE_", ""))
                 .orElseThrow(() -> new IllegalStateException("User has no authorities"));
 
         String token = Jwts.builder()
@@ -65,7 +65,7 @@ public class JwtUtil {
                 .getPayload();
     }
 
-    public List<String> extractRoles(String token) {
+    public String extractRole(String token) {
         Claims claims = extractAllClaims(token);
         String role = claims.get("role", String.class);
         log.debug("Extracted role from token: {}", role);

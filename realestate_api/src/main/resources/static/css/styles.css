@@ -22,6 +22,10 @@ body {
     background-repeat: no-repeat;
 }
 
+#listings-page {
+    background-color: #edebeb;
+}
+
 
 .container {
     display: flex;
@@ -66,7 +70,7 @@ body {
     gap: 20px;
 }
 
-button {
+.button {
     width: 75px;
     background-color: #515adb;
     border: none;
@@ -76,9 +80,10 @@ button {
     padding: 10px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
+    text-decoration: none;
 }
 
-button:hover {
+.button:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
@@ -119,12 +124,16 @@ button:hover {
 .property-card {
     border: 1px solid #ddd;
     padding: 10px;
+    border-radius: 15px;
+    font-family: "Inter", sans-serif;
+    background-color: white;
 }
 
 .property-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-radius: 7px;
 }
 
 .view-details {
@@ -133,3 +142,4 @@ button:hover {
     padding: 5px 10px;
     text-decoration: none;
 }
+
