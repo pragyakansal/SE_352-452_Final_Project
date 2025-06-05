@@ -19,7 +19,7 @@ public class BuyerController {
         this.propertyService = propertyService;
     }
 
-//    @PreAuthorize("hasRole('BUYER')")
+   @PreAuthorize("hasRole('BUYER')")
     @GetMapping({"/listings", ""})
     public String viewListings(Model model) {
         List<Property> props = propertyService.findAll();
@@ -27,7 +27,7 @@ public class BuyerController {
         return "buyer/listings";
     }
 
-//    @PreAuthorize("hasRole('BUYER')")
+   @PreAuthorize("hasRole('BUYER')")
     @GetMapping("/listings/{id}")
     public String viewProperty(@PathVariable Long id, Model model) {
         Property property = propertyService.findById(id);

@@ -29,7 +29,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping({"", "/"})
     public String landingPage() {
         return "landing-page";
     }
@@ -45,15 +45,12 @@ public class AuthController {
         return "registration-form";
     }
 
-    // Finish implementation
     @PostMapping("/register")
     public String userRegistration(@ModelAttribute User user, HttpServletResponse response, Model model) {
         try {
             user.setRole(Role.BUYER);
             log.info("Role set to {}: ", user.getRole());
             authService.registerUser(user);
-            Cookie jwtCookie = authService.loginAndCreateJwtCookie(user);
-            response.addCookie(jwtCookie);
             log.info("User registered successfully: {}", user.getEmail());
             return "redirect:/landing-page/login";
         } catch (Exception e) {

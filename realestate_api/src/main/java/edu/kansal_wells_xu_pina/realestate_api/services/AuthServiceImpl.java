@@ -6,6 +6,7 @@ import edu.kansal_wells_xu_pina.realestate_api.exceptions.AlreadyExistsException
 import edu.kansal_wells_xu_pina.realestate_api.dtos.JwtResponse;
 import edu.kansal_wells_xu_pina.realestate_api.jwt.JwtUtil;
 import edu.kansal_wells_xu_pina.realestate_api.utils.JwtAuthResponse;
+import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.time.LocalDateTime;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -45,6 +47,13 @@ public class AuthServiceImpl implements AuthService {
         try {
             log.info("Attempting to authenticate user: {}", user.getEmail());
             
+            // Get the user from database first to ensure we have the correct role
+            User dbUser = userRepository.findByEmail(user.getEmail());
+            if (dbUser == null) {
+                log.error("User not found in database: {}", user.getEmail());
+                throw new BadCredentialsException("Invalid email or password");
+            }
+            
             // Authenticate the user
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
@@ -54,12 +63,6 @@ public class AuthServiceImpl implements AuthService {
             // Set the authentication in the security context
             SecurityContextHolder.getContext().setAuthentication(auth);
             log.info("Security context set for user: {}", user.getEmail());
-            
-            // Get the actual user from the database to ensure we have the correct role
-            User dbUser = userRepository.findByEmail(user.getEmail());
-            if (dbUser == null) {
-                throw new BadCredentialsException("User not found");
-            }
             
             // Generate JWT token using the database user's role
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(dbUser.getEmail());
@@ -114,7 +117,7 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT', 'BUYER')")
+    @Override
     public User registerUser(User newUser) {
         User existingUser = userRepository.findByEmail(newUser.getEmail());
         if (existingUser != null) {
@@ -123,8 +126,14 @@ public class AuthServiceImpl implements AuthService {
         }
         validateUserRegistrationFields(newUser);
 
-        // NEW CHANGES
+        // Set role to BUYER for new registrations
+        newUser.setRole(Role.BUYER);
+        // Set creation timestamp
+        newUser.setCreatedAt(LocalDateTime.now());
+        
+        // Encrypt password
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        
         return userRepository.save(newUser);
     }
 

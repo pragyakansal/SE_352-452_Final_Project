@@ -51,8 +51,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Skip JWT processing for public endpoints
         if (path.startsWith("/landing-page/login") || 
             path.startsWith("/landing-page/register") || 
-            path.equals("/landing-page/") ||  // Only the landing page itself
-            path.startsWith("/css") || 
+            path.equals("/landing-page/") ||
+            path.equals("/landing-page") ||
+            path.startsWith("/css") ||
             path.startsWith("/images") ||
             path.equals("/") ||
             path.equals("/register") ||
@@ -78,6 +79,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             log.debug("No cookies found in request");
         }
 
+        // For public endpoints, continue without token
         if (token == null) {
             log.warn("No JWT token found in request cookies for URI: {}", request.getRequestURI());
             filterChain.doFilter(request, response);
