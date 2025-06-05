@@ -100,16 +100,26 @@ public class AuthServiceImpl implements AuthService {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
             );
+            log.info("test1");
             SecurityContextHolder.getContext().setAuthentication(auth);
 
+            log.info("test2");
             // Get the actual user from the database to ensure we have the correct role
             User dbUser = userRepository.findByEmail(user.getEmail());
+
+            log.info("test3");
             if (dbUser == null) {
+                log.info(" dbUser is null");
                 throw new BadCredentialsException("User not found");
+            } else {
+                log.info("dbUser emaiil:" + dbUser.getEmail());
+                log.info("dbUser role:" + dbUser.getRole());
             }
 
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(dbUser.getEmail());
+            log.info("userDetails:" + userDetails);
             String token = jwtUtil.generateToken(userDetails);
+            log.info("token:" + token);
 
             return new JwtResponse(token);
         } catch (AuthenticationException e) {

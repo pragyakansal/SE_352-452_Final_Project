@@ -1,7 +1,11 @@
 package edu.kansal_wells_xu_pina.realestate_api.controllers;
+import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.AlreadyExistsException;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
+import edu.kansal_wells_xu_pina.realestate_api.jwt.JwtUtil;
 import edu.kansal_wells_xu_pina.realestate_api.services.AdminService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -16,6 +20,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @RequestMapping("/admin")
 public class AdminController {
 
+    private static final Logger log = LoggerFactory.getLogger(AdminController.class);
     private AdminService adminService;
 
     @Autowired
@@ -62,9 +67,16 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create-agent")
     public String createAgent(@ModelAttribute User agentUser, Model model) throws AlreadyExistsException {
-        User newUser = adminService.createAgentUser(agentUser);
-        model.addAttribute("message", "Agent was created successfully");
-        return "create-agent-form";
+        User newUser = null;
+        try {
+            agentUser.setRole(Role.AGENT);
+            newUser = adminService.createAgentUser(agentUser);
+            model.addAttribute("message", "Agent was created successfully");
+        } catch (Exception e) {
+            log.error("Error in creating agent: " + newUser.getEmail() + ", role: " + newUser.getRole(),  e);
+            return "create-agent-form";
+        }
+        return "redirect:/landing-page/dashboard";
     }
 
 }

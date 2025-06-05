@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!-- <link rel="stylesheet" th:href="@{/css/styles.css}"/> -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
-<form th:action="@{/admin/create-agent}" method="post" th:object="${user}">
+<form th:action="@{/admin/create-agent}" method="post" th:object="${agentUser}">
     <h2>Create a New Agent</h2>
     <div class="input">
         <label for="firstName" class="form-label"></label>

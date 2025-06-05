@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -21,7 +22,10 @@ import jakarta.servlet.http.Cookie;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
+//@Order(Ordered.HIGHEST_PRECEDENCE)
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
@@ -48,6 +52,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         log.info("Normalized path: {}", path);
 
+        String rawCookieHeader = request.getHeader("Cookie");
+        log.info("Raw Cookie header: {}", rawCookieHeader);
+
         // Skip JWT processing for public endpoints
         if (path.startsWith("/landing-page/login") || 
             path.startsWith("/landing-page/register") || 
@@ -65,10 +72,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = null;
 
+        log.info("request cookies: " + request.getCookies());
         // Try to get token from cookie
         if (request.getCookies() != null) {
-            log.debug("Found {} cookies in request", request.getCookies().length);
+            log.info("Found {} cookies in request", request.getCookies().length);
             for (Cookie cookie : request.getCookies()) {
+                log.info("Cookie name: " + cookie.getName());
                 if ("jwt".equals(cookie.getName())) {
                     token = cookie.getValue();
                     log.info("JWT found in cookie");
@@ -76,7 +85,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } else {
-            log.debug("No cookies found in request");
+            log.info("No cookies found in request");
+        }
+
+        // parse raw cookie header
+        if (token == null) {
+            String cookieHeader = request.getHeader("Cookie");
+            log.info("Raw cookie header: {}", cookieHeader);
+
+            if (cookieHeader != null) {
+                for (String cookie : cookieHeader.split(";")) {
+                    String[] parts = cookie.trim().split("=", 2);
+                    log.info("parts: ", parts);
+                    if (parts.length == 2 && parts[0].trim().equals("jwt")) {
+                        token = parts[1].trim();
+                        log.info("JWT token extract from raw cookie header", token);
+                        break;
+                    }
+                }
+            }
         }
 
         // For public endpoints, continue without token

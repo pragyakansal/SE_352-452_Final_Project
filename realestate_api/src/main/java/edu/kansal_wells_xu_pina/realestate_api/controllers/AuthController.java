@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import edu.kansal_wells_xu_pina.realestate_api.dtos.UpdateProfileRequest;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidUserParameterException;
+import edu.kansal_wells_xu_pina.realestate_api.dtos.JwtResponse;
 
 @Controller
 @RequestMapping("/landing-page")
@@ -61,13 +62,34 @@ public class AuthController {
     }
 
     // Finish implementation
-    @PostMapping("/login")
+    /* @PostMapping("/login")
     public String loginUser(@ModelAttribute User user, HttpServletResponse response, Model model) {
         try {
             log.info("Attempting login for user: {}", user.getEmail());
             Cookie jwtCookie = authService.loginAndCreateJwtCookie(user);
             response.addCookie(jwtCookie);
             log.info("Login successful for user: {}", user.getEmail());
+            return "redirect:/landing-page/dashboard";
+        } catch (BadCredentialsException e) {
+            log.error("Login failed for user: {}", user.getEmail(), e);
+            model.addAttribute("error", "Invalid email or password");
+            return "login-form";
+        }
+    } */
+
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute User user, HttpServletResponse response, Model model) {
+        try {
+            log.info("Attempting login for user: {}", user.getEmail());
+            JwtResponse jwtResponse = authService.authenticateAndGenerateToken(user);
+            String token = jwtResponse.getToken();
+
+            Cookie jwtCookie = new Cookie("jwt", token);
+            jwtCookie.setPath("/");
+            jwtCookie.setMaxAge(60 * 60);
+            jwtCookie.setHttpOnly(true);
+            response.addCookie(jwtCookie);
+            log.info("JWT cookie set successfully for user: {}", user.getEmail());
             return "redirect:/landing-page/dashboard";
         } catch (BadCredentialsException e) {
             log.error("Login failed for user: {}", user.getEmail(), e);

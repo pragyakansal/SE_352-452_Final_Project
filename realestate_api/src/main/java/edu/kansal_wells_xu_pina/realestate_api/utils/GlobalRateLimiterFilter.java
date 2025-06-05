@@ -1,8 +1,11 @@
 package edu.kansal_wells_xu_pina.realestate_api.utils;
+import edu.kansal_wells_xu_pina.realestate_api.config.SecurityConfig;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -10,12 +13,15 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class GlobalRateLimiterFilter extends OncePerRequestFilter {
     private static final int MAX_REQUESTS = 100; // per time window
     private static final long WINDOW_MS = 60_000; // 1 minute
 
+    private static final Logger log = LoggerFactory.getLogger(GlobalRateLimiterFilter.class);
     private final Map<String, RequestWindow> ipRequests = new ConcurrentHashMap<>();
 
     protected void doFilterInternal(HttpServletRequest request,
@@ -27,6 +33,8 @@ public class GlobalRateLimiterFilter extends OncePerRequestFilter {
         Instant now = Instant.now();
 
         RequestWindow window = ipRequests.computeIfAbsent(ip, k -> new RequestWindow());
+
+        log.info("Beginning of global rate limiter filter");
 
         synchronized (window) {
             if (now.isAfter(window.windowStart.plusMillis(WINDOW_MS))) {
@@ -51,6 +59,7 @@ public class GlobalRateLimiterFilter extends OncePerRequestFilter {
                 return;
             }
         }
+        log.info("End of global rate limiter filter");
         filterChain.doFilter(request, response);
     }
 
