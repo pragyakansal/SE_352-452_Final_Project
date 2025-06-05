@@ -69,7 +69,8 @@ public class User {
         return role;
     }
 
-    public void setRoles(Role role) { this.role = role; }
+    public void setRole(Role role) { this.role = role; }
+
     public String getLastName() {
         return lastName;
     }

@@ -1,4 +1,5 @@
 package edu.kansal_wells_xu_pina.realestate_api.controllers;
+import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
 import jakarta.servlet.http.HttpServletResponse;
 import edu.kansal_wells_xu_pina.realestate_api.services.UserService;
 import jakarta.servlet.http.Cookie;
@@ -28,7 +29,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping({"", "/"})
     public String landingPage() {
         return "landing-page";
     }
@@ -44,10 +45,11 @@ public class AuthController {
         return "registration-form";
     }
 
-    // Finish implementation
     @PostMapping("/register")
-    public String userRegistration(@ModelAttribute User user, Model model) {
+    public String userRegistration(@ModelAttribute User user, HttpServletResponse response, Model model) {
         try {
+            user.setRole(Role.BUYER);
+            log.info("Role set to {}: ", user.getRole());
             authService.registerUser(user);
             log.info("User registered successfully: {}", user.getEmail());
             return "redirect:/landing-page/login";

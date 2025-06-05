@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -50,8 +51,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Skip JWT processing for public endpoints
         if (path.startsWith("/landing-page/login") || 
             path.startsWith("/landing-page/register") || 
-            path.equals("/landing-page/") ||  // Only the landing page itself
-            path.startsWith("/css") || 
+            path.equals("/landing-page/") ||
+            path.equals("/landing-page") ||
+            path.startsWith("/css") ||
             path.startsWith("/images") ||
             path.equals("/") ||
             path.equals("/register") ||
@@ -77,6 +79,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             log.debug("No cookies found in request");
         }
 
+        // For public endpoints, continue without token
         if (token == null) {
             log.warn("No JWT token found in request cookies for URI: {}", request.getRequestURI());
             filterChain.doFilter(request, response);
@@ -92,12 +95,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 log.info("Loaded user details for: {}", email);
 
                 if (jwtUtil.validateToken(token, userDetails)) {
-                    List<String> roles = jwtUtil.extractRoles(token);
-                    log.info("Extracted roles from token: {}", roles);
+                    String role = jwtUtil.extractRole(token);
+                    log.info("Extracted role from token: {}", role);
 
-                    var authorities = roles.stream()
-                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                            .collect(Collectors.toList());
+                    var authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
                     log.info("Created authorities: {}", authorities);
 
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
