@@ -7,6 +7,8 @@ import java.io.IOException;
 @Service
 public class PropertyImageService {
 
+    /*
+
     private String uploadDir;
 
     public String saveImage(MuitiPartFile file) throws IOException {
@@ -26,4 +28,6 @@ public class PropertyImageService {
 
 
     }
+
+     */
 }
