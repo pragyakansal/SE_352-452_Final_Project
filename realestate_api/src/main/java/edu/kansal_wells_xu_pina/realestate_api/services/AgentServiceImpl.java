@@ -27,14 +27,14 @@ public class AgentServiceImpl implements AgentService {
 
     @Autowired
     private final PropertyImageRepository propertyImageRepository;
-    private final UserService userService;
 
 
+
+    @Autowired
     public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository imageRepository) {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
         this.propertyImageRepository = imageRepository;
-        this.userService = userService;
     }
 
 
@@ -110,7 +110,7 @@ public class AgentServiceImpl implements AgentService {
 
     @Override
     public Property addNewProperty(Property newProperty) {
-        User agent = userService.getCurrentUser();
+        User agent = userService.getCurrentUser(); // fix validation for agent
         if (!agent.getRole().equals(Role.AGENT)) {
             throw new IllegalArgumentException("User is not an agent.");
         }
