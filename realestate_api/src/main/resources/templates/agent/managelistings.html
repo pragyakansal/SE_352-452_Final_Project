@@ -9,8 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
-<body>
+<body id="manage-listings-page">
 <div th:replace="header :: header"></div>
+<div id="properties-table-container">
 <h1>Manage Your Properties</h1>
 <table>
     <thead>
@@ -45,14 +46,16 @@
            <!-- <td th:text="${property.description}">Short description...</td> -->
             <td>
                 <!-- Link to edit the property -->
-                <a th:href="@{/agent/manage-listings/edit/{id}(id=${property.id})}" class="button-link">Edit</a>
+                <a th:href="@{/agent/manage-listings/edit/{id}(id=${property.id})}" class="button edit-button">Edit</a>
                 <!-- Link to delete the property -->
-                <a th:href="@{/agent/manage-listings/delete/{id}(id=${property.id})}" class="button-link red">Delete</a>
+                <a th:href="@{/agent/manage-listings/delete/{id}(id=${property.id})}" class="button delete-button">Delete</a>
             </td>
         </tr>
     </tbody>
     </thead>
 </table>
+</div>
+
 
 </body>
 </html>

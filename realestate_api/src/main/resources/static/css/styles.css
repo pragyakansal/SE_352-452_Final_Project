@@ -10,6 +10,11 @@ body {
     font-style: normal;
 }
 
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -170,6 +175,14 @@ body {
     display: inline-block;
 }
 
+.delete-button {
+    background-color: #e86f83;
+}
+
+.edit-button {
+    background-color: #82cded;
+}
+
 #header-button {
     margin-right: 50px;
 }
@@ -266,4 +279,14 @@ th, td {
     display: flex;
     width: 100%;
     justify-content: space-between
+}
+
+#manage-listings-page {
+    padding-top: 590px;
+    padding-bottom: 50px;
+}
+
+#properties-table-container {
+    display: flex;
+    flex-direction: column;
 }
