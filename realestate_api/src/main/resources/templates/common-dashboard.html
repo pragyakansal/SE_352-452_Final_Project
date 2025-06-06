@@ -23,7 +23,8 @@
             </li>
             <!-- AGENTS -->
             <li sec:authorize="hasRole('AGENT')">
-                <a th:href="@{/agent/listings/manage}" class="link">Manage Listings</a>
+                <!--a th:href="@{/{id}/managelistings}" class="link">Manage Listings</a-->
+                <a th:href="@{/agent/managelistings}" class="link">Manage Listings</a>
             </li>
             <li sec:authorize="hasRole('AGENT')">
                 <a th:href="@{/agent/listings/create-new}" class="link">Create New Listing</a>

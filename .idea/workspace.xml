@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92bc20eb-994d-48de-ad8c-b665ab69c9aa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/managelistings.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +19,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Exception" />
-        <option value="HTML File" />
         <option value="Class" />
         <option value="Interface" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -75,6 +75,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="RealestateApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="realestate_api" />
@@ -106,7 +111,7 @@
       <workItem from="1748830956527" duration="1313000" />
       <workItem from="1748930921023" duration="1675000" />
       <workItem from="1749011604621" duration="14371000" />
-      <workItem from="1749086520929" duration="24167000" />
+      <workItem from="1749086520929" duration="27991000" />
     </task>
     <servers />
   </component>
