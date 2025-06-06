@@ -1,6 +1,5 @@
 package edu.kansal_wells_xu_pina.realestate_api.services;
 
-
 import edu.kansal_wells_xu_pina.realestate_api.dtos.UpdateProfileRequest;
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;
@@ -16,20 +15,24 @@ public interface AgentService {
     User getAgentById(Long id);
     /* Redundant profile methods - now using common profile management
     UpdateProfileRequest getAgentDtoById(Long id);
-    User editAgentProfile(Long AgentId, UpdateProfileRequest request);
+    User editAgentProfile(Long agentId, UpdateProfileRequest request);
     */
+
+    /* Property management methods - not yet implemented
     List<Property> getAgentProperties(Long agentId);
     Property getAgentPropertyById(Long agentId, Long propertyId);
+<<<<<<< HEAD
    /*  Property addNewProperty(Property property, List<PropertyImage> images); */
 
-    void updateProperty(Property savedProperty);
-    PropertyImage setImageFileName(String imageFileName);
-    Property addProperty(Long agentId, Property property);
+   /* Property addNewProperty(Property property, List<PropertyImage> images);
+    void updateProperty(Property savedProperty); */
 
     /* Property addNewProperty(Property newProperty); */
 
+    /* These methods need to be implemented properly
+    Property addNewProperty(Property newProperty);
+>>>>>>> origin/AnnieNewBranch
     Property EditProperty(Long agentId, Long propertyId, Property property);
-    // void DeleteProperty(Long agentId, Long propertyId);
-
-
+    void DeleteProperty(Long agentId, Long propertyId);
+    */
 }

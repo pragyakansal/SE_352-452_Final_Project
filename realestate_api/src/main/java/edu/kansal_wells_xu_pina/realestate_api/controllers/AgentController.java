@@ -48,14 +48,15 @@ public class AgentController {
     */
 
     /* @PreAuthorize("hasRole('AGENT')")
+
+    /* Property management endpoints - not yet implemented
+    @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/{id}/managelistings")
     public String manageListings(@PathVariable Long id, Model model) {
         model.addAttribute("properties", agentService.getAgentProperties(id));
-        // return "managelistings";
         return "temp";
     }
 
-    // TO-DO: template for agentaddproperty.html and addProperty method to handle the form submission
     @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/{id}/addproperty")
     public String addPropertyForm(@PathVariable Long id, Model model) {
@@ -71,14 +72,11 @@ public class AgentController {
         return "redirect:/agent/" + id + "/managelistings";
     }
 
-
-    // TO-DO: template for editproperty.html and editProperty and saveProperty method to handle the form submission
     @PreAuthorize("hasRole('AGENT')")
     @PostMapping("/editproperty/{id}")
     public String editProperty(@ModelAttribute Property property, Model model) {
         return "temp";
     }
-
 
 }
 */
