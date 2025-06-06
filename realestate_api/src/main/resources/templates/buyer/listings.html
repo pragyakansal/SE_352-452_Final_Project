@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body id="listings-page">
+<div th:replace="header :: header"></div>
     <div class="listings-container">
         <div class="listings-dashboard">
             <h1>Property Listings</h1>
-            <a th:href="@{/landing-page/dashboard}" class="button">Back to Dashboard</a>
         </div>
         <div th:if="${properties.empty}">
             <p>No properties available at the moment.</p>
@@ -21,7 +21,7 @@
         <div class="property-list">
             <div th:each="property : ${properties}" class="property-card">
                 <img th:if="${!property.images.empty}" 
-                     th:src="@{/images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
+                     th:src="@{/images/property_images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
                      class="property-image">
                      
                 <div class="property-content">

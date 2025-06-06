@@ -121,7 +121,98 @@ public class DataInitializer {
                         "Modern 6 bed, 4.1 bath new construction home on an oversized 30' corner lot! …",
                         "Chicago, IL 60651",
                         4098,
-                        agent)
+                        agent),
+                new Property(
+                        "461 W Melrose St",
+                        3300000.0,
+                        "East Lakeview is the setting for this gorgeous contemporary masterpiece. The home is comprised of four levels of living space. …",
+                        "Chicago, IL 60657",
+                        5400,
+                        agent),
+                new Property(
+                        "1741 N Mozart St", 849000.0,
+                        "Reimagined Logan Square single-family home that's been carefully curated by the owner/designer. …",
+                        "Chicago, IL 60647",
+                        2631,
+                        agent),
+                new Property(
+                        "2317 W Ohio St",
+                        949000.0,
+                        "Fully gut-rehabbed in 2022, this 4 bedroom, 3.1 bath, 3000 SQFT single family home ideally located in Chicago's Ukrainian Village neighborhood. …",
+                        "Chicago, IL 60612",
+                        3000,
+                        agent
+                ),
+                new Property(
+                        "1701 N Dayton St",
+                        4750000.0, "Stunning LG custom-built single-family home on an extra wide 36.5' lot on a quiet stretch of Dayton in the heart of Lincoln Park. …",
+                        "Chicago, IL 60614",
+                        8000,
+                        agent
+                ),
+                new Property(
+                        "334 N Jefferson St UNIT D",
+                        925000.0,
+                        "This rare corner townhome in Kinzie Station offers 3 bedrooms and 3 baths, showcasing a renovated kitchen and an open-concept design.  …",
+                        "Chicago, IL 60661",
+                        2600,
+                        agent
+                ),
+                new Property(
+                        "1249 S Plymouth Ct",
+                        1200000.0,
+                        "Welcome home to your urban oasis in this rarely available single family home in Chicago's South Loop! …",
+                        "Chicago, IL 60605",
+                        3000,
+                        agent
+                ),
+                new Property(
+                        "2779 N Kenmore Ave",
+                        1300000.0,
+                        "Unicorn alert! This rare, beautifully renovated Victorian in the heart of Lincoln Park seamlessly blends historic craftsmanship with contemporary elegance, offering a truly one-of-a-kind living experience. …",
+                        "Chicago, IL 60614",
+                        2532,
+                        agent
+                ),
+                new Property(
+                        "4425 N Winchester Ave",
+                        1125000.0,
+                        "Lovely Victorian home on large lot in Ravenswood. This very wide home offers formal foyer, living and dining rooms. …",
+                        "Chicago, IL 60640",
+                        3000,
+                        agent
+                ),
+                new Property(
+                        "4511 N Saint Louis Ave",
+                        889000.0,
+                        "A perfect blend of traditional charm and modern elegance, this fully rebuilt contemporary home sits on a generous 38' wide lot, featuring a wrap-around porch and rear deck. …",
+                        "Chicago, IL 60625",
+                        3213,
+                        agent
+                ),
+                new Property(
+                        "401 W Dickens Ave",
+                        5995000.0,
+                        "This ultra notable single-family home sits on an extra-wide lot at the corner of Sedgwick and Dickens! The setting of the home allows for open views outside. …",
+                        "Chicago, IL 60614",
+                        7252,
+                        agent
+                ),
+                new Property (
+                        "339 W Webster Ave UNIT 2B",
+                        1225000.0,
+                        "Enjoy the perfect, prime East Lincoln Park location in this wonderfully intimate gated townhome community. …",
+                        "Chicago, IL 60614",
+                        2400,
+                        agent
+                ),
+                new Property (
+                        "1541 W Addison St", 1200000.0,
+                        "Don't miss this pristine, beautifully rehabbed solid brick home just steps to the highly desirable Southport Corridor. …",
+                        "Chicago, IL 60613",
+                        2869,
+                        agent
+                )
         );
 
         List<Property> saved = propertyRepo.saveAll(properties);
@@ -134,7 +225,7 @@ public class DataInitializer {
         String folderName = property.getTitle();
 
         String projectRoot = System.getProperty("user.dir");
-        Path folder = Paths.get(projectRoot, "src/main/resources/static/images", folderName);
+        Path folder = Paths.get(projectRoot, "src/main/resources/static/images/property_images", folderName);
         if (!Files.exists(folder)) {
             // no images for this property
             return;

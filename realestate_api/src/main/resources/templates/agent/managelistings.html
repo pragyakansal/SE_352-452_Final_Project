@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Manage Your Properties</title>
-    <!-- The below line loads in styling elements from the CSS file -->
-    <!-- The @{} syntax is used to resolve the URL of the CSS file -->
-    <!-- Comment it out to see the content without styling -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <body>
+<div th:replace="header :: header"></div>
+<h1>Manage Your Properties</h1>
 <table>
     <thead>
         <tr>
@@ -35,11 +38,11 @@
             <td>
                 <!-- Display the first image if available -->
                 <img th:if="${!property.images.empty}"
-                     th:src="@{/images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
+                     th:src="@{/images/property_images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
                      alt="Property Image" width="100">
                 <!-- If no images, show a placeholder -->
                 <span th:unless="${!property.images.empty}">No Image</span>
-            <td th:text="${property.description}">Short description...</td>
+           <!-- <td th:text="${property.description}">Short description...</td> -->
             <td>
                 <!-- Link to edit the property -->
                 <a th:href="@{/agent/manage-listings/edit/{id}(id=${property.id})}" class="button-link">Edit</a>
