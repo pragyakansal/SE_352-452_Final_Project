@@ -30,4 +30,10 @@ public class PropertyServiceImpl implements PropertyService{
         return propertyRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException("No property found with id: " + id));
     }
+
+    @Override
+    public Property updateProperty(Property savedProperty) {
+        propertyRepo.save(savedProperty);
+        return savedProperty;
+    }
 }

@@ -60,14 +60,14 @@ public class AgentController {
     @GetMapping("/{id}/addproperty")
     public String addPropertyForm(@PathVariable Long id, Model model) {
         model.addAttribute("property", new Property());
-        return "agentaddproperty";
+        return "temp";
     }
 
     @PreAuthorize("hasRole('AGENT')")
     @PostMapping("/{id}/addproperty")
-    public String addProperty(@PathVariable Long id, @ModelAttribute Property property, Model model) {
-        agentService.addProperty(id, property);
-        model.addAttribute("property", property);
+    public String addNewProperty(@PathVariable Long id, @ModelAttribute Property newProperty, Model model) {
+        agentService.addNewProperty(newProperty);
+        model.addAttribute("property", newProperty);
         return "redirect:/agent/" + id + "/managelistings";
     }
 

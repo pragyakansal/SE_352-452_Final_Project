@@ -1,6 +1,7 @@
 package edu.kansal_wells_xu_pina.realestate_api.services;
 
-import edu.kansal_wells_xu_pina.realestate_api.dtos.UpdateProfileRequest;
+
+import edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;
 import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageRepository;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -23,13 +26,15 @@ public class AgentServiceImpl implements AgentService {
     private final PropertyRepository propertyRepository;
 
     @Autowired
-    private final PropertyImageRepository imageRepository;
+    private final PropertyImageRepository propertyImageRepository;
 
 
+
+    @Autowired
     public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository imageRepository) {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
-        this.imageRepository = imageRepository;
+        this.propertyImageRepository = imageRepository;
     }
 
 
@@ -80,11 +85,47 @@ public class AgentServiceImpl implements AgentService {
         return property;
     }
 
+    /*
     @Override
-    public Property addProperty(Long agentId, Property property) {
+
+    public Property addNewProperty(Property property) {
+        User agent =  userService.getCurrentUser();
+        if (!agent.getRole().equals(Role.AGENT)) {
+            throw new IllegalArgumentException("User is not an agent.");
+        }
+        property.setAgent(agent);
+        Property savedProperty = propertyRepository.save(property);
+
+        for (PropertyImage image : property.getImages()) {}
+        return propertyRepository.save(property);
+
+
+    }
         User agent = getAgentById(agentId);
         property.setAgent(agent);
         return propertyRepository.save(property);
+    }
+
+     */
+
+    @Override
+    public Property addNewProperty(Property newProperty) {
+        User agent = userService.getCurrentUser(); // fix validation for agent
+        if (!agent.getRole().equals(Role.AGENT)) {
+            throw new IllegalArgumentException("User is not an agent.");
+        }
+        newProperty.setAgent(agent);
+        Set<PropertyImage> images = newProperty.getImages().stream()
+                .map(image -> {
+                    PropertyImage foundImage = propertyImageRepository.findByImageFileName(image.getImageFileName());
+                    if (foundImage == null) {
+                        throw new NotFoundException("Image not found: " + image.getImageFileName());
+                    }
+                    return foundImage;
+                })
+                .collect(Collectors.toSet());
+        return propertyRepository.save(newProperty);
+
     }
 
     @Override
