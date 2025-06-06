@@ -1,7 +1,9 @@
 package edu.kansal_wells_xu_pina.realestate_api.controllers;
 
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
+import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.services.AgentService;
+import edu.kansal_wells_xu_pina.realestate_api.services.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +16,11 @@ import java.util.List;
 public class AgentController {
 
     private final AgentService agentService;
+    private final UserService userService;
 
-    public AgentController(AgentService agentService) {this.agentService = agentService;}
+    public AgentController(AgentService agentService, UserService userService) {this.agentService = agentService;
+        this.userService = userService;
+    }
 
    /* @PreAuthorize("hasRole('AGENT')")
     @GetMapping({"/dashboard", "/"})
@@ -47,8 +52,9 @@ public class AgentController {
 
     @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/managelistings")
-    public String manageListings(@PathVariable Long id, Model model) {
-        List<Property> properties = agentService.getAgentProperties(id);
+    public String manageListings(Model model) {
+        User currentUser = userService.getCurrentUser();
+        List<Property> properties = agentService.getAgentProperties(currentUser.getId());
         model.addAttribute("properties", properties);
         return "agent/managelistings";
     }
