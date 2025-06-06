@@ -51,15 +51,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserProfile() {
-        User user = getCurrentUser();
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return user;
-    }
-
-    @Override
     public User updateUserProfile(UpdateProfileRequest request) {
         User user = getCurrentUser();
         if (user == null) {

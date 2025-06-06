@@ -124,7 +124,7 @@ public class AuthController {
     @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
     public String viewProfile(Model model) {
         try {
-            User user = userService.getUserProfile();
+            User user = userService.getCurrentUser();
             model.addAttribute("user", user);
             return "common-profile";
         } catch (Exception e) {
@@ -138,7 +138,7 @@ public class AuthController {
     @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
     public String editProfileForm(Model model) {
         try {
-            User user = userService.getUserProfile();
+            User user = userService.getCurrentUser();
             UpdateProfileRequest request = new UpdateProfileRequest(
                 user.getFirstName(),
                 user.getLastName(),

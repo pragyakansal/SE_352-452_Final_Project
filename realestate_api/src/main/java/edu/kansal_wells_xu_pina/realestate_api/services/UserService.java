@@ -13,7 +13,5 @@ public interface UserService {
 //    @PreAuthorize("isAuthenticated()")
     User getCurrentUser();
 
-    User getUserProfile();
-
     User updateUserProfile(UpdateProfileRequest request);
 }
