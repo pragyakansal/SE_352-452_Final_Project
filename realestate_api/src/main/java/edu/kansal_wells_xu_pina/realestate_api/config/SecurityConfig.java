@@ -16,8 +16,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import jakarta.servlet.Filter;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
@@ -28,6 +33,8 @@ public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
 
     private final GlobalRateLimiterFilter globalRateLimiterFilter;
+
+    private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
     @Autowired
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
@@ -43,15 +50,14 @@ public class SecurityConfig {
         http
                 // First, rate limit EVERY request as early as possible:
                 .addFilterBefore(globalRateLimiterFilter, UsernamePasswordAuthenticationFilter.class)
-
                 // Then, process JWT authentication:
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/landing-page/", "/landing-page/login", "/landing-page/register", "/landing-page/logout", "/register", "/login", "/images/**", "/css/**").permitAll()
+                        .requestMatchers("/", "/landing-page", "/landing-page/", "/landing-page/login", "/landing-page/register", "/landing-page/logout", "/register", "/login", "/images/**", "/css/**").permitAll()
                         .requestMatchers("/landing-page/dashboard", "/landing-page/profile/**").hasAnyRole("BUYER", "AGENT", "ADMIN")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**", "/admin/create-agent").hasRole("ADMIN")
                         .requestMatchers("/agent/**").hasRole("AGENT")
                         .requestMatchers("/buyer/**").hasRole("BUYER")
                         .anyRequest().authenticated()
@@ -62,7 +68,14 @@ public class SecurityConfig {
                         .accessDeniedHandler(new CustomAccessDeniedHandler())
                 );
 
-        return http.build();
+        //return http.build();
+        DefaultSecurityFilterChain securityFilterChain = http.build();
+        List<Filter> filters = securityFilterChain.getFilters();
+        for (Filter filter : filters) {
+            log.info("filter name: " + filter.toString());
+            log.info("filter class: " + filter.getClass().getName());
+        }
+        return securityFilterChain;
     }
 
     @Bean

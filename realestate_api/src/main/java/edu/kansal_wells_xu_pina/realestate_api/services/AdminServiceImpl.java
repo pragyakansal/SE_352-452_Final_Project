@@ -1,4 +1,8 @@
 package edu.kansal_wells_xu_pina.realestate_api.services;
+import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
+import edu.kansal_wells_xu_pina.realestate_api.jwt.JwtUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import java.util.List;
@@ -8,11 +12,14 @@ import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidUserParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.AlreadyExistsException;
 import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
     private UserRepository userRepository;
+    private static final Logger log = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Autowired
     public AdminServiceImpl(UserRepository userRepository) {
@@ -49,7 +56,18 @@ public class AdminServiceImpl implements AdminService {
             throw new AlreadyExistsException("The agent with the email address: " + newAgentUser.getEmail() + " already exists in the database. " +
                     " Please try again by creating a new agent with a unique email address.");
         }
-        return userRepository.save(newAgentUser);
+        User user = null;
+        try {
+            if (newAgentUser.getRole() == null || newAgentUser.getRole().equals("")) {
+                log.info("User role is null, setting to AGENT");
+                newAgentUser.setRole(Role.AGENT);
+            }
+            log.info("User role before saving: " + newAgentUser.getRole());
+            user = userRepository.save(newAgentUser);
+        } catch (Exception e) {
+            log.error("Error in saving user: " + newAgentUser.getEmail() + ", role: " + newAgentUser.getRole(),  e);
+        }
+        return user;
     }
 
     /* Redundant profile method - now using common profile management
