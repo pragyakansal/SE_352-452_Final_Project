@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body id="dashboard-page">
-    <div class="container">
+    <div class="container" id="dashboard-container">
         <h1 th:text="'Welcome, User: ' + ${#authentication.name}">Welcome, User {}</h1>
         <h3 th:text="'Your role: ' + ${user.role}">Your role: {}</h3>
         <span th:text="${user.role}">{} Dashboard</span>

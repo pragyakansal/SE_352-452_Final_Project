@@ -68,14 +68,13 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create-agent")
     public String createAgent(@ModelAttribute User agentUser, Model model) throws AlreadyExistsException {
-        User newUser = null;
         try {
             agentUser.setRole(Role.AGENT);
-            newUser = adminService.createAgentUser(agentUser);
+            adminService.createAgentUser(agentUser);
             model.addAttribute("message", "Agent was created successfully");
             return "redirect:/landing-page/dashboard";
         } catch (Exception e) {
-            log.error("Error in creating agent: " + newUser.getEmail() + ", role: " + newUser.getRole(),  e);
+            log.error("Error in creating agent: " + agentUser.getEmail() + ", role: " + agentUser.getRole(),  e);
             model.addAttribute("error", e.getMessage());
             model.addAttribute("agentUser", agentUser);
             return "create-agent-form";

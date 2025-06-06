@@ -4,34 +4,38 @@
     <meta charset="UTF-8">
     <title>My Profile</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
+<body id="profile-page">
+<div th:replace="header :: header"></div>
+    <div class="container" id="profile-container">
         <h1>My Profile</h1>
         
         <div th:if="${message}" class="success-message" th:text="${message}"></div>
         <div th:if="${error}" class="error-message" th:text="${error}"></div>
 
-        <div>
+        <div id="profile-fields-container">
             <div>
-                <label>First Name:</label>
+                <label class="profile-field-label">First Name:</label>
                 <span th:text="${user.firstName}">First Name</span>
             </div>
             <div>
-                <label>Last Name:</label>
+                <label class="profile-field-label">Last Name:</label>
                 <span th:text="${user.lastName}">Last Name</span>
             </div>
             <div>
-                <label>Email:</label>
+                <label class="profile-field-label">Email:</label>
                 <span th:text="${user.email}">Email</span>
             </div>
             <div>
-                <label>Role:</label>
+                <label class="profile-field-label">Role:</label>
                 <span th:text="${user.role}">Role</span>
             </div>
         </div>
 
-        <div>
+        <div class="profile-buttons-container">
             <a th:href="@{/landing-page/profile/edit}" class="button">Edit Profile</a>
             <a th:href="@{/landing-page/dashboard}" class="button">Back to Dashboard</a>
         </div>
