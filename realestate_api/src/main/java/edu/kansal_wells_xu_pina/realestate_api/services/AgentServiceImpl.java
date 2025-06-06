@@ -48,27 +48,30 @@ public class AgentServiceImpl implements AgentService {
         return user;
     }
 
-//    @Override
-//    public UpdateProfileRequest getAgentDtoById(Long id) {
-//        User agent = getAgentById(id);
-//        return new UpdateProfileRequest(agent.getFirstName(), agent.getLastName(), agent.getEmail());
-//    }
-//
-//    @Override
-//    public User editAgentProfile(Long agentId, UpdateProfileRequest request) {
-//        User agent = getAgentById(agentId);
-//       if (request.getFirstName() != null) {
-//            agent.setFirstName(request.getFirstName());
-//        }
-//        if (request.getLastName() != null) {
-//            agent.setLastName(request.getLastName());
-//        }
-//        if (request.getEmail() != null) {
-//            agent.setEmail(request.getEmail());
-//        }
-//        return userRepository.save(agent);
-//    }
+    /* Redundant profile methods - now using common profile management
+    @Override
+    public UpdateProfileRequest getAgentDtoById(Long id) {
+        User agent = getAgentById(id);
+        return new UpdateProfileRequest(agent.getFirstName(), agent.getLastName(), agent.getEmail());
+    }
 
+    @Override
+    public User editAgentProfile(Long agentId, UpdateProfileRequest request) {
+        User agent = getAgentById(agentId);
+        if (request.getFirstName() != null) {
+            agent.setFirstName(request.getFirstName());
+        }
+        if (request.getLastName() != null) {
+            agent.setLastName(request.getLastName());
+        }
+        if (request.getEmail() != null) {
+            agent.setEmail(request.getEmail());
+        }
+        return userRepository.save(agent);
+    }
+    */
+
+    /* Property management methods - not yet implemented
     @Override
     public List<Property> getAgentProperties(Long agentId) {
         User agent = getAgentById(agentId);
@@ -85,55 +88,44 @@ public class AgentServiceImpl implements AgentService {
         return property;
     }
 
-    /*
     @Override
-
-    public Property addNewProperty(Property property) {
-        User agent =  userService.getCurrentUser();
-        if (!agent.getRole().equals(Role.AGENT)) {
-            throw new IllegalArgumentException("User is not an agent.");
-        }
-        property.setAgent(agent);
-        Property savedProperty = propertyRepository.save(property);
-
-        for (PropertyImage image : property.getImages()) {}
-        return propertyRepository.save(property);
-
-
-    }
-        User agent = getAgentById(agentId);
-        property.setAgent(agent);
-        return propertyRepository.save(property);
-    }
-
-     */
-
-    @Override
-    public Property addNewProperty(Property newProperty) {
-        User agent = userService.getCurrentUser(); // fix validation for agent
-        if (!agent.getRole().equals(Role.AGENT)) {
-            throw new IllegalArgumentException("User is not an agent.");
-        }
-        newProperty.setAgent(agent);
-        Set<PropertyImage> images = newProperty.getImages().stream()
-                .map(image -> {
-                    PropertyImage foundImage = propertyImageRepository.findByImageFileName(image.getImageFileName());
-                    if (foundImage == null) {
-                        throw new NotFoundException("Image not found: " + image.getImageFileName());
-                    }
-                    return foundImage;
-                })
-                .collect(Collectors.toSet());
-        return propertyRepository.save(newProperty);
-
+    public Property addNewProperty(Property property, List<PropertyImage> images) {
+        // Implementation pending
+        return null;
     }
 
     @Override
-    public Property EditProperty(Long agentId, Long propertyId, Property property) {
-        getAgentPropertyById(agentId, propertyId);
-        property.setAgent(getAgentById(agentId));
-        return propertyRepository.save(property);
+    public void updateProperty(Property savedProperty) {
+        // Implementation pending
     }
+    */
+
+//    @Override
+//    public Property addNewProperty(Property newProperty) {
+//        User agent = userService.getCurrentUser(); // fix validation for agent
+//        if (!agent.getRole().equals(Role.AGENT)) {
+//            throw new IllegalArgumentException("User is not an agent.");
+//        }
+//        newProperty.setAgent(agent);
+//        Set<PropertyImage> images = newProperty.getImages().stream()
+//                .map(image -> {
+//                    PropertyImage foundImage = propertyImageRepository.findByImageFileName(image.getImageFileName());
+//                    if (foundImage == null) {
+//                        throw new NotFoundException("Image not found: " + image.getImageFileName());
+//                    }
+//                    return foundImage;
+//                })
+//                .collect(Collectors.toSet());
+//        return propertyRepository.save(newProperty);
+//
+//    }
+//
+//    @Override
+//    public Property EditProperty(Long agentId, Long propertyId, Property property) {
+//        getAgentPropertyById(agentId, propertyId);
+//        property.setAgent(getAgentById(agentId));
+//        return propertyRepository.save(property);
+//    }
 
     // @Override
     // TODO: Implement DeleteProperty method

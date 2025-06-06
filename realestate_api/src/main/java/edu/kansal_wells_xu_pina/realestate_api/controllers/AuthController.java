@@ -16,6 +16,9 @@ import org.slf4j.LoggerFactory;
 import edu.kansal_wells_xu_pina.realestate_api.dtos.UpdateProfileRequest;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidUserParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.dtos.JwtResponse;
+import org.springframework.security.core.userdetails.UserDetails;
+import edu.kansal_wells_xu_pina.realestate_api.services.CustomUserDetailsService;
+import edu.kansal_wells_xu_pina.realestate_api.jwt.JwtUtil;
 
 @Controller
 @RequestMapping("/landing-page")
@@ -23,11 +26,16 @@ public class AuthController {
     private static final Logger log = LoggerFactory.getLogger(AuthController.class);
     private final AuthService authService;
     private final UserService userService;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    public AuthController(AuthService authService, UserService userService) {
+    public AuthController(AuthService authService, UserService userService, 
+                         CustomUserDetailsService customUserDetailsService, JwtUtil jwtUtil) {
         this.authService = authService;
         this.userService = userService;
+        this.customUserDetailsService = customUserDetailsService;
+        this.jwtUtil = jwtUtil;
     }
 
     @GetMapping({"", "/"})
@@ -147,9 +155,22 @@ public class AuthController {
 
     @PostMapping("/profile/edit")
     @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
-    public String updateProfile(@ModelAttribute UpdateProfileRequest request, Model model) {
+    public String updateProfile(@ModelAttribute UpdateProfileRequest request, 
+                              HttpServletResponse response, Model model) {
         try {
             User updatedUser = userService.updateUserProfile(request);
+            
+            // Generate new JWT token with updated email
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(updatedUser.getEmail());
+            String newToken = jwtUtil.generateToken(userDetails);
+            
+            // Create new JWT cookie
+            Cookie jwtCookie = new Cookie("jwt", newToken);
+            jwtCookie.setPath("/");
+            jwtCookie.setMaxAge(60 * 60); // 1 hour
+            jwtCookie.setHttpOnly(true);
+            response.addCookie(jwtCookie);
+            
             model.addAttribute("user", updatedUser);
             model.addAttribute("message", "Profile updated successfully");
             return "common-profile";

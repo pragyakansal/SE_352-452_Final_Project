@@ -9,6 +9,7 @@ public class PropertyImageService {
 
     private String uploadDir;
 
+    /* Image upload functionality - not yet implemented
     public String saveImage(MuitiPartFile file) throws IOException {
         if (file.isEmpty()) {
             throw new IOException("File is empty, file store failed.");
@@ -23,7 +24,6 @@ public class PropertyImageService {
 
         Path filePath = uploadPath.resolve(file.getOriginalFilename());
         file.transferTo(filePath.toFile());
-
-
     }
+    */
 }
