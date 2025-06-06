@@ -10,6 +10,7 @@
 </head>
 <body id="dashboard-page">
     <div class="container">
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
         <h1 th:text="${message}">Welcome to Dashboard</h1>
         <h4 th:text="${#authentication.name}">User</h4>
         <h2>Dashboard</h2>

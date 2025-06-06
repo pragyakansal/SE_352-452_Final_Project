@@ -23,6 +23,7 @@
                     <input type="password" class="form-control" id="password" name="password" th:field="*{password}" placeholder="Password" required>
                 </div>
             </div>
+            <div class="success-message" th:if="${message}" th:text="${message}"></div>
             <div class="error-message" th:if="${error}" th:text="${error}"></div>
             <button type="submit" class="button">Login</button>
             <div class="register-link">

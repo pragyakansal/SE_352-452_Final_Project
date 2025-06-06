@@ -106,6 +106,14 @@ body {
     font-size: 14px;
 }
 
+.success-message {
+    background-color: #4CAF50;
+    border: 1px solid #45a049;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+}
+
 .listings-container {
     width: 100%;
     max-width: 1200px;
