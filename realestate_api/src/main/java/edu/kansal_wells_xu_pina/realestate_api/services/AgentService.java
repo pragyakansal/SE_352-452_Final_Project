@@ -20,13 +20,13 @@ public interface AgentService {
     */
     List<Property> getAgentProperties(Long agentId);
     Property getAgentPropertyById(Long agentId, Long propertyId);
-    Property addNewProperty(Property property, List<PropertyImage> images);
+   /*  Property addNewProperty(Property property, List<PropertyImage> images); */
 
     void updateProperty(Property savedProperty);
     PropertyImage setImageFileName(String imageFileName);
     Property addProperty(Long agentId, Property property);
 
-    Property addNewProperty(Property newProperty);
+    /* Property addNewProperty(Property newProperty); */
 
     Property EditProperty(Long agentId, Long propertyId, Property property);
     // void DeleteProperty(Long agentId, Long propertyId);

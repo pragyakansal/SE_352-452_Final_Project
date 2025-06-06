@@ -10,12 +10,14 @@
 </head>
 <body id="dashboard-page">
     <div class="container">
-        <h1 th:text="${message}">Welcome to Dashboard</h1>
-        <h4 th:text="${#authentication.name}">User</h4>
+        <h1 th:text="'Welcome, User: ' + ${#authentication.name}">Welcome, User {}</h1>
+        <h3 th:text="'Your role: ' + ${user.role}">Your role: {}</h3>
+        <span th:text="${user.role}">{} Dashboard</span>
+       <!-- <h4 th:text="${#authentication.name}">User</h4> -->
         <h2>Dashboard</h2>
         <br>
         <br>
-        <ul>
+        <ul class="dashboard-options">
             <li><a th:href="@{/landing-page/profile}" class="link">My Profile</a></li>
             <!-- BUYERS -->
             <li sec:authorize="hasRole('BUYER')">

@@ -10,8 +10,10 @@
 </head>
 <body id="listings-page">
     <div class="listings-container">
-        <h1>Property Listings</h1>
-
+        <div class="listings-dashboard">
+            <h1>Property Listings</h1>
+            <a th:href="@{/landing-page/dashboard}" class="button">Back to Dashboard</a>
+        </div>
         <div th:if="${properties.empty}">
             <p>No properties available at the moment.</p>
         </div>

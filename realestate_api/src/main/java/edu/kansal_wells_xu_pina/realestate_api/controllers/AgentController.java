@@ -1,4 +1,4 @@
-package edu.kansal_wells_xu_pina.realestate_api.controllers;
+/* package edu.kansal_wells_xu_pina.realestate_api.controllers;
 
 import edu.kansal_wells_xu_pina.realestate_api.dtos.UpdateProfileRequest;
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
@@ -11,9 +11,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException; */
 
-@Controller
+/* @Controller
 @RequestMapping("/agent")
 public class AgentController {
 
@@ -25,7 +25,7 @@ public class AgentController {
     @GetMapping({"/dashboard", "/"})
     public String agentDashboard() {
         return "common-dashboard";
-    }
+    } */
 
     /* Redundant profile endpoints - now using common profile management
     @PreAuthorize("hasRole('AGENT')")
@@ -47,7 +47,7 @@ public class AgentController {
     }
     */
 
-    @PreAuthorize("hasRole('AGENT')")
+    /* @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/{id}/managelistings")
     public String manageListings(@PathVariable Long id, Model model) {
         model.addAttribute("properties", agentService.getAgentProperties(id));
@@ -81,3 +81,4 @@ public class AgentController {
 
 
 }
+*/

@@ -14,8 +14,9 @@ import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import edu.kansal_wells_xu_pina.realestate_api.services.UserService;
 
-
+/*
 @Service
 public class AgentServiceImpl implements AgentService {
 
@@ -25,16 +26,20 @@ public class AgentServiceImpl implements AgentService {
     @Autowired
     private final PropertyRepository propertyRepository;
 
+    // is autowired needed here?
     @Autowired
     private final PropertyImageRepository propertyImageRepository;
 
+    private final UserService userService;
+
 
 
     @Autowired
-    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository imageRepository) {
+    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository, UserService userService) {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
-        this.propertyImageRepository = imageRepository;
+        this.propertyImageRepository = propertyImageRepository;
+        this.userService = userService;
     }
 
 
@@ -85,7 +90,7 @@ public class AgentServiceImpl implements AgentService {
         return property;
     }
 
-    /*
+
     @Override
 
     public Property addNewProperty(Property property) {
@@ -106,7 +111,7 @@ public class AgentServiceImpl implements AgentService {
         return propertyRepository.save(property);
     }
 
-     */
+
 
     @Override
     public Property addNewProperty(Property newProperty) {
@@ -148,3 +153,4 @@ public class AgentServiceImpl implements AgentService {
 
 
 }
+*/

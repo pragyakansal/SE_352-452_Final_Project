@@ -17,13 +17,20 @@ body {
 }
 
 #dashboard-page {
-    background-image: url('/images/dashboard-bg.jpg');
+    background-image: url('/images/dashboard-bg-1.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #listings-page {
     background-color: #edebeb;
+}
+
+#manage-users {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
 }
 
 
@@ -164,3 +171,15 @@ th, td {
     border-bottom: 1px solid #dddddd;
 }
 
+.dashboard-options {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.listings-dashboard {
+    display: flex;
+    width: 100%;
+    justify-content: space-between
+}

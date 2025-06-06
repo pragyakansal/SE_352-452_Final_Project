@@ -14,16 +14,20 @@ import edu.kansal_wells_xu_pina.realestate_api.exceptions.AlreadyExistsException
 import org.springframework.transaction.annotation.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.time.LocalDateTime;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
     private UserRepository userRepository;
     private static final Logger log = LoggerFactory.getLogger(AdminServiceImpl.class);
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AdminServiceImpl(UserRepository userRepository) {
+    public AdminServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -56,12 +60,20 @@ public class AdminServiceImpl implements AdminService {
             throw new AlreadyExistsException("The agent with the email address: " + newAgentUser.getEmail() + " already exists in the database. " +
                     " Please try again by creating a new agent with a unique email address.");
         }
+        String rawPassword = newAgentUser.getPassword();
+        if (rawPassword == null || rawPassword.isBlank()) {
+            throw new IllegalArgumentException("Password cannot be null or blank");
+        }
+        log.info("Raw password: {}", newAgentUser.getPassword());
+        newAgentUser.setPassword(passwordEncoder.encode(rawPassword));
+        log.info("Encoded password: {}", newAgentUser.getPassword());
         User user = null;
         try {
             if (newAgentUser.getRole() == null || newAgentUser.getRole().equals("")) {
                 log.info("User role is null, setting to AGENT");
                 newAgentUser.setRole(Role.AGENT);
             }
+            newAgentUser.setCreatedAt(LocalDateTime.now());
             log.info("User role before saving: " + newAgentUser.getRole());
             user = userRepository.save(newAgentUser);
         } catch (Exception e) {

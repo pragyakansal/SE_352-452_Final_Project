@@ -54,7 +54,8 @@ public class AdminController {
     @DeleteMapping("/delete/{email}")
     public String deleteUserByEmailAddress(@PathVariable("email") String email) throws NotFoundException {
         String message = adminService.deleteUserByEmailAddress(email);
-        return message;
+        log.info("Message: ", message);
+        return "redirect:/admin/manage-users";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -72,11 +73,13 @@ public class AdminController {
             agentUser.setRole(Role.AGENT);
             newUser = adminService.createAgentUser(agentUser);
             model.addAttribute("message", "Agent was created successfully");
+            return "redirect:/landing-page/dashboard";
         } catch (Exception e) {
             log.error("Error in creating agent: " + newUser.getEmail() + ", role: " + newUser.getRole(),  e);
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("agentUser", agentUser);
             return "create-agent-form";
         }
-        return "redirect:/landing-page/dashboard";
     }
 
 }

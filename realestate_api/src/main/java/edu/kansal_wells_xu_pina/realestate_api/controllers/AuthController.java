@@ -102,7 +102,7 @@ public class AuthController {
     @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
     public String displayDashboard(Model model) {
         userService.prepareDashboardModel(model);
-        model.addAttribute("message", "Welcome to the dashboard");
+        //model.addAttribute("message", "Welcome to the dashboard");
         return "common-dashboard";
     }
 
