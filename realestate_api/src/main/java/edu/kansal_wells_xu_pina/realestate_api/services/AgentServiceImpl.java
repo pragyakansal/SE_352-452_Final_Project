@@ -8,38 +8,34 @@ import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageReposit
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import edu.kansal_wells_xu_pina.realestate_api.services.UserService;
 
-/*
+
 @Service
 public class AgentServiceImpl implements AgentService {
 
-    @Autowired
+
     private final UserRepository userRepository;
 
-    @Autowired
     private final PropertyRepository propertyRepository;
 
-    // is autowired needed here?
-    @Autowired
     private final PropertyImageRepository propertyImageRepository;
 
-    private final UserService userService;
-
 
 
     @Autowired
-    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository, UserService userService) {
+    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository imageRepository) {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
-        this.propertyImageRepository = propertyImageRepository;
-        this.userService = userService;
+        this.propertyImageRepository = imageRepository;
     }
 
 
@@ -53,30 +49,6 @@ public class AgentServiceImpl implements AgentService {
         return user;
     }
 
-    /* Redundant profile methods - now using common profile management
-    @Override
-    public UpdateProfileRequest getAgentDtoById(Long id) {
-        User agent = getAgentById(id);
-        return new UpdateProfileRequest(agent.getFirstName(), agent.getLastName(), agent.getEmail());
-    }
-
-    @Override
-    public User editAgentProfile(Long agentId, UpdateProfileRequest request) {
-        User agent = getAgentById(agentId);
-        if (request.getFirstName() != null) {
-            agent.setFirstName(request.getFirstName());
-        }
-        if (request.getLastName() != null) {
-            agent.setLastName(request.getLastName());
-        }
-        if (request.getEmail() != null) {
-            agent.setEmail(request.getEmail());
-        }
-        return userRepository.save(agent);
-    }
-    */
-
-    /* Property management methods - not yet implemented
     @Override
     public List<Property> getAgentProperties(Long agentId) {
         User agent = getAgentById(agentId);
@@ -93,7 +65,20 @@ public class AgentServiceImpl implements AgentService {
         return property;
     }
 
+    private User getCurrentAgent() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        User agent = userRepository.findByEmail(email);
+        if (agent == null) {
+            throw new UsernameNotFoundException("User not found: " + email);
+        }
+        if (!agent.getRole().equals(Role.AGENT)) {
+            throw new IllegalArgumentException("User is not an agent.");
+        }
+        return agent;
+    }
 
+    /*
     @Override
 
     public Property addNewProperty(Property property) {
@@ -114,14 +99,11 @@ public class AgentServiceImpl implements AgentService {
         return propertyRepository.save(property);
     }
 
-
+     */
 
     @Override
     public Property addNewProperty(Property newProperty) {
-        User agent = userService.getCurrentUser(); // fix validation for agent
-        if (!agent.getRole().equals(Role.AGENT)) {
-            throw new IllegalArgumentException("User is not an agent.");
-        }
+        User agent = getCurrentAgent();
         newProperty.setAgent(agent);
         Set<PropertyImage> images = newProperty.getImages().stream()
                 .map(image -> {
@@ -132,48 +114,17 @@ public class AgentServiceImpl implements AgentService {
                     return foundImage;
                 })
                 .collect(Collectors.toSet());
+        newProperty.setImages((List<PropertyImage>) images);
         return propertyRepository.save(newProperty);
 
-
-    @Override
-    public Property addNewProperty(Property property, List<PropertyImage> images) {
-        // Implementation pending
-        return null;
-
     }
 
     @Override
-    public void updateProperty(Property savedProperty) {
-        // Implementation pending
+    public Property EditProperty(Long agentId, Long propertyId, Property property) {
+        getAgentPropertyById(agentId, propertyId);
+        property.setAgent(getAgentById(agentId));
+        return propertyRepository.save(property);
     }
-
-
-//    @Override
-//    public Property addNewProperty(Property newProperty) {
-//        User agent = userService.getCurrentUser(); // fix validation for agent
-//        if (!agent.getRole().equals(Role.AGENT)) {
-//            throw new IllegalArgumentException("User is not an agent.");
-//        }
-//        newProperty.setAgent(agent);
-//        Set<PropertyImage> images = newProperty.getImages().stream()
-//                .map(image -> {
-//                    PropertyImage foundImage = propertyImageRepository.findByImageFileName(image.getImageFileName());
-//                    if (foundImage == null) {
-//                        throw new NotFoundException("Image not found: " + image.getImageFileName());
-//                    }
-//                    return foundImage;
-//                })
-//                .collect(Collectors.toSet());
-//        return propertyRepository.save(newProperty);
-//
-//    }
-//
-//    @Override
-//    public Property EditProperty(Long agentId, Long propertyId, Property property) {
-//        getAgentPropertyById(agentId, propertyId);
-//        property.setAgent(getAgentById(agentId));
-//        return propertyRepository.save(property);
-//    }
 
     // @Override
     // TODO: Implement DeleteProperty method
@@ -188,4 +139,3 @@ public class AgentServiceImpl implements AgentService {
 
 
 }
-*/

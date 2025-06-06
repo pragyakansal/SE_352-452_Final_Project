@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Your Properties</title>
+    <!-- The below line loads in styling elements from the CSS file -->
+    <!-- The @{} syntax is used to resolve the URL of the CSS file -->
+    <!-- Comment it out to see the content without styling -->
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Location</th>
+            <th>Size</th>
+            <th>Images</th>
+            <!--th>Favorites</th-->
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <!-- The below line iterates over the properties list -->
+        <!-- The below is similar to "for each 'property' in the 'properties' -->
+        <tr th:each="property, propStat : ${properties}">
+            <td th:text="${propStat.count}"></td> <!-- Good for counting, starts at 1 -->
+            <td th:text="${property.title}">Property Title</td>
+            <td th:text="${'$' + #numbers.formatDecimal(property.price, 1, 'COMMA', 2, 'POINT')}">$0.00</td>
+            <td th:text="${property.location}">Location</td>
+            <td th:text="${property.size + ' sq ft'}">0 sq ft</td>
+            <td>
+                <!-- Display the first image if available -->
+                <img th:if="${!property.images.empty}"
+                     th:src="@{/images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
+                     alt="Property Image" width="100">
+                <!-- If no images, show a placeholder -->
+                <span th:unless="${!property.images.empty}">No Image</span>
+            <td th:text="${property.description}">Short description...</td>
+            <td>
+                <!-- Link to edit the property -->
+                <a th:href="@{/agent/manage-listings/edit/{id}(id=${property.id})}" class="button-link">Edit</a>
+                <!-- Link to delete the property -->
+                <a th:href="@{/agent/manage-listings/delete/{id}(id=${property.id})}" class="button-link red">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+    </thead>
+</table>
+
+</body>
+</html>
