@@ -64,7 +64,7 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     public String storePropertyImage(Long propertyId, MultipartFile file) {
         try {
             String imageFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-            Path uploadPath = Paths.get(System.getProperty("user.dir"),"uploads", "property_images");
+            Path uploadPath = Paths.get(System.getProperty("user.dir"),"uploads", "images", "property_images");
             Files.createDirectories(uploadPath);
 
             Path filePath = uploadPath.resolve(imageFileName);

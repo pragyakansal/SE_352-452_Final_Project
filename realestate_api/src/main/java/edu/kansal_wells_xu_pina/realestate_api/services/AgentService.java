@@ -24,7 +24,7 @@ public interface AgentService {
     Property addNewProperty(Property newProperty, List<MultipartFile> imageFiles);
 
     // Property editProperty(Long agentId, Long propertyId, Property property);
-    // void DeleteProperty(Long agentId, Long propertyId);
+    String deletePropertyByPropertyId(Long propertyId, Long agentId);
 
 
 }
