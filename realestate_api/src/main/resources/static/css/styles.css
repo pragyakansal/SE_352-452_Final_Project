@@ -43,6 +43,12 @@ html, body {
     background-repeat: no-repeat;
 }
 
+#login-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 #create-agent-page {
     background-image: url('/images/common-bg.jpg');
     background-size: cover;
@@ -64,7 +70,7 @@ html, body {
 #profile-container {
     background-color: rgba(255, 255, 255, 0.6);
     color: #333333;
-    //height: 400px;
+    height: 400px;
 }
 
 #edit-profile-fields-container {
@@ -211,8 +217,8 @@ html, body {
 }
 
 .success-message {
-    background-color: #4CAF50;
-    border: 1px solid #45a049;
+    background-color: #3ade61;
+    border: 1px solid #218a3a;
     color: white;
     padding: 10px;
     font-size: 14px;

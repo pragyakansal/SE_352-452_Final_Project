@@ -47,7 +47,7 @@ public class AdminController {
     public String manageUsers(Model model) throws NotFoundException {
         List<User> allUsers = adminService.getAllUsers();
         model.addAttribute("users", allUsers);
-        return "manage-users-page";
+        return "admin/manage-users-page";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -62,7 +62,7 @@ public class AdminController {
     @GetMapping("/create-agent")
     public String displayCreateAgentForm(Model model) {
         model.addAttribute("agentUser", new User());
-        return "create-agent-form";
+        return "admin/create-agent-form";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -77,7 +77,7 @@ public class AdminController {
             log.error("Error in creating agent: " + agentUser.getEmail() + ", role: " + agentUser.getRole(),  e);
             model.addAttribute("error", e.getMessage());
             model.addAttribute("agentUser", agentUser);
-            return "create-agent-form";
+            return "admin/create-agent-form";
         }
     }
 

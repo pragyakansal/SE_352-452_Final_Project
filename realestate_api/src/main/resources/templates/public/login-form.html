@@ -10,9 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body id="login-page">
+        <div id="login-page-container">
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}">Default success message</p>
+        </div>
         <form method="post" th:action="@{/landing-page/login}" th:object="${user}">
             <div class="container">
             <h2>Login</h2>
+
             <div class="form-controls-container">
                 <div class="input">
                     <!-- <label for="email">Email:</label> -->
@@ -33,5 +38,6 @@
             </div>
         </div>
         </form>
+        </div>
 </body>
 </html>
