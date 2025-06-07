@@ -351,6 +351,11 @@ th, td {
     background-color: #edebeb;
 }
 
+#add-property-page label {
+    color: #333333;
+    font-weight: 600;
+}
+
 #properties-table-container {
     display: flex;
     flex-direction: column;

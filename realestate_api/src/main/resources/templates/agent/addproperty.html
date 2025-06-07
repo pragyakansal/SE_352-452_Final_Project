@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Property</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body id="add-property-page">
+<div th:replace="common/header :: header"></div>
+<div class="container">
+    <h1>Add New Property</h1>
+    <div class="error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <div class="success" th:if="${successMessage}" th:text="${successMessage}"></div>
+    <form method="post" th:action="@{/agent/addproperty}" th:object="${property}" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input id="title" required="" th:field="*{title}" type="text"/>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+         <input id="price" required="" th:field="*{price}" type="number"/>
+        </div>
+
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input id="location" required="" th:field="*{location}" type="text"/>
+        </div>
+
+        <div class="form-group">
+            <label for="size">Size:</label>
+            <input id="size" required="" th:field="*{size}" type="text"/>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea input id="description" required="" th:field="*{description}" rows="5" cols="50"></textarea>
+        </div>
+
+        <div class="form-group">
+            <form method="post" enctype="multipart/form-data" th:action="@{/upload}">
+                <input type="file" name="image" accept="image/*" required>
+                <button type="submit">Upload</button>
+            </form>
+
+            <div th:if="${imageUrl}">
+                <h2>Uploaded Image:</h2>
+                <img th:src="@{${imageUrl}}" alt="Uploaded Image" width="300">
+            </div>
+            <label for="images">Upload Property Images:</label>
+            <input id="images" type="file" name="file" accept="image/*"/>
+        </div>
+
+        <br/><br/>
+
+        <button class="submit-btn" type="submit">Add Property</button>
+    </form>
+    <div class="back-link">
+        <a th:href="@{/landing-page/dashboard}">← Back to Dashboard</a>
+    </div>
+</div>
+</body>
+</html>

@@ -29,7 +29,7 @@
                 <a th:href="@{/agent/managelistings}" class="dashboard-link">Manage Listings</a>
             </li>
             <li sec:authorize="hasRole('AGENT')">
-                <a th:href="@{/agent/listings/create-new}" class="dashboard-link">Create New Listing</a>
+                <a th:href="@{/agent/addproperty}" class="dashboard-link">Create New Listing</a>
             </li>
             <!-- ADMINS -->
             <li sec:authorize="hasRole('ADMIN')">

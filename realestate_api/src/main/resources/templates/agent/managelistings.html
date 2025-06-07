@@ -39,7 +39,7 @@
             <td>
                 <!-- Display the first image if available -->
                 <img th:if="${!property.images.empty}"
-                     th:src="@{/images/property_images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
+                     th:src="@{/static/images/property_images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
                      alt="Property Image" width="100">
                 <!-- If no images, show a placeholder -->
                 <span th:unless="${!property.images.empty}">No Image</span>
