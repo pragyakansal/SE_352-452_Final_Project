@@ -16,6 +16,9 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/images/**")
                 .addResourceLocations("classpath:/static/images/");
         registry.addResourceHandler("/images/property_images/**")
-                .addResourceLocations("classpath:/static/images/property_images/");
+                .addResourceLocations("file:src/main/resources/static/images/property_images/")
+                .setCachePeriod(0)  // Disable caching
+                .resourceChain(true)
+                .addResolver(new org.springframework.web.servlet.resource.PathResourceResolver());
     }
 } 
