@@ -11,12 +11,14 @@ public interface PropertyImageService {
 
     String saveImage(MultipartFile file) throws IOException;
 
-    String storePropertyImage(Long propertyId, MultipartFile file);
+    String storePropertyImage(Long propertyId, MultipartFile file) throws IOException;
 
     List<String> storeMultiplePropertyImages(Long propertyId, List<MultipartFile> imageFileNames);
 
-    /*
 
+
+
+    /*
     private String uploadDir;
 
     public String saveImage(MuitiPartFile file) throws IOException {

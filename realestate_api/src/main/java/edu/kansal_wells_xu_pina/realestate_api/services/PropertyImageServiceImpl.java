@@ -6,9 +6,11 @@ import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,12 +26,14 @@ public class PropertyImageServiceImpl implements PropertyImageService {
 
     private final PropertyRepository propertyRepository;
     private final PropertyImageRepository propertyImageRepository;
-    private final UserRepository userRepository;
 
-    public PropertyImageServiceImpl(PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository, UserRepository userRepository) {
+
+
+    @Autowired
+    public PropertyImageServiceImpl(PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository) {
         this.propertyRepository = propertyRepository;
         this.propertyImageRepository = propertyImageRepository;
-        this.userRepository = userRepository;
+
     }
 
     @Value("${upload.dir}")
@@ -41,8 +45,8 @@ public class PropertyImageServiceImpl implements PropertyImageService {
             throw new IOException("Failed to store empty file.");
         }
 
-        String pojectRoot = System.getProperty("user.dir");
-        Path uploadPath = Paths.get(pojectRoot, uploadDir);
+        String projectRoot = System.getProperty("user.dir");
+        Path uploadPath = Paths.get(projectRoot, uploadDir);
 
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
@@ -63,14 +67,16 @@ public class PropertyImageServiceImpl implements PropertyImageService {
             Path uploadPath = Paths.get(System.getProperty("user.dir"),"uploads", "property_images");
             Files.createDirectories(uploadPath);
 
-            Property property = propertyRepository.findById(propertyId).orElseThrow(()
-                    -> new NotFoundException("Property not found"));
-
             Path filePath = uploadPath.resolve(imageFileName);
             file.transferTo(filePath.toFile());
 
+            Property property = propertyRepository.findById(propertyId).orElseThrow(()
+                    -> new NotFoundException("Property not found"));
+
             // Save the image metadata in the database
-            PropertyImage propertyImage = new PropertyImage(imageFileName, property);
+            PropertyImage propertyImage = new PropertyImage();
+            propertyImage.setImageFileName(imageFileName);
+            propertyImage.setProperty(property);
             propertyImageRepository.save(propertyImage);
 
             // Save the image file name and associate it with the property

@@ -55,8 +55,8 @@ public class SecurityConfig {
 
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/landing-page", "/landing-page/", "/landing-page/login", "/landing-page/register", "/landing-page/logout", "/register", "/login", "/images/**", "/css/**").permitAll()
-                        .requestMatchers("/landing-page/dashboard", "/landing-page/profile/**").hasAnyRole("BUYER", "AGENT", "ADMIN")
+                        .requestMatchers("/", "/landing-page", "/landing-page/", "/landing-page/login", "/landing-page/register", "/register", "/login", "/images/**", "/css/**").permitAll()
+                        .requestMatchers("/landing-page/dashboard", "/landing-page/profile/**", "/landing-page/logout").hasAnyRole("BUYER", "AGENT", "ADMIN")
                         .requestMatchers("/admin/**", "/admin/create-agent").hasRole("ADMIN")
                         .requestMatchers("/agent/**").hasRole("AGENT")
                         .requestMatchers("/buyer/**").hasRole("BUYER")
@@ -70,11 +70,11 @@ public class SecurityConfig {
 
         //return http.build();
         DefaultSecurityFilterChain securityFilterChain = http.build();
-        List<Filter> filters = securityFilterChain.getFilters();
+        /* List<Filter> filters = securityFilterChain.getFilters();
         for (Filter filter : filters) {
             log.info("filter name: " + filter.toString());
             log.info("filter class: " + filter.getClass().getName());
-        }
+        } */
         return securityFilterChain;
     }
 

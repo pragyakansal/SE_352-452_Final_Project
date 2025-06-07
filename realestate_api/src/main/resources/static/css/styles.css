@@ -43,6 +43,12 @@ html, body {
     background-repeat: no-repeat;
 }
 
+#login-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 #create-agent-page {
     background-image: url('/images/common-bg.jpg');
     background-size: cover;
@@ -64,7 +70,12 @@ html, body {
 #profile-container {
     background-color: rgba(255, 255, 255, 0.6);
     color: #333333;
-    //height: 400px;
+    height: 400px;
+}
+
+#create-agent-container {
+     background-color: rgba(255, 255, 255, 0.6);
+     color: #333333;
 }
 
 #edit-profile-fields-container {
@@ -96,16 +107,22 @@ html, body {
     width: 100%;
     justify-content: center;
     gap: 10px;
+    margin-top: 20px;
 }
 
 #dashboard-container {
     background-color: rgba(255, 255, 255, 0.6);
     color: #333333;
+    gap: 0px;
 }
 
 #listings-page {
     background-color: #edebeb;
 
+}
+
+#manage-users-page {
+    background-color: #edebeb;
 }
 
 #manage-users {
@@ -187,6 +204,23 @@ html, body {
     margin-right: 50px;
 }
 
+#logout-button {
+    background-color: #82cded;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-family: "Inter", sans-serif;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+#logout-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
 .button:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
@@ -198,6 +232,18 @@ html, body {
     transition: transform 0.2s ease-in-out;
 }
 
+.dashboard-link {
+    color: #444444;
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+}
+
+.dashboard-link:hover {
+    transform: scale(1.05);
+}
+
+
+
 .link:hover {
     transform: scale(1.05);
 }
@@ -205,6 +251,14 @@ html, body {
 .error-message {
     background-color: #e86f83;
     border: 1px solid #d42c48;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.success-message {
+    background-color: #3ade61;
+    border: 1px solid #218a3a;
     color: white;
     padding: 10px;
     font-size: 14px;
@@ -268,11 +322,21 @@ th, td {
     border-bottom: 1px solid #dddddd;
 }
 
-.dashboard-options {
+#dashboard-options {
+    color: #444444;
     display: flex;
     flex-direction: column;
     list-style-type: none;
     padding-left: 0;
+    gap: 10px;
+    padding-bottom: 40px;
+    font-weight: 700;
+}
+
+#dashboard-heading {
+    display: flex;
+    flex-direction: column;
+    color: #555555;
 }
 
 .listings-dashboard {
@@ -282,8 +346,9 @@ th, td {
 }
 
 #manage-listings-page {
-    padding-top: 190px;
+    padding-top: 630px;
     padding-bottom: 50px;
+    background-color: #edebeb;
 }
 
 #add-property-page label {

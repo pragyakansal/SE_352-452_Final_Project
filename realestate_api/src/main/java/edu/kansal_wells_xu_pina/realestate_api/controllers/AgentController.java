@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class AgentController {
     private final PropertyImageService propertyImageService;
     private final PropertyService propertyService;
 
+    @Autowired
     public AgentController(AgentService agentService, UserService userService, PropertyImageService propertyImageService,
                            PropertyService propertyService) {
         this.agentService = agentService;
@@ -54,11 +56,19 @@ public class AgentController {
     // @PreAuthorize("hasRole('AGENT')")
     @PostMapping("/addproperty")
     public String addNewProperty(@ModelAttribute("property") Property newProperty,
-                                 @RequestParam(value = "files", required = false) MultipartFile[] files,
+                                 @RequestParam(value = "files", required = false) List<MultipartFile> files,
                                  RedirectAttributes redirectAttributes, Model model) {
         try {
             //First, add the property (this will assign it an ID)
-            Property savedProperty = agentService.addNewProperty(newProperty);
+            Property savedProperty = agentService.addNewProperty(newProperty, files);
+            model.addAttribute("property", savedProperty);
+            return "redirect:agent/managelistings";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Failed to add property: " + e.getMessage());
+            return "redirect:/agent/addproperty";
+        }
+
+            /*
 
             // Then store the property image (if uploaded) and update the property record
             if (files != null) {
@@ -76,15 +86,19 @@ public class AgentController {
             redirectAttributes.addFlashAttribute("error", "Failed to add property: " + e.getMessage());
             return "redirect:/agent/addproperty";
         }
+
+             */
     }
 
 
+    // === EDIT PROPERTY ===
     // TO-DO: template for editproperty.html and editProperty and saveProperty method to handle the form submission
-    @PreAuthorize("hasRole('AGENT')")
-    @PostMapping("/editproperty/{id}")
+    // @PreAuthorize("hasRole('AGENT')")
+   /*
+    @PostMapping("/editproperty")
     public String editProperty(@ModelAttribute Property property, Model model) {
         return "temp";
     }
+    */
 
-
-}
+ }

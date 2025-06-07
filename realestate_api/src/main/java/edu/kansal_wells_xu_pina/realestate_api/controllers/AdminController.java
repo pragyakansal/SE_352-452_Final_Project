@@ -34,20 +34,12 @@ public class AdminController {
         return "common-dashboard";
     }
 
-    /* Redundant profile endpoint - now using common profile management
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/edit-profile")
-    public String displayEditProfileForm() {
-        return "edit-profile-form";
-    }
-    */
-
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/manage-users")
     public String manageUsers(Model model) throws NotFoundException {
         List<User> allUsers = adminService.getAllUsers();
         model.addAttribute("users", allUsers);
-        return "manage-users-page";
+        return "admin/manage-users-page";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
