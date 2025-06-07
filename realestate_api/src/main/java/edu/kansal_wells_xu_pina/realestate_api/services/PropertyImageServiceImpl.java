@@ -29,7 +29,6 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     private final Path baseImagePath;
 
 
-
     @Autowired
     public PropertyImageServiceImpl(PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository) {
         this.propertyRepository = propertyRepository;
@@ -64,14 +63,11 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     @Override
     public String storePropertyImage(Long propertyId, MultipartFile file) {
         try {
-
             // String imageFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();  //moved below
-
             // Path uploadPath = Paths.get(System.getProperty("user.dir"),"uploads", "images", "property_images");
             Property property = propertyRepository.findById(propertyId).orElseThrow(()
                     -> new NotFoundException("Property not found"));
             String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
-
            // Path uploadPath = Paths.get(System.getProperty("user.dir"), "uploadDir", safeTitle);
             Path propertyFolder = baseImagePath.resolve(safeTitle);
             Files.createDirectories(propertyFolder);
