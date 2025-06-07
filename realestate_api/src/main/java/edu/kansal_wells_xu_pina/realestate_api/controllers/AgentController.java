@@ -72,38 +72,20 @@ public class AgentController {
     public String addNewProperty(@ModelAttribute("property") Property newProperty,
                                  @RequestParam(value = "files", required = false) List<MultipartFile> files,
                                  RedirectAttributes redirectAttributes, Model model) {
+        log.info("Received request to add new property: {}", newProperty.getTitle());
         try {
             //First, add the property (this will assign it an ID)
+            log.info("Calling agentService.addNewProperty");
             Property savedProperty = agentService.addNewProperty(newProperty, files);
+            log.info("Property saved successfully with ID: {}", savedProperty.getId());
             redirectAttributes.addFlashAttribute("successMessage", "Property added successfully");
-            // model.addAttribute("property", savedProperty);
+            log.info("Redirecting to /agent/managelistings");
             return "redirect:/agent/managelistings";
         } catch (Exception e) {
+            log.error("Failed to add property: {}", e.getMessage(), e);
             redirectAttributes.addFlashAttribute("error", "Failed to add property: " + e.getMessage());
             return "redirect:/agent/addproperty";
         }
-
-
-            /*
-
-            // Then store the property image (if uploaded) and update the property record
-            if (files != null) {
-                for (MultipartFile file : files) {
-                    if (!file.isEmpty()) {
-                        propertyImageService.storeMultiplePropertyImages(savedProperty.getId(), (List<MultipartFile>) file);
-                    }
-                }
-            }
-
-            model.addAttribute("property", savedProperty);
-            return "redirect:agent/managelistings";
-
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Failed to add property: " + e.getMessage());
-            return "redirect:/agent/addproperty";
-        }
-
-             */
     }
 
     @PreAuthorize("hasRole('AGENT')")

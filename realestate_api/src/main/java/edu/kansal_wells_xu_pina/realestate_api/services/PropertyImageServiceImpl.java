@@ -41,25 +41,25 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     @Value("${upload.dir}")
     private String uploadDir;
 
-    @Override
-    public String saveImage(MultipartFile file) throws IOException {
-        if (file.isEmpty()) {
-            throw new IOException("Failed to store empty file.");
-        }
+    // @Override
+    // public String saveImage(MultipartFile file) throws IOException {
+    //     if (file.isEmpty()) {
+    //         throw new IOException("Failed to store empty file.");
+    //     }
 
-        String projectRoot = System.getProperty("user.dir");
-        Path uploadPath = Paths.get(projectRoot, uploadDir);
+    //     String projectRoot = System.getProperty("user.dir");
+    //     Path uploadPath = Paths.get(projectRoot, uploadDir);
 
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
+    //     if (!Files.exists(uploadPath)) {
+    //         Files.createDirectories(uploadPath);
+    //     }
 
-        Path filePath = uploadPath.resolve(file.getOriginalFilename());
-        file.transferTo(filePath.toFile());
+    //     Path filePath = uploadPath.resolve(file.getOriginalFilename());
+    //     file.transferTo(filePath.toFile());
 
-        return "/uploads/" + file.getOriginalFilename();
+    //     return "/uploads/" + file.getOriginalFilename();
 
-    }
+    // }
 
 
     @Override
@@ -68,9 +68,10 @@ public class PropertyImageServiceImpl implements PropertyImageService {
 
             Property property = propertyRepository.findById(propertyId).orElseThrow(()
                     -> new NotFoundException("Property not found"));
-            String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
 
-            Path propertyFolder = baseImagePath.resolve(safeTitle);
+            // String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
+
+            Path propertyFolder = baseImagePath.resolve(property.getTitle());
 
             log.info("Saving image to folder: {}", propertyFolder.toAbsolutePath());
             Files.createDirectories(propertyFolder);

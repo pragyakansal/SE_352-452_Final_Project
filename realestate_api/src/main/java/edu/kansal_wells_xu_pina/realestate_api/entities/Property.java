@@ -3,6 +3,7 @@ package edu.kansal_wells_xu_pina.realestate_api.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "properties")
@@ -35,7 +36,9 @@ public class Property {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PropertyImage> images;
 
-    public Property() { }
+    public Property() {
+        this.images = new ArrayList<>();
+    }
 
     public Property(String title, Double price, String description, String location, Integer size, User agent) {
         this.title = title;
