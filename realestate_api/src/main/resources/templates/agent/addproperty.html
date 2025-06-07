@@ -46,7 +46,10 @@
 
         <div class="form-group">
             <label for="files">Upload Property Images:</label>
-            <input id="files" type="file" name="files" multiple class="form-control"/>
+            <form method="post" enctype="multipart/form-data" th:action="@{agent/addproperty}">
+                <input id="files" type="file" name="files" accept="image/*" multiple/>
+                <button type="submit">Upload</button>
+            </form>
         </div>
 
         <br/><br/>
