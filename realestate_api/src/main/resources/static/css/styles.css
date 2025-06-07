@@ -10,8 +10,41 @@ body {
     font-style: normal;
 }
 
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    overflow-x: visible;
+    background-color: white;
+    height: 100px;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 0 20px;
+
+}
+
+.hot-properties-logo {
+    width: 110px;
+    height: 110px;
+}
+
 #landing-page, #login-page, #registration-page {
     background-image: url('/images/landing-page-bg-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#create-agent-page {
+    background-image: url('/images/common-bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -22,8 +55,64 @@ body {
     background-repeat: no-repeat;
 }
 
+#profile-page {
+    background-image: url('/images/profile-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#profile-container {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #333333;
+    //height: 400px;
+}
+
+#edit-profile-fields-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+#edit-profile-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#profile-fields-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.profile-field-label {
+    font-weight: 700;
+}
+
+.profile-buttons-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+}
+
+#dashboard-container {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #333333;
+}
+
 #listings-page {
     background-color: #edebeb;
+
+}
+
+#manage-users {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
 }
 
 
@@ -58,7 +147,7 @@ body {
     border: none;
     border-radius: 20px;
     padding: 10px;
-    width: 300px;
+    width: 250px;
 }
 
 .form-control::placeholder {
@@ -71,7 +160,6 @@ body {
 }
 
 .button {
-    width: 75px;
     background-color: #515adb;
     border: none;
     border-radius: 20px;
@@ -81,6 +169,22 @@ body {
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
     text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.delete-button {
+    background-color: #e86f83;
+}
+
+.edit-button {
+    background-color: #82cded;
+}
+
+#header-button {
+    margin-right: 50px;
 }
 
 .button:hover {
@@ -172,3 +276,25 @@ th, td {
     border-bottom: 1px solid #dddddd;
 }
 
+.dashboard-options {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.listings-dashboard {
+    display: flex;
+    width: 100%;
+    justify-content: space-between
+}
+
+#manage-listings-page {
+    padding-top: 590px;
+    padding-bottom: 50px;
+}
+
+#properties-table-container {
+    display: flex;
+    flex-direction: column;
+}

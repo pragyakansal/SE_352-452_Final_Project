@@ -19,8 +19,6 @@ import edu.kansal_wells_xu_pina.realestate_api.dtos.JwtResponse;
 import org.springframework.security.core.userdetails.UserDetails;
 import edu.kansal_wells_xu_pina.realestate_api.services.CustomUserDetailsService;
 import edu.kansal_wells_xu_pina.realestate_api.jwt.JwtUtil;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Controller
 @RequestMapping("/landing-page")
@@ -111,25 +109,14 @@ public class AuthController {
     @GetMapping("/dashboard")
     @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
     public String displayDashboard(Model model) {
-        try {
-            userService.prepareDashboardModel(model);
-            model.addAttribute("message", "Welcome to the dashboard");
-            return "common-dashboard";
-        } catch (UsernameNotFoundException e) {
-            log.error("User not found when accessing dashboard", e);
-            model.addAttribute("error", "User account not found. Please try logging in again.");
-            return "redirect:/landing-page/login";
-        } catch (Exception e) {
-            log.error("Error loading dashboard", e);
-            model.addAttribute("error", "Error loading dashboard. Please try again.");
-            return "common-dashboard";
-        }
+        userService.prepareDashboardModel(model);
+        //model.addAttribute("message", "Welcome to the dashboard");
+        return "common-dashboard";
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletResponse response, RedirectAttributes redirectAttributes) {
+    public String logout(HttpServletResponse response) {
         authService.clearJwtCookie(response);
-        redirectAttributes.addFlashAttribute("message", "You have been successfully logged out");
         return "redirect:/landing-page/login";
     }
 

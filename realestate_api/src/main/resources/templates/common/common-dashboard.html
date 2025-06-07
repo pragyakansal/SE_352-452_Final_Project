@@ -6,17 +6,18 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,ops,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body id="dashboard-page">
-    <div class="container">
-        <div th:if="${error}" class="error-message" th:text="${error}"></div>
-        <h1 th:text="${message}">Welcome to Dashboard</h1>
-        <h4 th:text="${#authentication.name}">User</h4>
+    <div class="container" id="dashboard-container">
+        <h1 th:text="'Welcome, User: ' + ${#authentication.name}">Welcome, User {}</h1>
+        <h3 th:text="'Your role: ' + ${user.role}">Your role: {}</h3>
+        <span th:text="${user.role}">{} Dashboard</span>
+       <!-- <h4 th:text="${#authentication.name}">User</h4> -->
         <h2>Dashboard</h2>
         <br>
         <br>
-        <ul>
+        <ul class="dashboard-options">
             <li><a th:href="@{/landing-page/profile}" class="link">My Profile</a></li>
             <!-- BUYERS -->
             <li sec:authorize="hasRole('BUYER')">
@@ -24,7 +25,8 @@
             </li>
             <!-- AGENTS -->
             <li sec:authorize="hasRole('AGENT')">
-                <a th:href="@{/agent/listings/manage}" class="link">Manage Listings</a>
+                <!--a th:href="@{/{id}/managelistings}" class="link">Manage Listings</a-->
+                <a th:href="@{/agent/managelistings}" class="link">Manage Listings</a>
             </li>
             <li sec:authorize="hasRole('AGENT')">
                 <a th:href="@{/agent/listings/create-new}" class="link">Create New Listing</a>
