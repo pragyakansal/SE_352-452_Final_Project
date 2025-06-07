@@ -18,7 +18,7 @@
     <div class="success" th:if="${successMessage}" th:text="${successMessage}"></div>
     <form method="post" th:action="@{/agent/addproperty}" th:object="${property}" enctype="multipart/form-data">
 
-        <div style="margin-bottom: 24px;"
+        <div style="margin-bottom: 24px;">>
         <div class="form-group">
             <label for="title">Title:</label>
             <input id="title" required="" th:field="*{title}" type="text" class="form-control"/>
@@ -46,10 +46,9 @@
 
         <div class="form-group">
             <label for="files">Upload Property Images:</label>
-            <form method="post" enctype="multipart/form-data" th:action="@{agent/addproperty}">
-                <input id="files" type="file" name="files" accept="image/*" multiple/>
-                <button type="submit">Upload</button>
-            </form>
+            <!--form method="post" enctype="multipart/form-data" th:action="@{agent/addproperty}">
+                <input id="files" type="file" name="files" accept="image/*" multiple/-->
+            <input id="files" type="file" name="files" accept="image/*" multiple class="form-control"/>
         </div>
 
         <br/><br/>

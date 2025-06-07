@@ -33,7 +33,7 @@ public class AgentController {
         this.propertyService = propertyService;
     }
 
-    @PreAuthorize("hasRole('AGENT')")
+    // @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/managelistings")
     public String manageListings(Model model) {
         User currentUser = userService.getCurrentUser();
@@ -51,7 +51,7 @@ public class AgentController {
         return "agent/addproperty";
     }
 
-    // @PreAuthorize("hasRole('AGENT')")
+    @PreAuthorize("hasRole('AGENT')")
     @PostMapping("/addproperty")
     public String addNewProperty(@ModelAttribute("property") Property newProperty,
                                  @RequestParam(value = "files", required = false) List<MultipartFile> files,
@@ -59,8 +59,9 @@ public class AgentController {
         try {
             //First, add the property (this will assign it an ID)
             Property savedProperty = agentService.addNewProperty(newProperty, files);
-            model.addAttribute("property", savedProperty);
-            return "redirect:agent/managelistings";
+            redirectAttributes.addFlashAttribute("successMessage", "Property added successfully");
+            // model.addAttribute("property", savedProperty);
+            return "redirect:/agent/managelistings";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Failed to add property: " + e.getMessage());
             return "redirect:/agent/addproperty";
