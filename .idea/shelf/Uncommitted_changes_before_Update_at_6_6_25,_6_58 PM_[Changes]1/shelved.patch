@@ -1,0 +1,104 @@
+Index: realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.kansal_wells_xu_pina.realestate_api.controllers;\n\nimport edu.kansal_wells_xu_pina.realestate_api.entities.Property;\nimport edu.kansal_wells_xu_pina.realestate_api.entities.User;\nimport edu.kansal_wells_xu_pina.realestate_api.services.AgentService;\nimport edu.kansal_wells_xu_pina.realestate_api.services.UserService;\nimport org.springframework.security.access.prepost.PreAuthorize;\nimport org.springframework.stereotype.Controller;\nimport org.springframework.ui.Model;\nimport org.springframework.web.bind.annotation.*;\n\nimport java.util.List;\n\n@Controller\n@RequestMapping(\"/agent\")\npublic class AgentController {\n\n    private final AgentService agentService;\n    private final UserService userService;\n\n    public AgentController(AgentService agentService, UserService userService) {this.agentService = agentService;\n        this.userService = userService;\n    }\n\n   /* @PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping({\"/dashboard\", \"/\"})\n    public String agentDashboard() {\n        return \"common-dashboard\";\n    }\n\n    */\n\n    /* Redundant profile endpoints - now using common profile management\n    @PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping(\"/{id}/myprofile\")\n    public String myAgentProfile(@PathVariable Long id, Model model) {\n        model.addAttribute(\"agent\", agentService.getAgentById(id));\n        return \"agentprofile\";\n    }\n\n    @PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping(\"/{id}/editprofile\")\n    public String editAgentProfile(@PathVariable(required = false) Long id, Model model) {\n        if (id != null && id > 0) {\n            model.addAttribute(\"agent\", agentService.getAgentDtoById(id));\n        } else {\n            model.addAttribute(\"agent\", new UpdateProfileRequest());\n        }\n        return \"editagentprofile\";\n    }\n    */\n\n    @PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping(\"/managelistings\")\n    public String manageListings(Model model) {\n        User currentUser = userService.getCurrentUser();\n        List<Property> properties = agentService.getAgentProperties(currentUser.getId());\n        model.addAttribute(\"properties\", properties);\n        return \"agent/managelistings\";\n    }\n\n    // TO-DO: template for agentaddproperty.html and addProperty method to handle the form submission\n    //@PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping(\"/{id}/addproperty\")\n    public String addPropertyForm(@PathVariable Long id, Model model) {\n        model.addAttribute(\"property\", new Property());\n        return \"temp\";\n    }\n\n   // @PreAuthorize(\"hasRole('AGENT')\")\n    @PostMapping(\"/{id}/addproperty\")\n    public String addNewProperty(@PathVariable Long id, @ModelAttribute Property newProperty, Model model) {\n        agentService.addNewProperty(newProperty);\n        model.addAttribute(\"property\", newProperty);\n        return \"redirect:/agent/\" + id + \"/managelistings\";\n    }\n\n\n    // TO-DO: template for editproperty.html and editProperty and saveProperty method to handle the form submission\n    @PreAuthorize(\"hasRole('AGENT')\")\n    @PostMapping(\"/editproperty/{id}\")\n    public String editProperty(@ModelAttribute Property property, Model model) {\n        return \"temp\";\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java
+--- a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java	(revision e50b75da75f4ba0cc74c4eda9030513e75ef7146)
++++ b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java	(date 1749186731777)
+@@ -55,16 +55,17 @@
+     public String manageListings(Model model) {
+         User currentUser = userService.getCurrentUser();
+         List<Property> properties = agentService.getAgentProperties(currentUser.getId());
++        model.addAttribute("agent", currentUser.getFirstName() + " " + currentUser.getLastName());
+         model.addAttribute("properties", properties);
+         return "agent/managelistings";
+     }
+ 
+     // TO-DO: template for agentaddproperty.html and addProperty method to handle the form submission
+     //@PreAuthorize("hasRole('AGENT')")
+-    @GetMapping("/{id}/addproperty")
+-    public String addPropertyForm(@PathVariable Long id, Model model) {
++    @GetMapping("/addproperty")
++    public String addPropertyForm(Model model) {
+         model.addAttribute("property", new Property());
+-        return "temp";
++        return "agent/addproperty";
+     }
+ 
+    // @PreAuthorize("hasRole('AGENT')")
+Index: realestate_api/src/main/resources/templates/agent/managelistings.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Manage Your Properties</title>\n    <!-- The below line loads in styling elements from the CSS file -->\n    <!-- The @{} syntax is used to resolve the URL of the CSS file -->\n    <!-- Comment it out to see the content without styling -->\n    <link th:href=\"@{/css/styles.css}\" rel=\"stylesheet\"/>\n</head>\n<body>\n<table>\n    <thead>\n        <tr>\n            <th>Number</th>\n            <th>Title</th>\n            <th>Price</th>\n            <th>Location</th>\n            <th>Size</th>\n            <th>Images</th>\n            <!--th>Favorites</th-->\n            <th>Action</th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <!-- The below line iterates over the properties list -->\n        <!-- The below is similar to \"for each 'property' in the 'properties' -->\n        <tr th:each=\"property, propStat : ${properties}\">\n            <td th:text=\"${propStat.count}\"></td> <!-- Good for counting, starts at 1 -->\n            <td th:text=\"${property.title}\">Property Title</td>\n            <td th:text=\"${'$' + #numbers.formatDecimal(property.price, 1, 'COMMA', 2, 'POINT')}\">$0.00</td>\n            <td th:text=\"${property.location}\">Location</td>\n            <td th:text=\"${property.size + ' sq ft'}\">0 sq ft</td>\n            <td>\n                <!-- Display the first image if available -->\n                <img th:if=\"${!property.images.empty}\"\n                     th:src=\"@{/images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}\"\n                     alt=\"Property Image\" width=\"100\">\n                <!-- If no images, show a placeholder -->\n                <span th:unless=\"${!property.images.empty}\">No Image</span>\n            <td th:text=\"${property.description}\">Short description...</td>\n            <td>\n                <!-- Link to edit the property -->\n                <a th:href=\"@{/agent/manage-listings/edit/{id}(id=${property.id})}\" class=\"button-link\">Edit</a>\n                <!-- Link to delete the property -->\n                <a th:href=\"@{/agent/manage-listings/delete/{id}(id=${property.id})}\" class=\"button-link red\">Delete</a>\n            </td>\n        </tr>\n    </tbody>\n    </thead>\n</table>\n\n</body>\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/realestate_api/src/main/resources/templates/agent/managelistings.html b/realestate_api/src/main/resources/templates/agent/managelistings.html
+--- a/realestate_api/src/main/resources/templates/agent/managelistings.html	(revision e50b75da75f4ba0cc74c4eda9030513e75ef7146)
++++ b/realestate_api/src/main/resources/templates/agent/managelistings.html	(date 1749186376235)
+@@ -6,9 +6,16 @@
+     <!-- The below line loads in styling elements from the CSS file -->
+     <!-- The @{} syntax is used to resolve the URL of the CSS file -->
+     <!-- Comment it out to see the content without styling -->
+-    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
++    <!--link th:href="@{/css/styles.css}" rel="stylesheet"/-->
+ </head>
+ <body>
++<h1 style="text-align: center; margin-top: 20px;" th:text="'Welcome, ' + ${agent} + '!'">Welcome!</h1>
++<br>
++
++<div style="text-align: right; margin 20px;">
++    <a th:href="@{/landing-page/dashboard}" class="button">Back to Dashboard</a>
++</div>
++<br>
+ <table>
+     <thead>
+         <tr>
+@@ -39,7 +46,7 @@
+                      alt="Property Image" width="100">
+                 <!-- If no images, show a placeholder -->
+                 <span th:unless="${!property.images.empty}">No Image</span>
+-            <td th:text="${property.description}">Short description...</td>
++            <!--td th:text="${property.description}">Short description...</td-->
+             <td>
+                 <!-- Link to edit the property -->
+                 <a th:href="@{/agent/manage-listings/edit/{id}(id=${property.id})}" class="button-link">Edit</a>
+@@ -50,6 +57,5 @@
+     </tbody>
+     </thead>
+ </table>
+-
+ </body>
+ </html>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"92bc20eb-994d-48de-ad8c-b665ab69c9aa\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/resources/application.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/resources/application.properties\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Exception\" />\n        <option value=\"Class\" />\n        <option value=\"Interface\" />\n        <option value=\"HTML File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;gregrw&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/pragyakansal/SE_352-452_Final_Project.git&quot;,\n    &quot;accountId&quot;: &quot;c4966e2a-516d-4a00-9d0c-6d9330381ce4&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 5\n}</component>\n  <component name=\"ProjectId\" id=\"2xbmjp0ICpu6WoYKKUVhGMrr05q\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"DefaultHtmlFileTemplate\": \"HTML File\",\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\n    \"RequestMappingsPanelOrder0\": \"0\",\n    \"RequestMappingsPanelOrder1\": \"1\",\n    \"RequestMappingsPanelWidth0\": \"75\",\n    \"RequestMappingsPanelWidth1\": \"75\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"RunOnceActivity.git.unshallow\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"Spring Boot.RealestateApiApplication.executor\": \"Run\",\n    \"git-widget-placeholder\": \"GregWork\",\n    \"junie.onboarding.icon.badge.shown\": \"true\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"settings.editor.selected.configurable\": \"preferences.lookFeel\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"RealestateApiApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\n      <module name=\"realestate_api\" />\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"edu.kansal_wells_xu_pina.realestate_api.RealestateApiApplication\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129\" />\n        <option value=\"bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"92bc20eb-994d-48de-ad8c-b665ab69c9aa\" name=\"Changes\" comment=\"\" />\n      <created>1748215284789</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1748215284789</updated>\n      <workItem from=\"1748215285915\" duration=\"925000\" />\n      <workItem from=\"1748226455720\" duration=\"4492000\" />\n      <workItem from=\"1748291373404\" duration=\"18594000\" />\n      <workItem from=\"1748796342768\" duration=\"7730000\" />\n      <workItem from=\"1748830956527\" duration=\"1313000\" />\n      <workItem from=\"1748930921023\" duration=\"1675000\" />\n      <workItem from=\"1749011604621\" duration=\"14371000\" />\n      <workItem from=\"1749086520929\" duration=\"33980000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\n                <map>\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\n                </map>\n              </option>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"origin/GregWork\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e50b75da75f4ba0cc74c4eda9030513e75ef7146)
++++ b/.idea/workspace.xml	(date 1749186321564)
+@@ -7,7 +7,7 @@
+     <list default="true" id="92bc20eb-994d-48de-ad8c-b665ab69c9aa" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/application.properties" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/managelistings.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/managelistings.html" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -112,7 +112,7 @@
+       <workItem from="1748830956527" duration="1313000" />
+       <workItem from="1748930921023" duration="1675000" />
+       <workItem from="1749011604621" duration="14371000" />
+-      <workItem from="1749086520929" duration="33980000" />
++      <workItem from="1749086520929" duration="38438000" />
+     </task>
+     <servers />
+   </component>

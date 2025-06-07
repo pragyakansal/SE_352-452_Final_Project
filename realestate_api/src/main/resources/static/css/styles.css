@@ -282,8 +282,13 @@ th, td {
 }
 
 #manage-listings-page {
-    padding-top: 590px;
+    padding-top: 190px;
     padding-bottom: 50px;
+}
+
+#add-property-page label {
+    color: #333333;
+    font-weight: 600;
 }
 
 #properties-table-container {

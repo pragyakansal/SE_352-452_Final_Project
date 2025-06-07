@@ -105,7 +105,16 @@ public class AgentServiceImpl implements AgentService {
     public Property addNewProperty(Property newProperty) {
         User agent = getCurrentAgent();
         newProperty.setAgent(agent);
-        Set<PropertyImage> images = newProperty.getImages().stream()
+
+        // Save the property first to generate an ID
+        newProperty = propertyRepository.save(newProperty);
+
+        // Now handle the images
+        List<PropertyImage> propertyImages = newProperty.getImages();
+
+
+
+        /*List<PropertyImage> images = propertyImages.retainAll().stream()
                 .map(image -> {
                     PropertyImage foundImage = propertyImageRepository.findByImageFileName(image.getImageFileName());
                     if (foundImage == null) {
@@ -113,8 +122,10 @@ public class AgentServiceImpl implements AgentService {
                     }
                     return foundImage;
                 })
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet   ());
         newProperty.setImages((List<PropertyImage>) images);
+
+         */
         return propertyRepository.save(newProperty);
 
     }

@@ -13,4 +13,5 @@ public interface PropertyService {
 
     Property updateProperty(Property savedProperty);
 
+
 }
