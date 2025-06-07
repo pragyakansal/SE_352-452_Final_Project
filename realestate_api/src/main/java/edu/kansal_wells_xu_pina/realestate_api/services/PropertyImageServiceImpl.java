@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,14 +25,14 @@ public class PropertyImageServiceImpl implements PropertyImageService {
 
     private final PropertyRepository propertyRepository;
     private final PropertyImageRepository propertyImageRepository;
-
+    private final Path baseImagePath;
 
 
     @Autowired
     public PropertyImageServiceImpl(PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository) {
         this.propertyRepository = propertyRepository;
         this.propertyImageRepository = propertyImageRepository;
-
+        this.baseImagePath = Paths.get(System.getProperty("user.dir"), "src/main/resources/static/images/property_images");
     }
 
     @Value("${upload.dir}")
@@ -63,17 +62,18 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     @Override
     public String storePropertyImage(Long propertyId, MultipartFile file) {
         try {
-            String imageFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-
+            // String imageFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();  //moved below
             // Path uploadPath = Paths.get(System.getProperty("user.dir"),"uploads", "images", "property_images");
             Property property = propertyRepository.findById(propertyId).orElseThrow(()
                     -> new NotFoundException("Property not found"));
             String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
-            Path uploadPath = Paths.get(System.getProperty("user.dir"), "uploadDir", safeTitle);
+           // Path uploadPath = Paths.get(System.getProperty("user.dir"), "uploadDir", safeTitle);
+            Path propertyFolder = baseImagePath.resolve(safeTitle);
+            Files.createDirectories(propertyFolder);
 
-            Files.createDirectories(uploadPath);
+            String imageFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 
-            Path filePath = uploadPath.resolve(imageFileName);
+            Path filePath = propertyFolder.resolve(imageFileName);
             file.transferTo(filePath.toFile());
 
             // Property property = propertyRepository.findById(propertyId).orElseThrow(()
