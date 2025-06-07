@@ -39,7 +39,7 @@ public class AgentController {
         this.propertyService = propertyService;
     }
 
-    // @PreAuthorize("hasRole('AGENT')")
+    @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/managelistings")
     public String manageListings(Model model) {
         User currentUser = userService.getCurrentUser();

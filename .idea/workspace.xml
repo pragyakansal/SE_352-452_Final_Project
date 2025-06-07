@@ -6,29 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="92bc20eb-994d-48de-ad8c-b665ab69c9aa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/admin/create-agent-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/admin/create-agent-form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/admin/manage-users-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/admin/manage-users-page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/addproperty.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/addproperty.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/managelistings.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/managelistings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/buyer/listings.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/buyer/listings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/buyer/propertydetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/buyer/propertydetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common/common-dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common/common-dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common/common-edit-profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common/common-edit-profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common/common-profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common/common-profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/public/login-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/public/login-form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +64,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.RealestateApiApplication.executor": "Run",
-    "git-widget-placeholder": "Merging GregWork",
+    "git-widget-placeholder": "GregWork",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -136,7 +115,7 @@
       <workItem from="1748930921023" duration="1675000" />
       <workItem from="1749011604621" duration="14371000" />
       <workItem from="1749086520929" duration="70044000" />
-      <workItem from="1749313546706" duration="14712000" />
+      <workItem from="1749313546706" duration="15893000" />
     </task>
     <servers />
   </component>
