@@ -18,7 +18,11 @@
     <div class="success" th:if="${successMessage}" th:text="${successMessage}"></div>
     <form method="post" th:action="@{/agent/addproperty}" th:object="${property}" enctype="multipart/form-data">
 
+<<<<<<< HEAD
         <div style="margin-bottom: 24px;">
+=======
+        <div style="margin-bottom: 24px;">>
+>>>>>>> origin/GregWork
         <div class="form-group">
             <label for="title"></label>
             <input id="title" required="" th:field="*{title}" type="text" class="form-control" placeholder="Title" />
@@ -46,10 +50,9 @@
 
         <div class="form-group">
             <label for="files">Upload Property Images:</label>
-          <!--  <form method="post" enctype="multipart/form-data" th:action="@{agent/addproperty}"> -->
-                <input id="files" type="file" name="files" accept="image/*" multiple/>
-                <!-- <button type="submit">Upload</button> -->
-          <!--  </form> -->
+            <!--form method="post" enctype="multipart/form-data" th:action="@{agent/addproperty}">
+                <input id="files" type="file" name="files" accept="image/*" multiple/-->
+            <input id="files" type="file" name="files" accept="image/*" multiple class="form-control"/>
         </div>
 
         <br/><br/>
