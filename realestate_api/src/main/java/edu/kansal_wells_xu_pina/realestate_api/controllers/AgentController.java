@@ -55,16 +55,17 @@ public class AgentController {
     public String manageListings(Model model) {
         User currentUser = userService.getCurrentUser();
         List<Property> properties = agentService.getAgentProperties(currentUser.getId());
+        model.addAttribute("agent", currentUser.getFirstName() + " " + currentUser.getLastName());
         model.addAttribute("properties", properties);
         return "agent/managelistings";
     }
 
     // TO-DO: template for agentaddproperty.html and addProperty method to handle the form submission
     //@PreAuthorize("hasRole('AGENT')")
-    @GetMapping("/{id}/addproperty")
-    public String addPropertyForm(@PathVariable Long id, Model model) {
+    @GetMapping("/addproperty")
+    public String addPropertyForm(Model model) {
         model.addAttribute("property", new Property());
-        return "temp";
+        return "agent/addproperty";
     }
 
     // @PreAuthorize("hasRole('AGENT')")

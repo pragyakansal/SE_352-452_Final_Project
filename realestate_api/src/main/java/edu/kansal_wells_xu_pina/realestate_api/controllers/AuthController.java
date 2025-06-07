@@ -40,18 +40,18 @@ public class AuthController {
 
     @GetMapping({"", "/"})
     public String landingPage() {
-        return "landing-page";
+        return "public/landing-page";
     }
 
     @GetMapping("/login")
     public String displayLoginForm(Model model) {
         model.addAttribute("user", new User());
-        return "login-form";
+        return "public/login-form";
     }
 
     @GetMapping("/register")
     public String displayRegistrationForm() {
-        return "registration-form";
+        return "public/registration-form";
     }
 
     @PostMapping("/register")
@@ -111,7 +111,7 @@ public class AuthController {
     public String displayDashboard(Model model) {
         userService.prepareDashboardModel(model);
         //model.addAttribute("message", "Welcome to the dashboard");
-        return "common-dashboard";
+        return "common/common-dashboard";
     }
 
     @GetMapping("/logout")
@@ -126,11 +126,11 @@ public class AuthController {
         try {
             User user = userService.getCurrentUser();
             model.addAttribute("user", user);
-            return "common-profile";
+            return "common/common-profile";
         } catch (Exception e) {
             log.error("Error loading profile", e);
             model.addAttribute("error", "Error loading profile");
-            return "common-profile";
+            return "common/common-profile";
         }
     }
 
@@ -145,11 +145,11 @@ public class AuthController {
                 user.getEmail()
             );
             model.addAttribute("profileRequest", request);
-            return "common-edit-profile";
+            return "common/common-edit-profile";
         } catch (Exception e) {
             log.error("Error loading edit profile form", e);
             model.addAttribute("error", "Error loading edit profile form");
-            return "common-edit-profile";
+            return "common/common-edit-profile";
         }
     }
 
@@ -173,16 +173,16 @@ public class AuthController {
             
             model.addAttribute("user", updatedUser);
             model.addAttribute("message", "Profile updated successfully");
-            return "common-profile";
+            return "common/common-profile";
         } catch (InvalidUserParameterException e) {
             log.error("Invalid profile update request", e);
             model.addAttribute("error", e.getMessage());
             model.addAttribute("profileRequest", request);
-            return "common-edit-profile";
+            return "common/common-edit-profile";
         } catch (Exception e) {
             log.error("Error updating profile", e);
             model.addAttribute("error", "Error updating profile");
-            return "common-edit-profile";
+            return "common/common-edit-profile";
         }
     }
 }

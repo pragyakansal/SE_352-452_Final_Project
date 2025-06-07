@@ -10,7 +10,7 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <body id="manage-listings-page">
-<div th:replace="header :: header"></div>
+<div th:replace="common/header :: header"></div>
 <div id="properties-table-container">
 <h1>Manage Your Properties</h1>
 <table>
@@ -39,7 +39,7 @@
             <td>
                 <!-- Display the first image if available -->
                 <img th:if="${!property.images.empty}"
-                     th:src="@{/images/property_images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
+                     th:src="@{/static/images/property_images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
                      alt="Property Image" width="100">
                 <!-- If no images, show a placeholder -->
                 <span th:unless="${!property.images.empty}">No Image</span>
