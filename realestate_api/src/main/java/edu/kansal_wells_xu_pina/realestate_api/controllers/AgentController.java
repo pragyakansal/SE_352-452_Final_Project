@@ -44,6 +44,16 @@ public class AgentController {
     public String manageListings(Model model) {
         User currentUser = userService.getCurrentUser();
         List<Property> properties = agentService.getAgentProperties(currentUser.getId());
+        
+        // Log property images
+        for (Property property : properties) {
+            log.info("Property: {} has {} images", property.getTitle(), 
+                    property.getImages() != null ? property.getImages().size() : 0);
+            if (property.getImages() != null && !property.getImages().isEmpty()) {
+                log.info("First image filename: {}", property.getImages().get(0).getImageFileName());
+            }
+        }
+        
         model.addAttribute("agent", currentUser.getFirstName() + " " + currentUser.getLastName());
         model.addAttribute("properties", properties);
         return "agent/managelistings";
