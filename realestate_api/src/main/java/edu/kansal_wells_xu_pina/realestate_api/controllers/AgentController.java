@@ -27,7 +27,7 @@ public class AgentController {
     private final PropertyService propertyService;
 
     @Autowired
-    public AgentController(AgentService agentService, UserService userService, PropertyImageService propertyImageService
+    public AgentController(AgentService agentService, UserService userService, PropertyImageService propertyImageService,
                            PropertyService propertyService) {
         this.agentService = agentService;
         this.userService = userService;
