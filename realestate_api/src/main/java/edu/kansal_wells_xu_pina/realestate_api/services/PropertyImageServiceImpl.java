@@ -68,9 +68,9 @@ public class PropertyImageServiceImpl implements PropertyImageService {
 
             Property property = propertyRepository.findById(propertyId).orElseThrow(()
                     -> new NotFoundException("Property not found"));
-            String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
+            //String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
 
-            Path propertyFolder = baseImagePath.resolve(safeTitle);
+            Path propertyFolder = baseImagePath.resolve(property.getTitle());
             
             log.info("Saving image to folder: {}", propertyFolder.toAbsolutePath());
             Files.createDirectories(propertyFolder);
