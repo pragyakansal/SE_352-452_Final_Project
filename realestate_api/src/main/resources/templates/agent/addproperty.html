@@ -18,7 +18,7 @@
     <div class="success" th:if="${successMessage}" th:text="${successMessage}"></div>
     <form method="post" th:action="@{/agent/addproperty}" th:object="${property}" enctype="multipart/form-data">
 
-        <div style="margin-bottom: 24px;"
+        <div style="margin-bottom: 24px;">
         <div class="form-group">
             <label for="title">Title:</label>
             <input id="title" required="" th:field="*{title}" type="text" class="form-control"/>

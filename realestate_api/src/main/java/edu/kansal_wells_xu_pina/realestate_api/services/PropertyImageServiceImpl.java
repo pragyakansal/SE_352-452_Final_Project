@@ -64,11 +64,13 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     public String storePropertyImage(Long propertyId, MultipartFile file) {
         try {
             String imageFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+
             // Path uploadPath = Paths.get(System.getProperty("user.dir"),"uploads", "images", "property_images");
             Property property = propertyRepository.findById(propertyId).orElseThrow(()
                     -> new NotFoundException("Property not found"));
             String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
             Path uploadPath = Paths.get(System.getProperty("user.dir"), "uploadDir", safeTitle);
+
             Files.createDirectories(uploadPath);
 
             Path filePath = uploadPath.resolve(imageFileName);
