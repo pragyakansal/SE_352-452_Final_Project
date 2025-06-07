@@ -186,6 +186,19 @@ public class AgentServiceImpl implements AgentService {
     //     propertyRepository.delete(property);
     // }
 
+    @Override
+    public String deletePropertyByPropertyId(Long propertyId, Long agentId) {
+        Property propertyToDelete = propertyRepository.findById(propertyId)
+                .orElseThrow(() -> new NotFoundException("The property with the id: " + propertyId + " could not be found." +
+                "Please delete an existing property."));
+
+        if (!propertyToDelete.getAgent().getId().equals(agentId)) {
+            throw new IllegalArgumentException("Agents are only authorized to delete their own properties.");
+        }
+        propertyRepository.delete(propertyToDelete);
+        return "The property with the ID: " + propertyId + " was deleted successfully.";
+    }
+
 
     // ? PropertyImageRepository methods can be added here
 

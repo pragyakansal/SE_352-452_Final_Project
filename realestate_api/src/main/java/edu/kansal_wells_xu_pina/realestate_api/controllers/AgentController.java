@@ -3,10 +3,13 @@ package edu.kansal_wells_xu_pina.realestate_api.controllers;
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;
 import edu.kansal_wells_xu_pina.realestate_api.entities.User;
+import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import edu.kansal_wells_xu_pina.realestate_api.services.AgentService;
 import edu.kansal_wells_xu_pina.realestate_api.services.PropertyImageService;
 import edu.kansal_wells_xu_pina.realestate_api.services.PropertyService;
 import edu.kansal_wells_xu_pina.realestate_api.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,7 @@ import java.util.List;
 @RequestMapping("/agent")
 public class AgentController {
 
+    private static final Logger log = LoggerFactory.getLogger(AgentController.class);
     private final AgentService agentService;
     private final UserService userService;
     private final PropertyImageService propertyImageService;
@@ -35,7 +39,7 @@ public class AgentController {
         this.propertyService = propertyService;
     }
 
-    @PreAuthorize("hasRole('AGENT')")
+    // @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/managelistings")
     public String manageListings(Model model) {
         User currentUser = userService.getCurrentUser();
@@ -53,7 +57,7 @@ public class AgentController {
         return "agent/addproperty";
     }
 
-    // @PreAuthorize("hasRole('AGENT')")
+    @PreAuthorize("hasRole('AGENT')")
     @PostMapping("/addproperty")
     public String addNewProperty(@ModelAttribute("property") Property newProperty,
                                  @RequestParam(value = "files", required = false) List<MultipartFile> files,
@@ -61,12 +65,14 @@ public class AgentController {
         try {
             //First, add the property (this will assign it an ID)
             Property savedProperty = agentService.addNewProperty(newProperty, files);
-            model.addAttribute("property", savedProperty);
-            return "redirect:agent/managelistings";
+            redirectAttributes.addFlashAttribute("successMessage", "Property added successfully");
+            // model.addAttribute("property", savedProperty);
+            return "redirect:/agent/managelistings";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Failed to add property: " + e.getMessage());
             return "redirect:/agent/addproperty";
         }
+
 
             /*
 
@@ -88,6 +94,22 @@ public class AgentController {
         }
 
              */
+    }
+
+    @PreAuthorize("hasRole('AGENT')")
+    @DeleteMapping("/delete/{propertyId}")
+    public String deletePropertyByPropertyId(@PathVariable("propertyId") Long propertyId) throws NotFoundException {
+        log.info("Received request to delete property with ID: " + propertyId);
+        log.info("In delete property controller method");
+        try {
+            User currentAgent = userService.getCurrentUser();
+            String message = agentService.deletePropertyByPropertyId(propertyId, currentAgent.getId());
+            log.info(message);
+            return "redirect:/agent/managelistings";
+        } catch (Exception e) {
+            log.error("Error in deleting property with id {}: {}", propertyId, e.getMessage());
+            return "redirect:/agent/managelistings?error=true";
+        }
     }
 
 
