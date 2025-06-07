@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Property</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body id="add-property-page">
+<div th:replace="common/header :: header"></div>
+<div class="container">
+    <h1>Add New Property</h1>
+    <div class="error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <div class="success" th:if="${successMessage}" th:text="${successMessage}"></div>
+    <form method="post" th:action="@{/agent/addproperty}" th:object="${property}" enctype="multipart/form-data">
+
+        <div style="margin-bottom: 24px;"
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input id="title" required="" th:field="*{title}" type="text" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+         <input id="price" required="" th:field="*{price}" type="number" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input id="location" required="" th:field="*{location}" type="text" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="size">Size:</label>
+            <input id="size" required="" th:field="*{size}" type="text" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control" rows="5" th:field="*{description}" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="files">Upload Property Images:</label>
+            <form method="post" enctype="multipart/form-data" th:action="@{agent/addproperty}">
+                <input id="files" type="file" name="files" accept="image/*" multiple/>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <br/><br/>
+
+        <button class="submit-btn" type="submit">Add Property</button>
+    </form>
+</div>
+</body>
+</html>

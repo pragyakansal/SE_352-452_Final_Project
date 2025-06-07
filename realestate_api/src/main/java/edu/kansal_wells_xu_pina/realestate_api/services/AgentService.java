@@ -8,6 +8,7 @@ import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import org.aspectj.weaver.loadtime.Agent;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ public interface AgentService {
     // void updateProperty(Property savedProperty);
     // PropertyImage setImageFileName(String imageFileName);
 
-    Property addNewProperty(Property newProperty);
+    Property addNewProperty(Property newProperty, List<MultipartFile> imageFiles);
 
-    Property EditProperty(Long agentId, Long propertyId, Property property);
+    // Property editProperty(Long agentId, Long propertyId, Property property);
     // void DeleteProperty(Long agentId, Long propertyId);
 
 

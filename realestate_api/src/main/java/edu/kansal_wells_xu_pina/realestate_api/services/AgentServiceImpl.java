@@ -14,6 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,14 +31,16 @@ public class AgentServiceImpl implements AgentService {
     private final PropertyRepository propertyRepository;
 
     private final PropertyImageRepository propertyImageRepository;
+    private final PropertyImageService propertyImageService;
 
 
 
     @Autowired
-    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository imageRepository) {
+    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository imageRepository, PropertyImageService propertyImageService) {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
         this.propertyImageRepository = imageRepository;
+        this.propertyImageService = propertyImageService;
     }
 
 
@@ -102,10 +107,52 @@ public class AgentServiceImpl implements AgentService {
      */
 
     @Override
-    public Property addNewProperty(Property newProperty) {
+    public Property addNewProperty(Property newProperty, List<MultipartFile> imageFiles) {
         User agent = getCurrentAgent();
         newProperty.setAgent(agent);
-        Set<PropertyImage> images = newProperty.getImages().stream()
+
+        // Save the property first to generate an ID
+        newProperty = propertyRepository.save(newProperty);
+
+        // Now handle the images
+        if (imageFiles != null && !imageFiles.isEmpty()) {
+            for (MultipartFile file : imageFiles) {
+                if (!file.isEmpty()) {
+                    try {
+                        //String imagePath = propertyImageRepository.saveImage(file);
+                        String imageFileName = propertyImageService.storePropertyImage(newProperty.getId(), file);
+                        PropertyImage propertyImage = new PropertyImage(imageFileName, newProperty);
+                        propertyImageRepository.save(propertyImage);
+                        newProperty.getImages().add(propertyImage);
+                    } catch (IOException e) {
+                        throw new RuntimeException("Failed to store property image" + file.getOriginalFilename(), e);
+                    }
+                }
+            }
+            // Save the property again with images
+            newProperty = propertyRepository.save(newProperty);
+        }
+
+        return newProperty;
+         /*
+            Set<PropertyImage> images = imageFiles.stream()
+                    .map(file -> {
+                        PropertyImage propertyImage = new PropertyImage();
+                        propertyImage.setImageFileName(file.getOriginalFilename());
+                        propertyImage.setProperty(newProperty);
+                        return propertyImageRepository.save(propertyImage);
+                    })
+                    .collect(Collectors.toSet());
+            newProperty.setImages(images);
+        }
+
+          */
+
+        // List<PropertyImage> propertyImages = newProperty.getImages();
+
+
+
+        /*List<PropertyImage> images = propertyImages.retainAll().stream()
                 .map(image -> {
                     PropertyImage foundImage = propertyImageRepository.findByImageFileName(image.getImageFileName());
                     if (foundImage == null) {
@@ -113,18 +160,23 @@ public class AgentServiceImpl implements AgentService {
                     }
                     return foundImage;
                 })
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet   ());
         newProperty.setImages((List<PropertyImage>) images);
-        return propertyRepository.save(newProperty);
+
+         */
+        //return propertyRepository.save(newProperty);
 
     }
 
+    /*
     @Override
-    public Property EditProperty(Long agentId, Long propertyId, Property property) {
+    public Property editProperty(Property property) {
         getAgentPropertyById(agentId, propertyId);
         property.setAgent(getAgentById(agentId));
         return propertyRepository.save(property);
     }
+
+     */
 
     // @Override
     // TODO: Implement DeleteProperty method
