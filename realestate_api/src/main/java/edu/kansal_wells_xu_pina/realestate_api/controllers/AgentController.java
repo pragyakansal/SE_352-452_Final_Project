@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -25,7 +26,8 @@ public class AgentController {
     private final PropertyImageService propertyImageService;
     private final PropertyService propertyService;
 
-    public AgentController(AgentService agentService, UserService userService, PropertyImageService propertyImageService,
+    @Autowired
+    public AgentController(AgentService agentService, UserService userService, PropertyImageService propertyImageService
                            PropertyService propertyService) {
         this.agentService = agentService;
         this.userService = userService;

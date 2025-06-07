@@ -32,10 +32,10 @@ public class AgentServiceImpl implements AgentService {
 
 
     @Autowired
-    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository imageRepository) {
+    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository) {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
-        this.propertyImageRepository = imageRepository;
+        this.propertyImageRepository = propertyImageRepository;
     }
 
 

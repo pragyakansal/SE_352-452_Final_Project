@@ -9,6 +9,7 @@ import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,6 +27,7 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     private final PropertyImageRepository propertyImageRepository;
     private final UserRepository userRepository;
 
+    @Autowired
     public PropertyImageServiceImpl(PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository, UserRepository userRepository) {
         this.propertyRepository = propertyRepository;
         this.propertyImageRepository = propertyImageRepository;
