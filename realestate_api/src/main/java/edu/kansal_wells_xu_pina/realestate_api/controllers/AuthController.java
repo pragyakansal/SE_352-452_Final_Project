@@ -65,7 +65,7 @@ public class AuthController {
         } catch (Exception e) {
             log.error("Registration failed for user: {}", user.getEmail(), e);
             model.addAttribute("error", e.getMessage());
-            return "registration-form";
+            return "public/registration-form";
         }
     }
 
@@ -126,11 +126,11 @@ public class AuthController {
         try {
             User user = userService.getCurrentUser();
             model.addAttribute("user", user);
-            return "common/common-profile";
+            return "common-profile";
         } catch (Exception e) {
             log.error("Error loading profile", e);
             model.addAttribute("error", "Error loading profile");
-            return "common/common-profile";
+            return "common-profile";
         }
     }
 
@@ -145,7 +145,7 @@ public class AuthController {
                 user.getEmail()
             );
             model.addAttribute("profileRequest", request);
-            return "common/common-edit-profile";
+            return "common-edit-profile";
         } catch (Exception e) {
             log.error("Error loading edit profile form", e);
             model.addAttribute("error", "Error loading edit profile form");
