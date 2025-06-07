@@ -72,13 +72,13 @@ public class PropertyImageServiceImpl implements PropertyImageService {
             // String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
 
             Path propertyFolder = baseImagePath.resolve(property.getTitle());
-            
+
             log.info("Saving image to folder: {}", propertyFolder.toAbsolutePath());
             Files.createDirectories(propertyFolder);
 
             String imageFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
             Path filePath = propertyFolder.resolve(imageFileName);
-            
+
             log.info("Saving image file: {}", filePath.toAbsolutePath());
             file.transferTo(filePath.toFile());
 
