@@ -29,7 +29,6 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     private final Path baseImagePath;
 
 
-
     @Autowired
     public PropertyImageServiceImpl(PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository) {
         this.propertyRepository = propertyRepository;
