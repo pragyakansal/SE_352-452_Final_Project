@@ -12,36 +12,36 @@
 </head>
 <body id="add-property-page">
 <div th:replace="common/header :: header"></div>
-<div class="container">
+<div class="container" id="add-new-property-container">
     <h1>Add New Property</h1>
     <div class="error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
     <div class="success" th:if="${successMessage}" th:text="${successMessage}"></div>
     <form method="post" th:action="@{/agent/addproperty}" th:object="${property}" enctype="multipart/form-data">
 
-        <div style="margin-bottom: 24px;">>
+        <div style="margin-bottom: 24px;">
         <div class="form-group">
-            <label for="title">Title:</label>
-            <input id="title" required="" th:field="*{title}" type="text" class="form-control"/>
+            <label for="title"></label>
+            <input id="title" required="" th:field="*{title}" type="text" class="form-control" placeholder="Title" />
         </div>
 
         <div class="form-group">
-            <label for="price">Price:</label>
-         <input id="price" required="" th:field="*{price}" type="number" class="form-control"/>
+            <label for="price"></label>
+         <input id="price" required="" th:field="*{price}" type="number" class="form-control" placeholder="Price" />
         </div>
 
         <div class="form-group">
-            <label for="location">Location:</label>
-            <input id="location" required="" th:field="*{location}" type="text" class="form-control"/>
+            <label for="location"></label>
+            <input id="location" required="" th:field="*{location}" type="text" class="form-control" placeholder="Location" />
         </div>
 
         <div class="form-group">
-            <label for="size">Size:</label>
-            <input id="size" required="" th:field="*{size}" type="text" class="form-control"/>
+            <label for="size"></label>
+            <input id="size" required="" th:field="*{size}" type="text" class="form-control" placeholder="Size"  />
         </div>
 
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" class="form-control" rows="5" th:field="*{description}" required></textarea>
+            <label for="description"></label>
+            <textarea id="description" name="description" class="form-control" rows="5" th:field="*{description}" placeholder="Description" required></textarea>
         </div>
 
         <div class="form-group">

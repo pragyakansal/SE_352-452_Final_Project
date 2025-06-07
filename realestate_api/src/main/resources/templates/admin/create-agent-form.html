@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body id="create-agent-page">
-<div th:replace="header :: header"></div>
+<div th:replace="common/header :: header"></div>
 <form th:action="@{/admin/create-agent}" method="post" th:object="${agentUser}">
-    <div class="container" id="profile-container">
+    <div class="container" id="create-agent-container">
         <h2>Create a New Agent</h2>
         <div class="input">
             <label for="firstName" class="form-label"></label>

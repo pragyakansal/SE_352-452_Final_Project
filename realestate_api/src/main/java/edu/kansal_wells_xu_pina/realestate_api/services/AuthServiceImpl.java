@@ -177,7 +177,7 @@ public class AuthServiceImpl implements AuthService {
                     " Please try again with a valid input.");
         }
 
-        // Correct format for email
+        // Checking correct format for email
         String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
         if (!newUser.getEmail().matches(emailRegex)) {
             throw new InvalidUserParameterException("The email format is incorrect. Please try again with a valid input.");

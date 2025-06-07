@@ -44,7 +44,11 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String displayLoginForm(Model model) {
+    public String displayLoginForm(@RequestParam(value = "successfulLogout", required = false) String successfulLogout, Model model) {
+        if ("true".equals(successfulLogout)) {
+            log.info("Adding success message");
+            model.addAttribute("successMessage", "You have been logged out successfully.");
+        }
         model.addAttribute("user", new User());
         return "public/login-form";
     }
@@ -102,7 +106,7 @@ public class AuthController {
         } catch (BadCredentialsException e) {
             log.error("Login failed for user: {}", user.getEmail(), e);
             model.addAttribute("error", "Invalid email or password");
-            return "login-form";
+            return "public/login-form";
         }
     }
 
@@ -117,7 +121,7 @@ public class AuthController {
     @GetMapping("/logout")
     public String logout(HttpServletResponse response) {
         authService.clearJwtCookie(response);
-        return "redirect:/landing-page/login";
+        return "redirect:/landing-page/login?successfulLogout=true";
     }
 
     @GetMapping("/profile")
@@ -126,11 +130,11 @@ public class AuthController {
         try {
             User user = userService.getCurrentUser();
             model.addAttribute("user", user);
-            return "common-profile";
+            return "common/common-profile";
         } catch (Exception e) {
             log.error("Error loading profile", e);
             model.addAttribute("error", "Error loading profile");
-            return "common-profile";
+            return "common/common-profile";
         }
     }
 
@@ -145,7 +149,7 @@ public class AuthController {
                 user.getEmail()
             );
             model.addAttribute("profileRequest", request);
-            return "common-edit-profile";
+            return "common/common-edit-profile";
         } catch (Exception e) {
             log.error("Error loading edit profile form", e);
             model.addAttribute("error", "Error loading edit profile form");
@@ -159,12 +163,10 @@ public class AuthController {
                               HttpServletResponse response, Model model) {
         try {
             User updatedUser = userService.updateUserProfile(request);
-            
-            // Generate new JWT token with updated email
+
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(updatedUser.getEmail());
             String newToken = jwtUtil.generateToken(userDetails);
-            
-            // Create new JWT cookie
+
             Cookie jwtCookie = new Cookie("jwt", newToken);
             jwtCookie.setPath("/");
             jwtCookie.setMaxAge(60 * 60); // 1 hour
