@@ -12,7 +12,7 @@
 <body id="login-page">
         <div id="login-page-container">
         <div th:if="${successMessage}" class="success-message">
-            <p th:text="${successMessage}">Default success message</p>
+            <p th:text="${successMessage}"></p>
         </div>
         <form method="post" th:action="@{/landing-page/login}" th:object="${user}">
             <div class="container">

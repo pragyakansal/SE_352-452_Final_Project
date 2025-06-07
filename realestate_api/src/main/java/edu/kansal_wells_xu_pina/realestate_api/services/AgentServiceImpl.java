@@ -41,6 +41,7 @@ public class AgentServiceImpl implements AgentService {
         this.propertyRepository = propertyRepository;
         this.propertyImageRepository = imageRepository;
         this.propertyImageService = propertyImageService;
+
     }
 
 

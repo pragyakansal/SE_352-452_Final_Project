@@ -10,36 +10,36 @@
 </head>
 <body id="dashboard-page">
     <div class="container" id="dashboard-container">
-        <h1 th:text="'Welcome, User: ' + ${#authentication.name}">Welcome, User {}</h1>
-        <h3 th:text="'Your role: ' + ${user.role}">Your role: {}</h3>
-        <span th:text="${user.role}">{} Dashboard</span>
-       <!-- <h4 th:text="${#authentication.name}">User</h4> -->
-        <h2>Dashboard</h2>
+        <div id="dashboard-heading">
+            <h1 th:text="'Welcome, User: ' + ${#authentication.name}">Welcome, User {}</h1>
+            <h3 th:text="'Your role: ' + ${user.role}">Your role: {}</h3>
+        </div>
+        <span th:text="${user.role + ' Dashboard'}">Dashboard</span>
         <br>
         <br>
-        <ul class="dashboard-options">
-            <li><a th:href="@{/landing-page/profile}" class="link">My Profile</a></li>
+        <ul id="dashboard-options">
+            <li><a th:href="@{/landing-page/profile}" class="dashboard-link">My Profile</a></li>
             <!-- BUYERS -->
             <li sec:authorize="hasRole('BUYER')">
-                <a th:href="@{/buyer/listings}" class="link">Browse Properties</a>
+                <a th:href="@{/buyer/listings}" class="dashboard-link">Browse Properties</a>
             </li>
             <!-- AGENTS -->
             <li sec:authorize="hasRole('AGENT')">
                 <!--a th:href="@{/{id}/managelistings}" class="link">Manage Listings</a-->
-                <a th:href="@{/agent/managelistings}" class="link">Manage Listings</a>
+                <a th:href="@{/agent/managelistings}" class="dashboard-link">Manage Listings</a>
             </li>
             <li sec:authorize="hasRole('AGENT')">
-                <a th:href="@{/agent/addproperty}" class="link">Create New Listing</a>
+                <a th:href="@{/agent/addproperty}" class="dashboard-link">Create New Listing</a>
             </li>
             <!-- ADMINS -->
             <li sec:authorize="hasRole('ADMIN')">
-                <a th:href="@{/admin/manage-users}" class="link">Manage Users</a>
+                <a th:href="@{/admin/manage-users}" class="dashboard-link">Manage Users</a>
             </li>
             <li sec:authorize="hasRole('ADMIN')">
-                <a th:href="@{/admin/create-agent}" class="link">Create Agent</a>
+                <a th:href="@{/admin/create-agent}" class="dashboard-link">Create Agent</a>
             </li>
         </ul>
-        <li><a class="section-spacing" th:href="@{/landing-page/logout}">Log Out</a></li>
+        <a class="section-spacing" th:href="@{/landing-page/logout}" id="logout-button">Log Out</a>
     </div>
 </body>
 </html>
