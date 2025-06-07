@@ -28,11 +28,11 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/dashboard")
-    public String adminDashboard() {
-        return "common-dashboard";
-    }
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @GetMapping("/dashboard")
+//    public String adminDashboard() {
+//        return "common-dashboard";
+//    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/manage-users")

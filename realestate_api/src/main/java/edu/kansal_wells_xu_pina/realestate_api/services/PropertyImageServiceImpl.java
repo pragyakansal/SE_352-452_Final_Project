@@ -6,6 +6,8 @@ import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ import java.util.UUID;
 @Service
 public class PropertyImageServiceImpl implements PropertyImageService {
 
+    private static final Logger log = LoggerFactory.getLogger(PropertyImageServiceImpl.class);
 
     private final PropertyRepository propertyRepository;
     private final PropertyImageRepository propertyImageRepository;
@@ -63,22 +66,19 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     @Override
     public String storePropertyImage(Long propertyId, MultipartFile file) {
         try {
-            // String imageFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();  //moved below
-            // Path uploadPath = Paths.get(System.getProperty("user.dir"),"uploads", "images", "property_images");
             Property property = propertyRepository.findById(propertyId).orElseThrow(()
                     -> new NotFoundException("Property not found"));
             String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
-           // Path uploadPath = Paths.get(System.getProperty("user.dir"), "uploadDir", safeTitle);
             Path propertyFolder = baseImagePath.resolve(safeTitle);
+
+            log.info("Saving image to folder: {}", propertyFolder.toAbsolutePath());
             Files.createDirectories(propertyFolder);
 
             String imageFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-
             Path filePath = propertyFolder.resolve(imageFileName);
-            file.transferTo(filePath.toFile());
 
-            // Property property = propertyRepository.findById(propertyId).orElseThrow(()
-            //       -> new NotFoundException("Property not found"));
+            log.info("Saving image file: {}", filePath.toAbsolutePath());
+            file.transferTo(filePath.toFile());
 
             // Save the image metadata in the database
             PropertyImage propertyImage = new PropertyImage();
@@ -90,9 +90,10 @@ public class PropertyImageServiceImpl implements PropertyImageService {
             property.addImage(propertyImage);
             propertyRepository.save(property);
 
+            log.info("Successfully saved image: {}", imageFileName);
             return imageFileName;
         } catch (IOException e) {
-            System.out.println("Error storing property image: " + e.getMessage());
+            log.error("Error storing property image: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to store property image", e);
         }
     }
