@@ -39,7 +39,7 @@ public class AgentController {
         this.propertyService = propertyService;
     }
 
-    // @PreAuthorize("hasRole('AGENT')")
+    @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/managelistings")
     public String manageListings(Model model) {
         User currentUser = userService.getCurrentUser();
@@ -50,7 +50,7 @@ public class AgentController {
     }
 
     // === ADD PROPERTY ===
-    //@PreAuthorize("hasRole('AGENT')")
+    @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/addproperty")
     public String addPropertyForm(Model model) {
         model.addAttribute("property", new Property());

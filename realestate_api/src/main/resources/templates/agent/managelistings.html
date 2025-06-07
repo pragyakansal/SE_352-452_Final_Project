@@ -39,7 +39,7 @@
             <td>
                 <!-- Display the first image if available -->
                 <span th:if="${property.images != null and !property.images.empty}">
-                    <img th:src="@{'/images/property_images/{propertyTitle}/{fileName}(propertyTitle=${property.title}, fileName=${property.images[0].imageFileName})}"
+                    <img th:src="@{/images/property_images/{propertyTitle}/{fileName}(propertyTitle=${property.title}, fileName=${property.images[0].imageFileName})}"
                             alt="Property Image" width="100">
                 </span>
                 <span th:unless="${property.images != null and !property.images.empty}">No Image</span>
