@@ -73,6 +73,11 @@ html, body {
     height: 400px;
 }
 
+#create-agent-container {
+     background-color: rgba(255, 255, 255, 0.6);
+     color: #333333;
+}
+
 #edit-profile-fields-container {
     display: flex;
     flex-direction: column;
@@ -114,6 +119,10 @@ html, body {
 #listings-page {
     background-color: #edebeb;
 
+}
+
+#manage-users-page {
+    background-color: #edebeb;
 }
 
 #manage-users {
@@ -337,8 +346,9 @@ th, td {
 }
 
 #manage-listings-page {
-    padding-top: 590px;
+    padding-top: 630px;
     padding-bottom: 50px;
+    background-color: #edebeb;
 }
 
 #properties-table-container {

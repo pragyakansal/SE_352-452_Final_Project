@@ -70,11 +70,11 @@ public class SecurityConfig {
 
         //return http.build();
         DefaultSecurityFilterChain securityFilterChain = http.build();
-        List<Filter> filters = securityFilterChain.getFilters();
+        /* List<Filter> filters = securityFilterChain.getFilters();
         for (Filter filter : filters) {
             log.info("filter name: " + filter.toString());
             log.info("filter class: " + filter.getClass().getName());
-        }
+        } */
         return securityFilterChain;
     }
 
