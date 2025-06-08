@@ -50,10 +50,17 @@ html, body {
     gap: 20px;
 }
 
-#create-agent-page, #add-property-page {
+#create-agent-page {
     background-image: url('/images/common-bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+#add-property-page {
+    background-image: url('/images/common-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 120px;
 }
 
 #dashboard-page {
