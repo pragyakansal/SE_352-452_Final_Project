@@ -20,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Controller
 @RequestMapping("/agent")
 public class AgentController {
@@ -114,5 +116,37 @@ public class AgentController {
         return "temp";
     }
     */
+
+    @PreAuthorize("hasRole('AGENT')")
+    @GetMapping("/editproperty/{id}")
+    public String editPropertyForm(@PathVariable Long id, Model model)  {
+        Property property = propertyService.findById(id);
+        model.addAttribute("property", property);
+        return "agent/editproperty";
+    }
+
+    @PreAuthorize("hasRole('AGENT')")
+    @PostMapping("/editproperty/{id}")
+    public String editProperty(@PathVariable("id") Long id,
+                               @ModelAttribute Property property,
+                               @RequestParam("title") String title,
+                               @RequestParam("price") Double price,
+                               @RequestParam("description") String description,
+                               @RequestParam("location") String location,
+                               @RequestParam("size") Integer size,
+                               RedirectAttributes redirectAttributes, Model model) {
+        try {
+            Property propertyToUpdate = propertyService.findById(id);
+            agentService.editProperty(propertyToUpdate, title, price, description, location, size);
+            redirectAttributes.addFlashAttribute("successMessage", "Property updated successfully");
+            return "redirect:/agent/managelistings";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Failed to update property: " + e.getMessage());
+            return "redirect:/agent/editproperty/" + id;
+        }
+    }
+
+
+
 
  }

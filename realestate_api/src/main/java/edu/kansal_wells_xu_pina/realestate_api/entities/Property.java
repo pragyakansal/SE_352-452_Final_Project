@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name = "properties")
-public class Property {
+public class    Property {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

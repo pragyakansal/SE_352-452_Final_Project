@@ -47,7 +47,7 @@
            <!-- <td th:text="${property.description}">Short description...</td> -->
             <td>
                 <!-- Link to edit the property -->
-                <a th:href="@{/agent/manage-listings/edit/{id}(id=${property.id})}" class="button edit-button">Edit</a>
+                <a th:href="@{/agent/editproperty/{id}(id=${property.id})}" class="button edit-button">Edit</a>
                 <!-- Link to delete the property -->
                 <form th:action="@{/agent/delete/{propertyId}(propertyId=${property.id})}" method="post" th:object="${property}">
                     <input type="hidden" name="_method" value="delete" />
