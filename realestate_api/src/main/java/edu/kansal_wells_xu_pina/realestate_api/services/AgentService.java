@@ -17,13 +17,15 @@ public interface AgentService {
     User getAgentById(Long id);
     List<Property> getAgentProperties(Long agentId);
     Property getAgentPropertyById(Long agentId, Long propertyId);
+    Property getCurrentProperty(Long propertyId);
 
-    // void updateProperty(Property savedProperty);
+    // public Property updateProperty(Property savedProperty);
     // PropertyImage setImageFileName(String imageFileName);
 
     Property addNewProperty(Property newProperty, List<MultipartFile> imageFiles);
 
-    // Property editProperty(Long agentId, Long propertyId, Property property);
+    public void editProperty(Property propertyToUpdate, String title, Double price, String description,
+                      String location, Integer size);
     String deletePropertyByPropertyId(Long propertyId, Long agentId);
 
 

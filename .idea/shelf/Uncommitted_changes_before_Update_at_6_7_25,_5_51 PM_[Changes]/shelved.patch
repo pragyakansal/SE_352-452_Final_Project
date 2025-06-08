@@ -1,0 +1,1716 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_6_3_25__1_16AM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25__1_16AM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25__1_16AM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25__1_16AM__Changes_.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_6_3_25,_1_16 AM_[Changes]" date="1748931461268" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25,_1_16 AM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 6/3/25, 1:16 AM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_6_3_25,_1_16 AM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25,_1_16 AM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25,_1_16 AM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25,_1_16 AM_[Changes]/shelved.patch	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,59 +0,0 @@
+-Index: realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package edu.kansal_wells_xu_pina.realestate_api.services;\n\n\nimport edu.kansal_wells_xu_pina.realestate_api.entities.Property;\nimport edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;\nimport org.aspectj.weaver.loadtime.Agent;\nimport org.springframework.stereotype.Service;\n\nimport java.util.List;\nimport java.util.TreeMap;\n\n@Service\npublic interface AgentService {\n\n    List<Property> getAllProperties(Long agentId);\n    Property addProperty(Long agentId, Property property);\n    Property editProperty(Property property);\n    Agent getAgent();\n\n\n\n\n    /*\n\n    private final TreeMap<String, Agent> agentMap = new TreeMap<>();\n\n    public AgentService() {\n\n    }\n\n    public Agent getCurrentAgent() {\n       //TO-DO: Need to implement logic to retrieve the current agent\n        return null; // Placeholder for current agent retrieval logic\n    }\n\n    // TO-DO: Implement logic to get all properties for the current agent\n    // Check to see if this should be in a different service\n    public Agent getAllProperties() {\n        // TO-DO: Need to implement logic to retrieve all properties for the current agent\n        return null;\n    }\n\n\n    // TO-DO: Implement logic to retrieve an agent by ID\n    public Agent getAgent(Long id) {\n        if (id == null || id <= 0)\n            throw new NotFoundException(\"Agent Name Cannot Be Null or Empty\");\n        Agent agent = agentMap.get(id);\n        if (agent == null)\n            throw new NotFoundException(\"Agent Not Found\");\n        return agent;\n    }\n\n    // TO-DO: Implement logic to add a property to an agent\n    // Does this need to be in a differnt class or can it be in this service?\n    public void addProperty(String agentName, Property property) {\n\n    }\n\n    // TO-DO: Implement logic to save a property for an agent\n    // Does this need to be in a different class or can it be in this service?\n    public  Agent saveProperty(Property property) {\n        return null;\n    }\n\n\n    */\n\n\n\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java
+---- a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java	(revision 7281a323e23478bde5212b5e7c23b62b48401d3a)
+-+++ b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java	(date 1748807655127)
+-@@ -9,7 +9,7 @@
+- import java.util.List;
+- import java.util.TreeMap;
+- 
+--@Service
+-+
+- public interface AgentService {
+- 
+-     List<Property> getAllProperties(Long agentId);
+-Index: realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package edu.kansal_wells_xu_pina.realestate_api.services;\n\npublic class AgentServiceImpl implements AgentService {\n\n\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java
+---- a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java	(revision 7281a323e23478bde5212b5e7c23b62b48401d3a)
+-+++ b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java	(date 1748809083904)
+-@@ -1,6 +1,29 @@
+- package edu.kansal_wells_xu_pina.realestate_api.services;
+- 
+-+import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
+-+import edu.kansal_wells_xu_pina.realestate_api.entities.User;
+-+import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;
+-+import edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;
+-+import org.springframework.stereotype.Service;
+-+
+-+import java.util.List;
+-+
+-+@Service
+- public class AgentServiceImpl implements AgentService {
+- 
+-+    private UserRepository userRepository;
+-+
+-+    private PropertyRepository propertyRepository;
+-+
+-+    public List<Property> getAllProperties(Long agentId) {
+-+        User agent = getAgent();
+-+        
+-+
+-+    }
+-+
+-+
+-+
+-+
+-+
+- 
+- }
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]/shelved.patch	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,16 +0,0 @@
+-Index: realestate_api/src/main/resources/templates/common-dashboard.html
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><!DOCTYPE html>\n<html lang=\"en\" xmlns:th=\"http://www.thymeleaf.org\" xmlns:sec=\"http://www.thymeleaf.org/extras/spring-security\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Dashboard</title>\n    <link rel=\"stylesheet\" th:href=\"@{/css/styles.css}\"/>\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:ital,ops,wght@0,14..32,100..900;1,14..32,100..900&display=swap\" rel=\"stylesheet\">\n</head>\n<body id=\"dashboard-page\">\n    <div class=\"container\">\n        <h1 th:text=\"${message}\">Welcome to Dashboard</h1>\n        <h4 th:text=\"${#authentication.name}\">User</h4>\n        <h2>Dashboard</h2>\n        <br>\n        <br>\n        <ul>\n            <li><a th:href=\"@{/landing-page/profile}\" class=\"link\">My Profile</a></li>\n            <!-- BUYERS -->\n            <li sec:authorize=\"hasRole('BUYER')\">\n                <a th:href=\"@{/buyer/listings}\" class=\"link\">Browse Properties</a>\n            </li>\n            <!-- AGENTS -->\n            <li sec:authorize=\"hasRole('AGENT')\">\n                <!--a th:href=\"@{/{id}/managelistings}\" class=\"link\">Manage Listings</a-->\n                <a th:href=\"@{/agent/managelistings}\" class=\"link\">Manage Listings</a>\n            </li>\n            <li sec:authorize=\"hasRole('AGENT')\">\n                <a th:href=\"@{/agent/listings/create-new}\" class=\"link\">Create New Listing</a>\n            </li>\n            <!-- ADMINS -->\n            <li sec:authorize=\"hasRole('ADMIN')\">\n                <a th:href=\"@{/admin/manage-users}\" class=\"link\">Manage Users</a>\n            </li>\n            <li sec:authorize=\"hasRole('ADMIN')\">\n                <a th:href=\"@{/admin/create-agent}\" class=\"link\">Create Agent</a>\n            </li>\n        </ul>\n        <li><a class=\"section-spacing\" th:href=\"@{/landing-page/logout}\">Log Out</a></li>\n    </div>\n</body>\n</html>
+-===================================================================
+-diff --git a/realestate_api/src/main/resources/templates/common-dashboard.html b/realestate_api/src/main/resources/templates/common-dashboard.html
+---- a/realestate_api/src/main/resources/templates/common-dashboard.html	(revision e50b75da75f4ba0cc74c4eda9030513e75ef7146)
+-+++ b/realestate_api/src/main/resources/templates/common-dashboard.html	(date 1749186731764)
+-@@ -23,7 +23,6 @@
+-             </li>
+-             <!-- AGENTS -->
+-             <li sec:authorize="hasRole('AGENT')">
+--                <!--a th:href="@{/{id}/managelistings}" class="link">Manage Listings</a-->
+-                 <a th:href="@{/agent/managelistings}" class="link">Manage Listings</a>
+-             </li>
+-             <li sec:authorize="hasRole('AGENT')">
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_6_4_25,_2_32 AM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25,_2_32 AM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25,_2_32 AM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25,_2_32 AM_[Changes]/shelved.patch	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,19 +0,0 @@
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"92bc20eb-994d-48de-ad8c-b665ab69c9aa\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/showagentprofile.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/agentprofile.html\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Exception\" />\n        <option value=\"HTML File\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;gregrw&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/pragyakansal/SE_352-452_Final_Project.git&quot;,\n    &quot;accountId&quot;: &quot;c4966e2a-516d-4a00-9d0c-6d9330381ce4&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 5\n}</component>\n  <component name=\"ProjectId\" id=\"2xbmjp0ICpu6WoYKKUVhGMrr05q\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"DefaultHtmlFileTemplate\": \"HTML File\",\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\n    \"RequestMappingsPanelOrder0\": \"0\",\n    \"RequestMappingsPanelOrder1\": \"1\",\n    \"RequestMappingsPanelWidth0\": \"75\",\n    \"RequestMappingsPanelWidth1\": \"75\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"RunOnceActivity.git.unshallow\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"Spring Boot.RealestateApiApplication.executor\": \"Run\",\n    \"git-widget-placeholder\": \"GregWork\",\n    \"junie.onboarding.icon.badge.shown\": \"true\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RunManager\">\n    <configuration name=\"RealestateApiApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\n      <module name=\"realestate_api\" />\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"edu.kansal_wells_xu_pina.realestate_api.RealestateApiApplication\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129\" />\n        <option value=\"bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"92bc20eb-994d-48de-ad8c-b665ab69c9aa\" name=\"Changes\" comment=\"\" />\n      <created>1748215284789</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1748215284789</updated>\n      <workItem from=\"1748215285915\" duration=\"925000\" />\n      <workItem from=\"1748226455720\" duration=\"4492000\" />\n      <workItem from=\"1748291373404\" duration=\"18594000\" />\n      <workItem from=\"1748796342768\" duration=\"7730000\" />\n      <workItem from=\"1748830956527\" duration=\"1313000\" />\n      <workItem from=\"1748930921023\" duration=\"1675000\" />\n      <workItem from=\"1749011604621\" duration=\"9860000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\n                <map>\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\n                </map>\n              </option>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"GregWork\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 776fbedec725d198112bf4034c7dcf01b5fb7627)
+-+++ b/.idea/workspace.xml	(date 1749021782396)
+-@@ -105,7 +105,7 @@
+-       <workItem from="1748796342768" duration="7730000" />
+-       <workItem from="1748830956527" duration="1313000" />
+-       <workItem from="1748930921023" duration="1675000" />
+--      <workItem from="1749011604621" duration="9860000" />
+-+      <workItem from="1749011604621" duration="10163000" />
+-     </task>
+-     <servers />
+-   </component>
+Index: .idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c.xml
+===================================================================
+diff --git a/.idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c.xml b/.idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c.xml
+deleted file mode 100644
+--- a/.idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,1074 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<dataSource name="real_estate_db@localhost">
+-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.53">
+-    <root id="1">
+-      <DefaultCasing>mixed/mixed</DefaultCasing>
+-      <DefaultEngine>InnoDB</DefaultEngine>
+-      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
+-      <Grants>real_estate_db|schema||real_estate_user|localhost|ALTER|G
+-real_estate_db|schema||real_estate_user|localhost|ALTER ROUTINE|G
+-real_estate_db|schema||real_estate_user|localhost|CREATE|G
+-real_estate_db|schema||real_estate_user|localhost|CREATE ROUTINE|G
+-real_estate_db|schema||real_estate_user|localhost|CREATE TEMPORARY TABLES|G
+-real_estate_db|schema||real_estate_user|localhost|CREATE VIEW|G
+-real_estate_db|schema||real_estate_user|localhost|DELETE|G
+-real_estate_db|schema||real_estate_user|localhost|DROP|G
+-real_estate_db|schema||real_estate_user|localhost|EVENT|G
+-real_estate_db|schema||real_estate_user|localhost|EXECUTE|G
+-real_estate_db|schema||real_estate_user|localhost|INDEX|G
+-real_estate_db|schema||real_estate_user|localhost|INSERT|G
+-real_estate_db|schema||real_estate_user|localhost|LOCK TABLES|G
+-real_estate_db|schema||real_estate_user|localhost|REFERENCES|G
+-real_estate_db|schema||real_estate_user|localhost|SELECT|G
+-real_estate_db|schema||real_estate_user|localhost|SHOW VIEW|G
+-real_estate_db|schema||real_estate_user|localhost|TRIGGER|G
+-real_estate_db|schema||real_estate_user|localhost|UPDATE|G</Grants>
+-      <ServerVersion>9.3.0</ServerVersion>
+-    </root>
+-    <collation id="2" parent="1" name="armscii8_bin">
+-      <Charset>armscii8</Charset>
+-    </collation>
+-    <collation id="3" parent="1" name="armscii8_general_ci">
+-      <Charset>armscii8</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="4" parent="1" name="ascii_bin">
+-      <Charset>ascii</Charset>
+-    </collation>
+-    <collation id="5" parent="1" name="ascii_general_ci">
+-      <Charset>ascii</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="6" parent="1" name="big5_bin">
+-      <Charset>big5</Charset>
+-    </collation>
+-    <collation id="7" parent="1" name="big5_chinese_ci">
+-      <Charset>big5</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="8" parent="1" name="binary">
+-      <Charset>binary</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="9" parent="1" name="cp1250_bin">
+-      <Charset>cp1250</Charset>
+-    </collation>
+-    <collation id="10" parent="1" name="cp1250_croatian_ci">
+-      <Charset>cp1250</Charset>
+-    </collation>
+-    <collation id="11" parent="1" name="cp1250_czech_cs">
+-      <Charset>cp1250</Charset>
+-    </collation>
+-    <collation id="12" parent="1" name="cp1250_general_ci">
+-      <Charset>cp1250</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="13" parent="1" name="cp1250_polish_ci">
+-      <Charset>cp1250</Charset>
+-    </collation>
+-    <collation id="14" parent="1" name="cp1251_bin">
+-      <Charset>cp1251</Charset>
+-    </collation>
+-    <collation id="15" parent="1" name="cp1251_bulgarian_ci">
+-      <Charset>cp1251</Charset>
+-    </collation>
+-    <collation id="16" parent="1" name="cp1251_general_ci">
+-      <Charset>cp1251</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="17" parent="1" name="cp1251_general_cs">
+-      <Charset>cp1251</Charset>
+-    </collation>
+-    <collation id="18" parent="1" name="cp1251_ukrainian_ci">
+-      <Charset>cp1251</Charset>
+-    </collation>
+-    <collation id="19" parent="1" name="cp1256_bin">
+-      <Charset>cp1256</Charset>
+-    </collation>
+-    <collation id="20" parent="1" name="cp1256_general_ci">
+-      <Charset>cp1256</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="21" parent="1" name="cp1257_bin">
+-      <Charset>cp1257</Charset>
+-    </collation>
+-    <collation id="22" parent="1" name="cp1257_general_ci">
+-      <Charset>cp1257</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="23" parent="1" name="cp1257_lithuanian_ci">
+-      <Charset>cp1257</Charset>
+-    </collation>
+-    <collation id="24" parent="1" name="cp850_bin">
+-      <Charset>cp850</Charset>
+-    </collation>
+-    <collation id="25" parent="1" name="cp850_general_ci">
+-      <Charset>cp850</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="26" parent="1" name="cp852_bin">
+-      <Charset>cp852</Charset>
+-    </collation>
+-    <collation id="27" parent="1" name="cp852_general_ci">
+-      <Charset>cp852</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="28" parent="1" name="cp866_bin">
+-      <Charset>cp866</Charset>
+-    </collation>
+-    <collation id="29" parent="1" name="cp866_general_ci">
+-      <Charset>cp866</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="30" parent="1" name="cp932_bin">
+-      <Charset>cp932</Charset>
+-    </collation>
+-    <collation id="31" parent="1" name="cp932_japanese_ci">
+-      <Charset>cp932</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="32" parent="1" name="dec8_bin">
+-      <Charset>dec8</Charset>
+-    </collation>
+-    <collation id="33" parent="1" name="dec8_swedish_ci">
+-      <Charset>dec8</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="34" parent="1" name="eucjpms_bin">
+-      <Charset>eucjpms</Charset>
+-    </collation>
+-    <collation id="35" parent="1" name="eucjpms_japanese_ci">
+-      <Charset>eucjpms</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="36" parent="1" name="euckr_bin">
+-      <Charset>euckr</Charset>
+-    </collation>
+-    <collation id="37" parent="1" name="euckr_korean_ci">
+-      <Charset>euckr</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="38" parent="1" name="gb18030_bin">
+-      <Charset>gb18030</Charset>
+-    </collation>
+-    <collation id="39" parent="1" name="gb18030_chinese_ci">
+-      <Charset>gb18030</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="40" parent="1" name="gb18030_unicode_520_ci">
+-      <Charset>gb18030</Charset>
+-    </collation>
+-    <collation id="41" parent="1" name="gb2312_bin">
+-      <Charset>gb2312</Charset>
+-    </collation>
+-    <collation id="42" parent="1" name="gb2312_chinese_ci">
+-      <Charset>gb2312</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="43" parent="1" name="gbk_bin">
+-      <Charset>gbk</Charset>
+-    </collation>
+-    <collation id="44" parent="1" name="gbk_chinese_ci">
+-      <Charset>gbk</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="45" parent="1" name="geostd8_bin">
+-      <Charset>geostd8</Charset>
+-    </collation>
+-    <collation id="46" parent="1" name="geostd8_general_ci">
+-      <Charset>geostd8</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="47" parent="1" name="greek_bin">
+-      <Charset>greek</Charset>
+-    </collation>
+-    <collation id="48" parent="1" name="greek_general_ci">
+-      <Charset>greek</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="49" parent="1" name="hebrew_bin">
+-      <Charset>hebrew</Charset>
+-    </collation>
+-    <collation id="50" parent="1" name="hebrew_general_ci">
+-      <Charset>hebrew</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="51" parent="1" name="hp8_bin">
+-      <Charset>hp8</Charset>
+-    </collation>
+-    <collation id="52" parent="1" name="hp8_english_ci">
+-      <Charset>hp8</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="53" parent="1" name="keybcs2_bin">
+-      <Charset>keybcs2</Charset>
+-    </collation>
+-    <collation id="54" parent="1" name="keybcs2_general_ci">
+-      <Charset>keybcs2</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="55" parent="1" name="koi8r_bin">
+-      <Charset>koi8r</Charset>
+-    </collation>
+-    <collation id="56" parent="1" name="koi8r_general_ci">
+-      <Charset>koi8r</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="57" parent="1" name="koi8u_bin">
+-      <Charset>koi8u</Charset>
+-    </collation>
+-    <collation id="58" parent="1" name="koi8u_general_ci">
+-      <Charset>koi8u</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="59" parent="1" name="latin1_bin">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="60" parent="1" name="latin1_danish_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="61" parent="1" name="latin1_general_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="62" parent="1" name="latin1_general_cs">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="63" parent="1" name="latin1_german1_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="64" parent="1" name="latin1_german2_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="65" parent="1" name="latin1_spanish_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="66" parent="1" name="latin1_swedish_ci">
+-      <Charset>latin1</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="67" parent="1" name="latin2_bin">
+-      <Charset>latin2</Charset>
+-    </collation>
+-    <collation id="68" parent="1" name="latin2_croatian_ci">
+-      <Charset>latin2</Charset>
+-    </collation>
+-    <collation id="69" parent="1" name="latin2_czech_cs">
+-      <Charset>latin2</Charset>
+-    </collation>
+-    <collation id="70" parent="1" name="latin2_general_ci">
+-      <Charset>latin2</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="71" parent="1" name="latin2_hungarian_ci">
+-      <Charset>latin2</Charset>
+-    </collation>
+-    <collation id="72" parent="1" name="latin5_bin">
+-      <Charset>latin5</Charset>
+-    </collation>
+-    <collation id="73" parent="1" name="latin5_turkish_ci">
+-      <Charset>latin5</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="74" parent="1" name="latin7_bin">
+-      <Charset>latin7</Charset>
+-    </collation>
+-    <collation id="75" parent="1" name="latin7_estonian_cs">
+-      <Charset>latin7</Charset>
+-    </collation>
+-    <collation id="76" parent="1" name="latin7_general_ci">
+-      <Charset>latin7</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="77" parent="1" name="latin7_general_cs">
+-      <Charset>latin7</Charset>
+-    </collation>
+-    <collation id="78" parent="1" name="macce_bin">
+-      <Charset>macce</Charset>
+-    </collation>
+-    <collation id="79" parent="1" name="macce_general_ci">
+-      <Charset>macce</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="80" parent="1" name="macroman_bin">
+-      <Charset>macroman</Charset>
+-    </collation>
+-    <collation id="81" parent="1" name="macroman_general_ci">
+-      <Charset>macroman</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="82" parent="1" name="sjis_bin">
+-      <Charset>sjis</Charset>
+-    </collation>
+-    <collation id="83" parent="1" name="sjis_japanese_ci">
+-      <Charset>sjis</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="84" parent="1" name="swe7_bin">
+-      <Charset>swe7</Charset>
+-    </collation>
+-    <collation id="85" parent="1" name="swe7_swedish_ci">
+-      <Charset>swe7</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="86" parent="1" name="tis620_bin">
+-      <Charset>tis620</Charset>
+-    </collation>
+-    <collation id="87" parent="1" name="tis620_thai_ci">
+-      <Charset>tis620</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="88" parent="1" name="ucs2_bin">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="89" parent="1" name="ucs2_croatian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="90" parent="1" name="ucs2_czech_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="91" parent="1" name="ucs2_danish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="92" parent="1" name="ucs2_esperanto_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="93" parent="1" name="ucs2_estonian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="94" parent="1" name="ucs2_general_ci">
+-      <Charset>ucs2</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="95" parent="1" name="ucs2_general_mysql500_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="96" parent="1" name="ucs2_german2_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="97" parent="1" name="ucs2_hungarian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="98" parent="1" name="ucs2_icelandic_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="99" parent="1" name="ucs2_latvian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="100" parent="1" name="ucs2_lithuanian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="101" parent="1" name="ucs2_persian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="102" parent="1" name="ucs2_polish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="103" parent="1" name="ucs2_roman_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="104" parent="1" name="ucs2_romanian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="105" parent="1" name="ucs2_sinhala_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="106" parent="1" name="ucs2_slovak_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="107" parent="1" name="ucs2_slovenian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="108" parent="1" name="ucs2_spanish2_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="109" parent="1" name="ucs2_spanish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="110" parent="1" name="ucs2_swedish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="111" parent="1" name="ucs2_turkish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="112" parent="1" name="ucs2_unicode_520_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="113" parent="1" name="ucs2_unicode_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="114" parent="1" name="ucs2_vietnamese_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="115" parent="1" name="ujis_bin">
+-      <Charset>ujis</Charset>
+-    </collation>
+-    <collation id="116" parent="1" name="ujis_japanese_ci">
+-      <Charset>ujis</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="117" parent="1" name="utf16_bin">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="118" parent="1" name="utf16_croatian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="119" parent="1" name="utf16_czech_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="120" parent="1" name="utf16_danish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="121" parent="1" name="utf16_esperanto_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="122" parent="1" name="utf16_estonian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="123" parent="1" name="utf16_general_ci">
+-      <Charset>utf16</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="124" parent="1" name="utf16_german2_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="125" parent="1" name="utf16_hungarian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="126" parent="1" name="utf16_icelandic_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="127" parent="1" name="utf16_latvian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="128" parent="1" name="utf16_lithuanian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="129" parent="1" name="utf16_persian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="130" parent="1" name="utf16_polish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="131" parent="1" name="utf16_roman_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="132" parent="1" name="utf16_romanian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="133" parent="1" name="utf16_sinhala_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="134" parent="1" name="utf16_slovak_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="135" parent="1" name="utf16_slovenian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="136" parent="1" name="utf16_spanish2_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="137" parent="1" name="utf16_spanish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="138" parent="1" name="utf16_swedish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="139" parent="1" name="utf16_turkish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="140" parent="1" name="utf16_unicode_520_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="141" parent="1" name="utf16_unicode_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="142" parent="1" name="utf16_vietnamese_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="143" parent="1" name="utf16le_bin">
+-      <Charset>utf16le</Charset>
+-    </collation>
+-    <collation id="144" parent="1" name="utf16le_general_ci">
+-      <Charset>utf16le</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="145" parent="1" name="utf32_bin">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="146" parent="1" name="utf32_croatian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="147" parent="1" name="utf32_czech_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="148" parent="1" name="utf32_danish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="149" parent="1" name="utf32_esperanto_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="150" parent="1" name="utf32_estonian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="151" parent="1" name="utf32_general_ci">
+-      <Charset>utf32</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="152" parent="1" name="utf32_german2_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="153" parent="1" name="utf32_hungarian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="154" parent="1" name="utf32_icelandic_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="155" parent="1" name="utf32_latvian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="156" parent="1" name="utf32_lithuanian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="157" parent="1" name="utf32_persian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="158" parent="1" name="utf32_polish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="159" parent="1" name="utf32_roman_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="160" parent="1" name="utf32_romanian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="161" parent="1" name="utf32_sinhala_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="162" parent="1" name="utf32_slovak_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="163" parent="1" name="utf32_slovenian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="164" parent="1" name="utf32_spanish2_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="165" parent="1" name="utf32_spanish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="166" parent="1" name="utf32_swedish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="167" parent="1" name="utf32_turkish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="168" parent="1" name="utf32_unicode_520_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="169" parent="1" name="utf32_unicode_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="170" parent="1" name="utf32_vietnamese_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="171" parent="1" name="utf8mb3_bin">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="172" parent="1" name="utf8mb3_croatian_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="173" parent="1" name="utf8mb3_czech_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="174" parent="1" name="utf8mb3_danish_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="175" parent="1" name="utf8mb3_esperanto_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="176" parent="1" name="utf8mb3_estonian_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="177" parent="1" name="utf8mb3_general_ci">
+-      <Charset>utf8mb3</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="178" parent="1" name="utf8mb3_general_mysql500_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="179" parent="1" name="utf8mb3_german2_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="180" parent="1" name="utf8mb3_hungarian_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="181" parent="1" name="utf8mb3_icelandic_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="182" parent="1" name="utf8mb3_latvian_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="183" parent="1" name="utf8mb3_lithuanian_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="184" parent="1" name="utf8mb3_persian_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="185" parent="1" name="utf8mb3_polish_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="186" parent="1" name="utf8mb3_roman_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="187" parent="1" name="utf8mb3_romanian_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="188" parent="1" name="utf8mb3_sinhala_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="189" parent="1" name="utf8mb3_slovak_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="190" parent="1" name="utf8mb3_slovenian_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="191" parent="1" name="utf8mb3_spanish2_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="192" parent="1" name="utf8mb3_spanish_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="193" parent="1" name="utf8mb3_swedish_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="194" parent="1" name="utf8mb3_tolower_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="195" parent="1" name="utf8mb3_turkish_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="196" parent="1" name="utf8mb3_unicode_520_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="197" parent="1" name="utf8mb3_unicode_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="198" parent="1" name="utf8mb3_vietnamese_ci">
+-      <Charset>utf8mb3</Charset>
+-    </collation>
+-    <collation id="199" parent="1" name="utf8mb4_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="200" parent="1" name="utf8mb4_0900_as_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="201" parent="1" name="utf8mb4_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="202" parent="1" name="utf8mb4_0900_bin">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="203" parent="1" name="utf8mb4_bg_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="204" parent="1" name="utf8mb4_bg_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="205" parent="1" name="utf8mb4_bin">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="206" parent="1" name="utf8mb4_bs_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="207" parent="1" name="utf8mb4_bs_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="208" parent="1" name="utf8mb4_croatian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="209" parent="1" name="utf8mb4_cs_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="210" parent="1" name="utf8mb4_cs_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="211" parent="1" name="utf8mb4_czech_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="212" parent="1" name="utf8mb4_da_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="213" parent="1" name="utf8mb4_da_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="214" parent="1" name="utf8mb4_danish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="215" parent="1" name="utf8mb4_de_pb_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="216" parent="1" name="utf8mb4_de_pb_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="217" parent="1" name="utf8mb4_eo_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="218" parent="1" name="utf8mb4_eo_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="219" parent="1" name="utf8mb4_es_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="220" parent="1" name="utf8mb4_es_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="221" parent="1" name="utf8mb4_es_trad_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="222" parent="1" name="utf8mb4_es_trad_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="223" parent="1" name="utf8mb4_esperanto_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="224" parent="1" name="utf8mb4_estonian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="225" parent="1" name="utf8mb4_et_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="226" parent="1" name="utf8mb4_et_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="227" parent="1" name="utf8mb4_general_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="228" parent="1" name="utf8mb4_german2_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="229" parent="1" name="utf8mb4_gl_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="230" parent="1" name="utf8mb4_gl_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="231" parent="1" name="utf8mb4_hr_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="232" parent="1" name="utf8mb4_hr_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="233" parent="1" name="utf8mb4_hu_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="234" parent="1" name="utf8mb4_hu_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="235" parent="1" name="utf8mb4_hungarian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="236" parent="1" name="utf8mb4_icelandic_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="237" parent="1" name="utf8mb4_is_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="238" parent="1" name="utf8mb4_is_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="239" parent="1" name="utf8mb4_ja_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="240" parent="1" name="utf8mb4_ja_0900_as_cs_ks">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="241" parent="1" name="utf8mb4_la_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="242" parent="1" name="utf8mb4_la_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="243" parent="1" name="utf8mb4_latvian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="244" parent="1" name="utf8mb4_lithuanian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="245" parent="1" name="utf8mb4_lt_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="246" parent="1" name="utf8mb4_lt_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="247" parent="1" name="utf8mb4_lv_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="248" parent="1" name="utf8mb4_lv_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="249" parent="1" name="utf8mb4_mn_cyrl_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="250" parent="1" name="utf8mb4_mn_cyrl_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="251" parent="1" name="utf8mb4_nb_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="252" parent="1" name="utf8mb4_nb_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="253" parent="1" name="utf8mb4_nn_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="254" parent="1" name="utf8mb4_nn_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="255" parent="1" name="utf8mb4_persian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="256" parent="1" name="utf8mb4_pl_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="257" parent="1" name="utf8mb4_pl_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="258" parent="1" name="utf8mb4_polish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="259" parent="1" name="utf8mb4_ro_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="260" parent="1" name="utf8mb4_ro_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="261" parent="1" name="utf8mb4_roman_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="262" parent="1" name="utf8mb4_romanian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="263" parent="1" name="utf8mb4_ru_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="264" parent="1" name="utf8mb4_ru_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="265" parent="1" name="utf8mb4_sinhala_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="266" parent="1" name="utf8mb4_sk_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="267" parent="1" name="utf8mb4_sk_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="268" parent="1" name="utf8mb4_sl_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="269" parent="1" name="utf8mb4_sl_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="270" parent="1" name="utf8mb4_slovak_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="271" parent="1" name="utf8mb4_slovenian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="272" parent="1" name="utf8mb4_spanish2_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="273" parent="1" name="utf8mb4_spanish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="274" parent="1" name="utf8mb4_sr_latn_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="275" parent="1" name="utf8mb4_sr_latn_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="276" parent="1" name="utf8mb4_sv_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="277" parent="1" name="utf8mb4_sv_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="278" parent="1" name="utf8mb4_swedish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="279" parent="1" name="utf8mb4_tr_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="280" parent="1" name="utf8mb4_tr_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="281" parent="1" name="utf8mb4_turkish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="282" parent="1" name="utf8mb4_unicode_520_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="283" parent="1" name="utf8mb4_unicode_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="284" parent="1" name="utf8mb4_vi_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="285" parent="1" name="utf8mb4_vi_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="286" parent="1" name="utf8mb4_vietnamese_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="287" parent="1" name="utf8mb4_zh_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <schema id="288" parent="1" name="information_schema">
+-      <CollationName>utf8mb3_general_ci</CollationName>
+-    </schema>
+-    <schema id="289" parent="1" name="performance_schema">
+-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+-    </schema>
+-    <schema id="290" parent="1" name="real_estate_db">
+-      <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
+-      <Current>1</Current>
+-      <LastIntrospectionLevel>3</LastIntrospectionLevel>
+-      <LastIntrospectionLocalTimestamp>2025-06-07.16:26:25</LastIntrospectionLocalTimestamp>
+-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+-    </schema>
+-    <user id="291" parent="1" name="real_estate_user">
+-      <Host>localhost</Host>
+-    </user>
+-    <table id="292" parent="290" name="roles">
+-      <DetailsLevel>3</DetailsLevel>
+-      <Engine>InnoDB</Engine>
+-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+-    </table>
+-    <table id="293" parent="290" name="user_roles">
+-      <DetailsLevel>3</DetailsLevel>
+-      <Engine>InnoDB</Engine>
+-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+-    </table>
+-    <table id="294" parent="290" name="users">
+-      <DetailsLevel>3</DetailsLevel>
+-      <Engine>InnoDB</Engine>
+-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+-    </table>
+-    <column id="295" parent="292" name="id">
+-      <AutoIncrement>1</AutoIncrement>
+-      <NotNull>1</NotNull>
+-      <Position>1</Position>
+-      <StoredType>bigint|0s</StoredType>
+-    </column>
+-    <column id="296" parent="292" name="name">
+-      <NotNull>1</NotNull>
+-      <Position>2</Position>
+-      <StoredType>varchar(255)|0s</StoredType>
+-    </column>
+-    <index id="297" parent="292" name="PRIMARY">
+-      <ColNames>id</ColNames>
+-      <Type>btree</Type>
+-      <Unique>1</Unique>
+-    </index>
+-    <index id="298" parent="292" name="UKofx66keruapi6vyqpv6f2or37">
+-      <ColNames>name</ColNames>
+-      <Type>btree</Type>
+-      <Unique>1</Unique>
+-    </index>
+-    <key id="299" parent="292" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <Primary>1</Primary>
+-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+-    </key>
+-    <key id="300" parent="292" name="UKofx66keruapi6vyqpv6f2or37">
+-      <UnderlyingIndexName>UKofx66keruapi6vyqpv6f2or37</UnderlyingIndexName>
+-    </key>
+-    <column id="301" parent="293" name="user_id">
+-      <NotNull>1</NotNull>
+-      <Position>1</Position>
+-      <StoredType>bigint|0s</StoredType>
+-    </column>
+-    <column id="302" parent="293" name="role_id">
+-      <NotNull>1</NotNull>
+-      <Position>2</Position>
+-      <StoredType>bigint|0s</StoredType>
+-    </column>
+-    <foreign-key id="303" parent="293" name="FKhfh9dx7w3ubf1co1vdev94g3f">
+-      <ColNames>user_id</ColNames>
+-      <RefColNames>id</RefColNames>
+-      <RefTableName>users</RefTableName>
+-    </foreign-key>
+-    <foreign-key id="304" parent="293" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
+-      <ColNames>role_id</ColNames>
+-      <RefColNames>id</RefColNames>
+-      <RefTableName>roles</RefTableName>
+-    </foreign-key>
+-    <index id="305" parent="293" name="PRIMARY">
+-      <ColNames>user_id
+-role_id</ColNames>
+-      <Type>btree</Type>
+-      <Unique>1</Unique>
+-    </index>
+-    <index id="306" parent="293" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
+-      <ColNames>role_id</ColNames>
+-      <Type>btree</Type>
+-    </index>
+-    <key id="307" parent="293" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <Primary>1</Primary>
+-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+-    </key>
+-    <column id="308" parent="294" name="id">
+-      <AutoIncrement>5</AutoIncrement>
+-      <NotNull>1</NotNull>
+-      <Position>1</Position>
+-      <StoredType>bigint|0s</StoredType>
+-    </column>
+-    <column id="309" parent="294" name="created_at">
+-      <Position>2</Position>
+-      <StoredType>datetime(6)|0s</StoredType>
+-    </column>
+-    <column id="310" parent="294" name="email">
+-      <NotNull>1</NotNull>
+-      <Position>3</Position>
+-      <StoredType>varchar(255)|0s</StoredType>
+-    </column>
+-    <column id="311" parent="294" name="first_name">
+-      <Position>4</Position>
+-      <StoredType>varchar(255)|0s</StoredType>
+-    </column>
+-    <column id="312" parent="294" name="last_name">
+-      <Position>5</Position>
+-      <StoredType>varchar(255)|0s</StoredType>
+-    </column>
+-    <column id="313" parent="294" name="password">
+-      <NotNull>1</NotNull>
+-      <Position>6</Position>
+-      <StoredType>varchar(255)|0s</StoredType>
+-    </column>
+-    <column id="314" parent="294" name="role">
+-      <NotNull>1</NotNull>
+-      <Position>7</Position>
+-      <StoredType>enum(&apos;ADMIN&apos;, &apos;AGENT&apos;, &apos;BUYER&apos;)|0e</StoredType>
+-    </column>
+-    <index id="315" parent="294" name="PRIMARY">
+-      <ColNames>id</ColNames>
+-      <Type>btree</Type>
+-      <Unique>1</Unique>
+-    </index>
+-    <index id="316" parent="294" name="UK6dotkott2kjsp8vw4d0m25fb7">
+-      <ColNames>email</ColNames>
+-      <Type>btree</Type>
+-      <Unique>1</Unique>
+-    </index>
+-    <key id="317" parent="294" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <Primary>1</Primary>
+-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+-    </key>
+-    <key id="318" parent="294" name="UK6dotkott2kjsp8vw4d0m25fb7">
+-      <UnderlyingIndexName>UK6dotkott2kjsp8vw4d0m25fb7</UnderlyingIndexName>
+-    </key>
+-  </database-model>
+-</dataSource>
+\ No newline at end of file
+Index: .idea/dataSources.local.xml
+===================================================================
+diff --git a/.idea/dataSources.local.xml b/.idea/dataSources.local.xml
+deleted file mode 100644
+--- a/.idea/dataSources.local.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,20 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="dataSourceStorageLocal" created-in="IU-251.25410.129">
+-    <data-source name="real_estate_db@localhost" uuid="4caf7646-5eb9-4ae4-92b0-222e9921e42c">
+-      <database-info product="MySQL" version="9.3.0" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="9.3.0" exact-driver-version="8.2">
+-        <extra-name-characters>#@</extra-name-characters>
+-        <identifier-quote-string>`</identifier-quote-string>
+-        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
+-      </database-info>
+-      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+-      <user-name>real_estate_user</user-name>
+-      <schema-mapping>
+-        <introspection-scope>
+-          <node kind="schema" qname="@" />
+-        </introspection-scope>
+-      </schema-mapping>
+-      <load-sources>user_and_system_sources</load-sources>
+-    </data-source>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]" date="1749254286171" recycled="false" toDelete="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 6/6/25, 6:58 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]1/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]1/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]1/shelved.patch	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,104 +0,0 @@
+-Index: realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package edu.kansal_wells_xu_pina.realestate_api.controllers;\n\nimport edu.kansal_wells_xu_pina.realestate_api.entities.Property;\nimport edu.kansal_wells_xu_pina.realestate_api.entities.User;\nimport edu.kansal_wells_xu_pina.realestate_api.services.AgentService;\nimport edu.kansal_wells_xu_pina.realestate_api.services.UserService;\nimport org.springframework.security.access.prepost.PreAuthorize;\nimport org.springframework.stereotype.Controller;\nimport org.springframework.ui.Model;\nimport org.springframework.web.bind.annotation.*;\n\nimport java.util.List;\n\n@Controller\n@RequestMapping(\"/agent\")\npublic class AgentController {\n\n    private final AgentService agentService;\n    private final UserService userService;\n\n    public AgentController(AgentService agentService, UserService userService) {this.agentService = agentService;\n        this.userService = userService;\n    }\n\n   /* @PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping({\"/dashboard\", \"/\"})\n    public String agentDashboard() {\n        return \"common-dashboard\";\n    }\n\n    */\n\n    /* Redundant profile endpoints - now using common profile management\n    @PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping(\"/{id}/myprofile\")\n    public String myAgentProfile(@PathVariable Long id, Model model) {\n        model.addAttribute(\"agent\", agentService.getAgentById(id));\n        return \"agentprofile\";\n    }\n\n    @PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping(\"/{id}/editprofile\")\n    public String editAgentProfile(@PathVariable(required = false) Long id, Model model) {\n        if (id != null && id > 0) {\n            model.addAttribute(\"agent\", agentService.getAgentDtoById(id));\n        } else {\n            model.addAttribute(\"agent\", new UpdateProfileRequest());\n        }\n        return \"editagentprofile\";\n    }\n    */\n\n    @PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping(\"/managelistings\")\n    public String manageListings(Model model) {\n        User currentUser = userService.getCurrentUser();\n        List<Property> properties = agentService.getAgentProperties(currentUser.getId());\n        model.addAttribute(\"properties\", properties);\n        return \"agent/managelistings\";\n    }\n\n    // TO-DO: template for agentaddproperty.html and addProperty method to handle the form submission\n    //@PreAuthorize(\"hasRole('AGENT')\")\n    @GetMapping(\"/{id}/addproperty\")\n    public String addPropertyForm(@PathVariable Long id, Model model) {\n        model.addAttribute(\"property\", new Property());\n        return \"temp\";\n    }\n\n   // @PreAuthorize(\"hasRole('AGENT')\")\n    @PostMapping(\"/{id}/addproperty\")\n    public String addNewProperty(@PathVariable Long id, @ModelAttribute Property newProperty, Model model) {\n        agentService.addNewProperty(newProperty);\n        model.addAttribute(\"property\", newProperty);\n        return \"redirect:/agent/\" + id + \"/managelistings\";\n    }\n\n\n    // TO-DO: template for editproperty.html and editProperty and saveProperty method to handle the form submission\n    @PreAuthorize(\"hasRole('AGENT')\")\n    @PostMapping(\"/editproperty/{id}\")\n    public String editProperty(@ModelAttribute Property property, Model model) {\n        return \"temp\";\n    }\n\n\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java
+---- a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java	(revision e50b75da75f4ba0cc74c4eda9030513e75ef7146)
+-+++ b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java	(date 1749186731777)
+-@@ -55,16 +55,17 @@
+-     public String manageListings(Model model) {
+-         User currentUser = userService.getCurrentUser();
+-         List<Property> properties = agentService.getAgentProperties(currentUser.getId());
+-+        model.addAttribute("agent", currentUser.getFirstName() + " " + currentUser.getLastName());
+-         model.addAttribute("properties", properties);
+-         return "agent/managelistings";
+-     }
+- 
+-     // TO-DO: template for agentaddproperty.html and addProperty method to handle the form submission
+-     //@PreAuthorize("hasRole('AGENT')")
+--    @GetMapping("/{id}/addproperty")
+--    public String addPropertyForm(@PathVariable Long id, Model model) {
+-+    @GetMapping("/addproperty")
+-+    public String addPropertyForm(Model model) {
+-         model.addAttribute("property", new Property());
+--        return "temp";
+-+        return "agent/addproperty";
+-     }
+- 
+-    // @PreAuthorize("hasRole('AGENT')")
+-Index: realestate_api/src/main/resources/templates/agent/managelistings.html
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Manage Your Properties</title>\n    <!-- The below line loads in styling elements from the CSS file -->\n    <!-- The @{} syntax is used to resolve the URL of the CSS file -->\n    <!-- Comment it out to see the content without styling -->\n    <link th:href=\"@{/css/styles.css}\" rel=\"stylesheet\"/>\n</head>\n<body>\n<table>\n    <thead>\n        <tr>\n            <th>Number</th>\n            <th>Title</th>\n            <th>Price</th>\n            <th>Location</th>\n            <th>Size</th>\n            <th>Images</th>\n            <!--th>Favorites</th-->\n            <th>Action</th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <!-- The below line iterates over the properties list -->\n        <!-- The below is similar to \"for each 'property' in the 'properties' -->\n        <tr th:each=\"property, propStat : ${properties}\">\n            <td th:text=\"${propStat.count}\"></td> <!-- Good for counting, starts at 1 -->\n            <td th:text=\"${property.title}\">Property Title</td>\n            <td th:text=\"${'$' + #numbers.formatDecimal(property.price, 1, 'COMMA', 2, 'POINT')}\">$0.00</td>\n            <td th:text=\"${property.location}\">Location</td>\n            <td th:text=\"${property.size + ' sq ft'}\">0 sq ft</td>\n            <td>\n                <!-- Display the first image if available -->\n                <img th:if=\"${!property.images.empty}\"\n                     th:src=\"@{/images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}\"\n                     alt=\"Property Image\" width=\"100\">\n                <!-- If no images, show a placeholder -->\n                <span th:unless=\"${!property.images.empty}\">No Image</span>\n            <td th:text=\"${property.description}\">Short description...</td>\n            <td>\n                <!-- Link to edit the property -->\n                <a th:href=\"@{/agent/manage-listings/edit/{id}(id=${property.id})}\" class=\"button-link\">Edit</a>\n                <!-- Link to delete the property -->\n                <a th:href=\"@{/agent/manage-listings/delete/{id}(id=${property.id})}\" class=\"button-link red\">Delete</a>\n            </td>\n        </tr>\n    </tbody>\n    </thead>\n</table>\n\n</body>\n</html>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/realestate_api/src/main/resources/templates/agent/managelistings.html b/realestate_api/src/main/resources/templates/agent/managelistings.html
+---- a/realestate_api/src/main/resources/templates/agent/managelistings.html	(revision e50b75da75f4ba0cc74c4eda9030513e75ef7146)
+-+++ b/realestate_api/src/main/resources/templates/agent/managelistings.html	(date 1749186376235)
+-@@ -6,9 +6,16 @@
+-     <!-- The below line loads in styling elements from the CSS file -->
+-     <!-- The @{} syntax is used to resolve the URL of the CSS file -->
+-     <!-- Comment it out to see the content without styling -->
+--    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+-+    <!--link th:href="@{/css/styles.css}" rel="stylesheet"/-->
+- </head>
+- <body>
+-+<h1 style="text-align: center; margin-top: 20px;" th:text="'Welcome, ' + ${agent} + '!'">Welcome!</h1>
+-+<br>
+-+
+-+<div style="text-align: right; margin 20px;">
+-+    <a th:href="@{/landing-page/dashboard}" class="button">Back to Dashboard</a>
+-+</div>
+-+<br>
+- <table>
+-     <thead>
+-         <tr>
+-@@ -39,7 +46,7 @@
+-                      alt="Property Image" width="100">
+-                 <!-- If no images, show a placeholder -->
+-                 <span th:unless="${!property.images.empty}">No Image</span>
+--            <td th:text="${property.description}">Short description...</td>
+-+            <!--td th:text="${property.description}">Short description...</td-->
+-             <td>
+-                 <!-- Link to edit the property -->
+-                 <a th:href="@{/agent/manage-listings/edit/{id}(id=${property.id})}" class="button-link">Edit</a>
+-@@ -50,6 +57,5 @@
+-     </tbody>
+-     </thead>
+- </table>
+--
+- </body>
+- </html>
+-\ No newline at end of file
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"92bc20eb-994d-48de-ad8c-b665ab69c9aa\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/resources/application.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/resources/application.properties\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Exception\" />\n        <option value=\"Class\" />\n        <option value=\"Interface\" />\n        <option value=\"HTML File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;gregrw&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/pragyakansal/SE_352-452_Final_Project.git&quot;,\n    &quot;accountId&quot;: &quot;c4966e2a-516d-4a00-9d0c-6d9330381ce4&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 5\n}</component>\n  <component name=\"ProjectId\" id=\"2xbmjp0ICpu6WoYKKUVhGMrr05q\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"DefaultHtmlFileTemplate\": \"HTML File\",\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\n    \"RequestMappingsPanelOrder0\": \"0\",\n    \"RequestMappingsPanelOrder1\": \"1\",\n    \"RequestMappingsPanelWidth0\": \"75\",\n    \"RequestMappingsPanelWidth1\": \"75\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"RunOnceActivity.git.unshallow\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"Spring Boot.RealestateApiApplication.executor\": \"Run\",\n    \"git-widget-placeholder\": \"GregWork\",\n    \"junie.onboarding.icon.badge.shown\": \"true\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"settings.editor.selected.configurable\": \"preferences.lookFeel\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"RealestateApiApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\n      <module name=\"realestate_api\" />\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"edu.kansal_wells_xu_pina.realestate_api.RealestateApiApplication\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129\" />\n        <option value=\"bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"92bc20eb-994d-48de-ad8c-b665ab69c9aa\" name=\"Changes\" comment=\"\" />\n      <created>1748215284789</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1748215284789</updated>\n      <workItem from=\"1748215285915\" duration=\"925000\" />\n      <workItem from=\"1748226455720\" duration=\"4492000\" />\n      <workItem from=\"1748291373404\" duration=\"18594000\" />\n      <workItem from=\"1748796342768\" duration=\"7730000\" />\n      <workItem from=\"1748830956527\" duration=\"1313000\" />\n      <workItem from=\"1748930921023\" duration=\"1675000\" />\n      <workItem from=\"1749011604621\" duration=\"14371000\" />\n      <workItem from=\"1749086520929\" duration=\"33980000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\n                <map>\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\n                </map>\n              </option>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"origin/GregWork\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision e50b75da75f4ba0cc74c4eda9030513e75ef7146)
+-+++ b/.idea/workspace.xml	(date 1749186321564)
+-@@ -7,7 +7,7 @@
+-     <list default="true" id="92bc20eb-994d-48de-ad8c-b665ab69c9aa" name="Changes" comment="">
+-       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/application.properties" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/managelistings.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/managelistings.html" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/common-dashboard.html" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-@@ -112,7 +112,7 @@
+-       <workItem from="1748830956527" duration="1313000" />
+-       <workItem from="1748930921023" duration="1675000" />
+-       <workItem from="1749011604621" duration="14371000" />
+--      <workItem from="1749086520929" duration="33980000" />
+-+      <workItem from="1749086520929" duration="38438000" />
+-     </task>
+-     <servers />
+-   </component>
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_6_4_25__2_32AM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25__2_32AM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25__2_32AM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25__2_32AM__Changes_.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_6_4_25,_2_32 AM_[Changes]" date="1749022321053" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25,_2_32 AM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 6/4/25, 2:32 AM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_1.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_1.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_1.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]1" date="1749254541258" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 6/6/25, 6:58 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/dataSources.xml
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+deleted file mode 100644
+--- a/.idea/dataSources.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ /dev/null	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
+@@ -1,19 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+-    <data-source source="LOCAL" name="real_estate_db@localhost" uuid="4caf7646-5eb9-4ae4-92b0-222e9921e42c">
+-      <driver-ref>mysql.8</driver-ref>
+-      <synchronize>true</synchronize>
+-      <imported>true</imported>
+-      <remarks>$PROJECT_DIR$/realestate_api/src/main/resources/application.properties</remarks>
+-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+-      <jdbc-url>jdbc:mysql://localhost:3306/real_estate_db</jdbc-url>
+-      <jdbc-additional-properties>
+-        <property name="com.intellij.clouds.kubernetes.db.host.port" />
+-        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+-        <property name="com.intellij.clouds.kubernetes.db.container.port" />
+-      </jdbc-additional-properties>
+-      <working-dir>$ProjectFileDir$</working-dir>
+-    </data-source>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/Project_Workspace.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/Project_Workspace.iml b/.idea/Project_Workspace.iml
+new file mode 100644
+--- /dev/null	(date 1749334388256)
++++ b/.idea/Project_Workspace.iml	(date 1749334388256)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1749334388257)
++++ b/.idea/modules.xml	(date 1749334388257)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/Project_Workspace.iml" filepath="$PROJECT_DIR$/.idea/Project_Workspace.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.kansal_wells_xu_pina.realestate_api.services;\n\nimport edu.kansal_wells_xu_pina.realestate_api.entities.Property;\nimport edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;\nimport edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;\nimport edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageRepository;\nimport edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;\nimport edu.kansal_wells_xu_pina.realestate_api.repositories.UserRepository;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.stereotype.Service;\nimport org.springframework.web.multipart.MultipartFile;\n\nimport java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.nio.file.Paths;\nimport java.util.ArrayList;\nimport java.util.List;\nimport java.util.UUID;\n\n@Service\npublic class PropertyImageServiceImpl implements PropertyImageService {\n\n    private static final Logger log = LoggerFactory.getLogger(PropertyImageServiceImpl.class);\n\n    private final PropertyRepository propertyRepository;\n    private final PropertyImageRepository propertyImageRepository;\n    private final Path baseImagePath;\n\n\n    @Autowired\n    public PropertyImageServiceImpl(PropertyRepository propertyRepository, PropertyImageRepository propertyImageRepository) {\n        this.propertyRepository = propertyRepository;\n        this.propertyImageRepository = propertyImageRepository;\n        this.baseImagePath = Paths.get(System.getProperty(\"user.dir\"), \"src/main/resources/static/images/property_images\");\n    }\n\n    @Value(\"${upload.dir}\")\n    private String uploadDir;\n\n    @Override\n    public String saveImage(MultipartFile file) throws IOException {\n        if (file.isEmpty()) {\n            throw new IOException(\"Failed to store empty file.\");\n        }\n\n        String projectRoot = System.getProperty(\"user.dir\");\n        Path uploadPath = Paths.get(projectRoot, uploadDir);\n\n        if (!Files.exists(uploadPath)) {\n            Files.createDirectories(uploadPath);\n        }\n\n        Path filePath = uploadPath.resolve(file.getOriginalFilename());\n        file.transferTo(filePath.toFile());\n\n        return \"/uploads/\" + file.getOriginalFilename();\n\n    }\n\n\n    @Override\n    public String storePropertyImage(Long propertyId, MultipartFile file) {\n        try {\n\n            Property property = propertyRepository.findById(propertyId).orElseThrow(()\n                    -> new NotFoundException(\"Property not found\"));\n            String safeTitle = property.getTitle().replaceAll(\"[^a-zA-Z0-9]\", \"_\");\n\n            Path propertyFolder = baseImagePath.resolve(safeTitle);\n\n            log.info(\"Saving image to folder: {}\", propertyFolder.toAbsolutePath());\n            Files.createDirectories(propertyFolder);\n\n            String imageFileName = UUID.randomUUID() + \"_\" + file.getOriginalFilename();\n            Path filePath = propertyFolder.resolve(imageFileName);\n\n            log.info(\"Saving image file: {}\", filePath.toAbsolutePath());\n            file.transferTo(filePath.toFile());\n\n            // Save the image metadata in the database\n            PropertyImage propertyImage = new PropertyImage();\n            propertyImage.setImageFileName(imageFileName);\n            propertyImage.setProperty(property);\n            propertyImageRepository.save(propertyImage);\n\n            // Save the image file name and associate it with the property\n            property.addImage(propertyImage);\n            propertyRepository.save(property);\n\n            log.info(\"Successfully saved image: {}\", imageFileName);\n            return imageFileName;\n        } catch (IOException e) {\n            log.error(\"Error storing property image: {}\", e.getMessage(), e);\n            throw new RuntimeException(\"Failed to store property image\", e);\n        }\n    }\n\n    @Override\n    public List<String> storeMultiplePropertyImages(Long propertyId, List<MultipartFile> images) {\n        List<String> uploadedFileNames = new ArrayList<>();\n        for (MultipartFile file : images) {\n            String fileName = storePropertyImage(propertyId, file);\n            uploadedFileNames.add(fileName);\n        }\n        return uploadedFileNames;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java
+--- a/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ b/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java	(date 1749333381145)
+@@ -12,6 +12,7 @@
+ import org.springframework.beans.factory.annotation.Value;
+ import org.springframework.stereotype.Service;
+ import org.springframework.web.multipart.MultipartFile;
++import org.springframework.beans.factory.annotation.Autowired;
+ 
+ import java.io.IOException;
+ import java.nio.file.Files;
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"VcsDirectoryMappings\">\n    <mapping directory=\"\" vcs=\"Git\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ b/.idea/vcs.xml	(date 1749334388259)
+@@ -2,5 +2,6 @@
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+     <mapping directory="" vcs="Git" />
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/realestate_api/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" default=\"true\" project-jdk-name=\"homebrew-21\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ b/.idea/misc.xml	(date 1749334429002)
+@@ -8,7 +8,7 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="homebrew-21" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_22_PREVIEW" project-jdk-name="homebrew-21" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"92bc20eb-994d-48de-ad8c-b665ab69c9aa\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/config/WebConfig.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/config/WebConfig.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/resources/application.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/resources/application.properties\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/addproperty.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/addproperty.html\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Exception\" />\n        <option value=\"Interface\" />\n        <option value=\"Class\" />\n        <option value=\"HTML File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;gregrw&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/pragyakansal/SE_352-452_Final_Project.git&quot;,\n    &quot;accountId&quot;: &quot;c4966e2a-516d-4a00-9d0c-6d9330381ce4&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 5\n}</component>\n  <component name=\"ProjectId\" id=\"2xbmjp0ICpu6WoYKKUVhGMrr05q\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,\n    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,\n    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,\n    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,\n    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,\n    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;Spring Boot.RealestateApiApplication.executor&quot;: &quot;Run&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;GregWork&quot;,\n    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"RealestateApiApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\n      <module name=\"realestate_api\" />\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"edu.kansal_wells_xu_pina.realestate_api.RealestateApiApplication\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129\" />\n        <option value=\"bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"92bc20eb-994d-48de-ad8c-b665ab69c9aa\" name=\"Changes\" comment=\"\" />\n      <created>1748215284789</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1748215284789</updated>\n      <workItem from=\"1748215285915\" duration=\"925000\" />\n      <workItem from=\"1748226455720\" duration=\"4492000\" />\n      <workItem from=\"1748291373404\" duration=\"18594000\" />\n      <workItem from=\"1748796342768\" duration=\"7730000\" />\n      <workItem from=\"1748830956527\" duration=\"1313000\" />\n      <workItem from=\"1748930921023\" duration=\"1675000\" />\n      <workItem from=\"1749011604621\" duration=\"14371000\" />\n      <workItem from=\"1749086520929\" duration=\"70044000\" />\n      <workItem from=\"1749313546706\" duration=\"8869000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\n                <map>\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\n                </map>\n              </option>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"origin/GregWork\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 15f047f9dabcca505d69513426a9ef844ea79bc0)
++++ b/.idea/workspace.xml	(date 1749336587907)
+@@ -4,84 +4,81 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="92bc20eb-994d-48de-ad8c-b665ab69c9aa" name="Changes" comment="">
++    <list default="true" id="8b2b2074-5a44-4406-91ff-f3e8e6c55a1a" name="Changes" comment="">
++      <change afterPath="$PROJECT_DIR$/.idea/Project_Workspace.iml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25,_1_16 AM_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25__1_16AM__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25,_2_32 AM_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25__2_32AM__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]1/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_1.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/config/WebConfig.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/application.properties" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/addproperty.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/addproperty.html" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+-  </component>
+-  <component name="FileTemplateManagerImpl">
+-    <option name="RECENT_TEMPLATES">
+-      <list>
+-        <option value="Exception" />
+-        <option value="Interface" />
+-        <option value="Class" />
+-        <option value="HTML File" />
+-      </list>
+-    </option>
+   </component>
+   <component name="Git.Settings">
+-    <option name="RECENT_BRANCH_BY_REPOSITORY">
+-      <map>
+-        <entry key="$PROJECT_DIR$" value="main" />
+-      </map>
+-    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="GitHubPullRequestSearchHistory">{
+-  &quot;lastFilter&quot;: {
+-    &quot;state&quot;: &quot;OPEN&quot;,
+-    &quot;assignee&quot;: &quot;gregrw&quot;
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN",
++    "assignee": "gregrw"
+   }
+-}</component>
+-  <component name="GithubPullRequestsUISettings">{
+-  &quot;selectedUrlAndAccountId&quot;: {
+-    &quot;url&quot;: &quot;https://github.com/pragyakansal/SE_352-452_Final_Project.git&quot;,
+-    &quot;accountId&quot;: &quot;c4966e2a-516d-4a00-9d0c-6d9330381ce4&quot;
++}]]></component>
++  <component name="GithubPullRequestsUISettings"><![CDATA[{
++  "selectedUrlAndAccountId": {
++    "url": "https://github.com/pragyakansal/SE_352-452_Final_Project.git",
++    "accountId": "c4966e2a-516d-4a00-9d0c-6d9330381ce4"
+   }
+-}</component>
+-  <component name="ProjectColorInfo">{
+-  &quot;associatedIndex&quot;: 5
+-}</component>
+-  <component name="ProjectId" id="2xbmjp0ICpu6WoYKKUVhGMrr05q" />
++}]]></component>
++  <component name="ProjectColorInfo"><![CDATA[{
++  "customColor": "",
++  "associatedIndex": 5
++}]]></component>
++  <component name="ProjectId" id="2yCMvSqzEApG4ICozExMNTn78ut" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;Spring Boot.RealestateApiApplication.executor&quot;: &quot;Run&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;GregWork&quot;,
+-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "ModuleVcsDetector.initialDetectionPerformed": "true",
++    "RequestMappingsPanelOrder0": "0",
++    "RequestMappingsPanelOrder1": "1",
++    "RequestMappingsPanelWidth0": "75",
++    "RequestMappingsPanelWidth1": "75",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "RunOnceActivity.git.unshallow": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "Spring Boot.RealestateApiApplication.executor": "Run",
++    "git-widget-placeholder": "GregWork",
++    "junie.onboarding.icon.badge.shown": "true",
++    "last_opened_file_path": "/Users/gregorywells/Library/Mobile Documents/com~apple~CloudDocs/Grad school/Spring 2025/SE 452 - Object-Oriented Enterprise Computing/Final_Project/Project_Workspace",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "Project",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.2",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
+-  <component name="RecentsManager">
+-    <key name="MoveFile.RECENT_KEYS">
+-      <recent name="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent" />
+-    </key>
+-  </component>
++}]]></component>
+   <component name="RunManager">
+     <configuration name="RealestateApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+       <module name="realestate_api" />
+@@ -101,52 +98,16 @@
+   </component>
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+-      <changelist id="92bc20eb-994d-48de-ad8c-b665ab69c9aa" name="Changes" comment="" />
+-      <created>1748215284789</created>
++      <changelist id="8b2b2074-5a44-4406-91ff-f3e8e6c55a1a" name="Changes" comment="" />
++      <created>1749334331781</created>
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+-      <updated>1748215284789</updated>
+-      <workItem from="1748215285915" duration="925000" />
+-      <workItem from="1748226455720" duration="4492000" />
+-      <workItem from="1748291373404" duration="18594000" />
+-      <workItem from="1748796342768" duration="7730000" />
+-      <workItem from="1748830956527" duration="1313000" />
+-      <workItem from="1748930921023" duration="1675000" />
+-      <workItem from="1749011604621" duration="14371000" />
+-      <workItem from="1749086520929" duration="70044000" />
+-      <workItem from="1749313546706" duration="8869000" />
++      <updated>1749334331781</updated>
++      <workItem from="1749334332990" duration="1907000" />
+     </task>
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
+-  <component name="Vcs.Log.Tabs.Properties">
+-    <option name="TAB_STATES">
+-      <map>
+-        <entry key="MAIN">
+-          <value>
+-            <State>
+-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+-                <map>
+-                  <entry key="Show.Git.Branches" value="true" />
+-                </map>
+-              </option>
+-              <option name="FILTERS">
+-                <map>
+-                  <entry key="branch">
+-                    <value>
+-                      <list>
+-                        <option value="origin/GregWork" />
+-                      </list>
+-                    </value>
+-                  </entry>
+-                </map>
+-              </option>
+-            </State>
+-          </value>
+-        </entry>
+-      </map>
+-    </option>
+-  </component>
+ </project>
+\ No newline at end of file

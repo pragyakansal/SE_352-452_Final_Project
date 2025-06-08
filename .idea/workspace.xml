@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4840c5a3-b6bf-4e76-a500-2325759bc6d4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Project_Workspace.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4caf7646-5eb9-4ae4-92b0-222e9921e42c/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25,_1_16 AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_3_25__1_16AM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25,_2_32 AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_4_25__2_32AM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25,_6_58 PM_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_6_25__6_58PM__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/entities/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/entities/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/repositories/PropertyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/repositories/PropertyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/editproperty.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/editproperty.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/managelistings.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/managelistings.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "gregrw"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/pragyakansal/SE_352-452_Final_Project.git",
+    "accountId": "c4966e2a-516d-4a00-9d0c-6d9330381ce4"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2yCS9UsdRIpMsrYvr7XK4ue5rhz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.RealestateApiApplication.executor": "Run",
+    "git-widget-placeholder": "GregWork",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="RealestateApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="realestate_api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.kansal_wells_xu_pina.realestate_api.RealestateApiApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.kansal_wells_xu_pina.realestate_api.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.RealestateApiApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4840c5a3-b6bf-4e76-a500-2325759bc6d4" name="Changes" comment="" />
+      <created>1749336912050</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749336912050</updated>
+      <workItem from="1749336913623" duration="7201000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
