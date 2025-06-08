@@ -18,12 +18,10 @@ import org.slf4j.LoggerFactory;
 public class UserServiceImpl implements UserService {
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
-//    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-//        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -31,7 +29,6 @@ public class UserServiceImpl implements UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepository.findByEmail(username);
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
         return new CurrentUserContext(user, auth);
     }
 
@@ -47,7 +44,6 @@ public class UserServiceImpl implements UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         return userRepository.findByEmail(username);
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
 
     @Override

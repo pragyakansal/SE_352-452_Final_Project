@@ -64,17 +64,11 @@ public class SecurityConfig {
                 )
                 .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint(new CustomAuthenticationEntryPoint())  // Handles 401 errors
+                        .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                         .accessDeniedHandler(new CustomAccessDeniedHandler())
                 );
 
-        //return http.build();
         DefaultSecurityFilterChain securityFilterChain = http.build();
-        /* List<Filter> filters = securityFilterChain.getFilters();
-        for (Filter filter : filters) {
-            log.info("filter name: " + filter.toString());
-            log.info("filter class: " + filter.getClass().getName());
-        } */
         return securityFilterChain;
     }
 

@@ -42,27 +42,6 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     @Value("${upload.dir}")
     private String uploadDir;
 
-    // @Override
-    // public String saveImage(MultipartFile file) throws IOException {
-    //     if (file.isEmpty()) {
-    //         throw new IOException("Failed to store empty file.");
-    //     }
-
-    //     String projectRoot = System.getProperty("user.dir");
-    //     Path uploadPath = Paths.get(projectRoot, uploadDir);
-
-    //     if (!Files.exists(uploadPath)) {
-    //         Files.createDirectories(uploadPath);
-    //     }
-
-    //     Path filePath = uploadPath.resolve(file.getOriginalFilename());
-    //     file.transferTo(filePath.toFile());
-
-    //     return "/uploads/" + file.getOriginalFilename();
-
-    // }
-
-
     @Override
     public String storePropertyImage(Long propertyId, MultipartFile file) {
         try {
