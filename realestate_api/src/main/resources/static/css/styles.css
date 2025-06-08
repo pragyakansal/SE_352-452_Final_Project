@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    /* height: 100vh; */
+    padding: 0;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,7 +79,7 @@ html, body {
      color: #333333;
 }
 
-#add-new-property-container. #edit-property-container {
+#add-new-property-container {
      background-color: rgba(255, 255, 255, 0.6);
      color: #333333;
 }
@@ -172,6 +173,17 @@ html, body {
     width: 250px;
 }
 
+.textarea-control {
+    max-width: 400px;
+    height: auto;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.form-group {
+    padding-bottom: 20px;
+}
+
 .form-control::placeholder {
     font-family: "Inter", sans-serif;
 }
@@ -203,6 +215,10 @@ html, body {
 
 .edit-button {
     background-color: #82cded;
+}
+
+.add-button {
+    background-color: #6dba65;
 }
 
 #header-button {
@@ -306,7 +322,6 @@ html, body {
     text-decoration: none;
 }
 
-/* Change this */
 table {
     width: 100%;
     font-family: "Inter", sans-serif;
@@ -317,14 +332,14 @@ table {
 }
 
 thead {
-    background-color: #3f51b5;
+    background-color: #3625f5;
     color: white;
 }
 
 th, td {
-    padding: 12px 16px;
+    padding: 14px 16px;
     text-align: left;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #cfcfcf;
 }
 
 #dashboard-options {
@@ -354,6 +369,10 @@ th, td {
     padding-top: 100px;
     padding-bottom: 50px;
     background-color: #edebeb;
+   /*  max-height: 100vh; */
+    height: calc(100% - 200px);
+    overflow-y: auto;
+
 }
 
 #add-property-page label {
@@ -364,26 +383,4 @@ th, td {
 #properties-table-container {
     display: flex;
     flex-direction: column;
-}
-
-#edit-property-page {
-    background-color: rgba(255, 255, 255, 0.6);
-    color: #333333;
-    width: 80%;
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    overflow-y: auto;
-
-    background-image: url('/images/common-bg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-
-.property-image-container {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #ddd;
-    width: 100%;
-    max-height: 400px;
 }

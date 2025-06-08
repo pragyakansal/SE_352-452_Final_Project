@@ -44,7 +44,6 @@
                 </span>
                 <span th:unless="${property.images != null and !property.images.empty}">No Image</span>
             </td>
-           <!-- <td th:text="${property.description}">Short description...</td> -->
             <td>
                 <!-- Link to edit the property -->
                 <a th:href="@{/agent/editproperty/{id}(id=${property.id})}" class="button edit-button">Edit</a>
