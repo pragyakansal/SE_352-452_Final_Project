@@ -45,11 +45,9 @@ public class PropertyImageServiceImpl implements PropertyImageService {
     @Override
     public String storePropertyImage(Long propertyId, MultipartFile file) {
         try {
-
+            // Locate property
             Property property = propertyRepository.findById(propertyId).orElseThrow(()
                     -> new NotFoundException("Property not found"));
-
-            // String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
 
             Path propertyFolder = baseImagePath.resolve(property.getTitle());
 
@@ -62,15 +60,21 @@ public class PropertyImageServiceImpl implements PropertyImageService {
             log.info("Saving image file: {}", filePath.toAbsolutePath());
             file.transferTo(filePath.toFile());
 
-            // Save the image metadata in the database
-            PropertyImage propertyImage = new PropertyImage();
-            propertyImage.setImageFileName(imageFileName);
-            propertyImage.setProperty(property);
-            propertyImageRepository.save(propertyImage);
+            // Create property image entity
+            PropertyImage propertyImage = new PropertyImage(imageFileName, property);
+
+            // Add image to the prop
+            property.addImage(propertyImage);               // new: test to see if duplicate images issue is fixed
+
+            // propertyImage.setImageFileName(imageFileName);
+            // propertyImage.setProperty(property);
+
+            // Save the prop image entity to the repo
+            propertyImageRepository.save(propertyImage);    // new: test to see if duplicate images issue is fixed
 
             // Save the image file name and associate it with the property
-            property.addImage(propertyImage);
-            propertyRepository.save(property);
+            // property.addImage(propertyImage);
+            // propertyRepository.save(property);
 
             log.info("Successfully saved image: {}", imageFileName);
             return imageFileName;
@@ -80,6 +84,7 @@ public class PropertyImageServiceImpl implements PropertyImageService {
         }
     }
 
+    /*
     @Override
     public List<String> storeMultiplePropertyImages(Long propertyId, List<MultipartFile> images) {
         List<String> uploadedFileNames = new ArrayList<>();
@@ -89,5 +94,7 @@ public class PropertyImageServiceImpl implements PropertyImageService {
         }
         return uploadedFileNames;
     }
+
+     */
 
 }

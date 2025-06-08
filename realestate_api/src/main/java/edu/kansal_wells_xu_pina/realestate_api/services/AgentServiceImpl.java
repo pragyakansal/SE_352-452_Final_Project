@@ -125,9 +125,9 @@ public class AgentServiceImpl implements AgentService {
                     try {
                         //String imagePath = propertyImageRepository.saveImage(file);
                         String imageFileName = propertyImageService.storePropertyImage(newProperty.getId(), file);
-                        PropertyImage propertyImage = new PropertyImage(imageFileName, newProperty);
-                        propertyImageRepository.save(propertyImage);
-                        newProperty.getImages().add(propertyImage);
+                        // PropertyImage propertyImage = new PropertyImage(imageFileName, newProperty);
+                        // propertyImageRepository.save(propertyImage);
+                        // newProperty.getImages().add(propertyImage);
                     } catch (IOException e) {
                         throw new RuntimeException("Failed to store property image" + file.getOriginalFilename(), e);
                     }
@@ -177,19 +177,15 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public void editProperty(Property propertyToUpdate, String title, Double price, String description,
+    public void updateProperty(Property propertyToUpdate, String title, Double price, String description,
                                       String location, Integer size) {
         Property property = propertyService.findById(propertyToUpdate.getId());
-        // Property propertyToUpdate = propertyRepository.findById(propertyId)
-        //        .orElseThrow(() -> new NotFoundException("Property not found with id: " + propertyId));
 
         property.setTitle(title);
         property.setPrice(price);
         property.setDescription(description);
         property.setLocation(location);
         property.setSize(size);
-
-        //need to update for images too
 
         propertyRepository.save(property);
     }

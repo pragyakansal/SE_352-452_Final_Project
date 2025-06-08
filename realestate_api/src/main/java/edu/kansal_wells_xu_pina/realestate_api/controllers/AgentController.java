@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
@@ -128,16 +129,46 @@ public class AgentController {
     @PreAuthorize("hasRole('AGENT')")
     @PostMapping("/editproperty/{id}")
     public String editProperty(@PathVariable("id") Long id,
-                               @ModelAttribute Property property,
+                               @ModelAttribute Property updatedProperty,
                                @RequestParam("title") String title,
                                @RequestParam("price") Double price,
                                @RequestParam("description") String description,
                                @RequestParam("location") String location,
                                @RequestParam("size") Integer size,
+                               @RequestParam(value = "files", required = false) List<MultipartFile> files,
                                RedirectAttributes redirectAttributes, Model model) {
         try {
-            Property propertyToUpdate = propertyService.findById(id);
-            agentService.editProperty(propertyToUpdate, title, price, description, location, size);
+            // Look up the existing property to get the correct ID
+            Property actualProp = propertyService.findById(id);
+
+            // Copy updates from form-bound property
+            actualProp.setTitle(updatedProperty.getTitle());
+            actualProp.setPrice(updatedProperty.getPrice());
+            actualProp.setDescription(updatedProperty.getDescription());
+            actualProp.setLocation(updatedProperty.getLocation());
+            actualProp.setSize(updatedProperty.getSize());
+
+            agentService.updateProperty(actualProp, title, price, description, location, size);
+
+            // Save new images if provided, iterates over new uploads and stores/creates a new Prop Image and adds to list for updating property
+            if (files != null && !files.isEmpty()) {
+                List<PropertyImage> newUpload = new ArrayList<>();
+                for (MultipartFile file : files) {
+                    if (!file.isEmpty()) {
+                        try {
+                            String imagefilename = propertyImageService.storePropertyImage(actualProp.getId(), file);
+                            // PropertyImage propertyImage = new PropertyImage(imagefilename, actualProp);
+                            // newUpload.add(propertyImage);
+                        } catch (Exception e) {
+                            log.error("Error storing property image: {}", e.getMessage(), e);
+                            throw new RuntimeException("Failed to store property image: " + file.getOriginalFilename(), e);
+                        }
+                    }
+                }
+                actualProp.getImages().addAll(newUpload);
+                propertyService.updateProperty(actualProp);
+            }
+
             redirectAttributes.addFlashAttribute("successMessage", "Property updated successfully");
             return "redirect:/agent/managelistings";
         } catch (Exception e) {
@@ -145,6 +176,25 @@ public class AgentController {
             return "redirect:/agent/editproperty/" + id;
         }
     }
+
+    /*
+    @PreAuthorize("hasRole('AGENT')")
+    @PostMapping("/deleteimage/{propertyId}/{imageId}")
+    public String deletePropImage(@PathVariable("propertyId") Long propertyId,
+                                      @PathVariable("imageId") Long imageId,
+                                      RedirectAttributes redirectAttributes) {
+        try {
+            User currentUser = userService.getCurrentUser();
+            Property property =
+            agentService.deletePropertyImage(propertyId, imageId);
+            redirectAttributes.addFlashAttribute("successMessage", "Image deleted successfully");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete image: " + e.getMessage());
+        }
+        return "redirect:/agent/editproperty/" + propertyId;
+    }
+
+     */
 
 
 

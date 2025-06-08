@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,7 +78,7 @@ html, body {
      color: #333333;
 }
 
-#add-new-property-container {
+#add-new-property-container. #edit-property-container {
      background-color: rgba(255, 255, 255, 0.6);
      color: #333333;
 }
@@ -351,7 +351,7 @@ th, td {
 }
 
 #manage-listings-page {
-    padding-top: 630px;
+    padding-top: 100px;
     padding-bottom: 50px;
     background-color: #edebeb;
 }
@@ -364,4 +364,26 @@ th, td {
 #properties-table-container {
     display: flex;
     flex-direction: column;
+}
+
+#edit-property-page {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #333333;
+    width: 80%;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    overflow-y: auto;
+
+    background-image: url('/images/common-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+.property-image-container {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ddd;
+    width: 100%;
+    max-height: 400px;
 }
