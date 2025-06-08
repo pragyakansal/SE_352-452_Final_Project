@@ -17,7 +17,38 @@
         <div th:if="${properties.empty}">
             <p>No properties available at the moment.</p>
         </div>
+        <!-- Filter Form -->
+        <form th:action="@{/buyer/listings}" method="get" class="filter-form">
+            <div class="filter-group">
+                <label for="minSqFt">Min Square Feet:</label>
+                <input type="number" id="minSqFt" name="minSqFt" th:value="${filter.minSqFt}">
+            </div>
 
+            <div class="filter-group">
+                <label for="minPrice">Min Price:</label>
+                <input type="number" id="minPrice" name="minPrice" th:value="${filter.minPrice}">
+            </div>
+
+            <div class="filter-group">
+                <label for="maxPrice">Max Price:</label>
+                <input type="number" id="maxPrice" name="maxPrice" th:value="${filter.maxPrice}">
+            </div>
+
+            <div class="filter-group">
+                <label for="sortBy">Sort By:</label>
+                <select id="sortBy" name="sortBy">
+                    <option value="">None</option>
+                    <option value="price_asc" th:selected="${filter.sortBy == 'price_asc'}">Price: Low to High</option>
+                    <option value="price_desc" th:selected="${filter.sortBy == 'price_desc'}">Price: High to Low</option>
+                    <option value="sqft_asc" th:selected="${filter.sortBy == 'sqft_asc'}">Square Feet: Low to High</option>
+                    <option value="sqft_desc" th:selected="${filter.sortBy == 'sqft_desc'}">Square Feet: High to Low</option>
+                </select>
+            </div>
+
+            <button type="submit">Apply Filters</button>
+        </form>
+
+        <!-- Property List -->
         <div class="property-list">
             <div th:each="property : ${properties}" class="property-card">
                 <img th:if="${!property.images.empty}" 
