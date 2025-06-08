@@ -114,11 +114,11 @@
                      th:classappend="${statusVar.first} ? 'active' : ''"
                      data-bs-toggle="modal"
                      data-bs-target="#imageModal"
-                     th:data-bs-slide-to="${statusVar.index}"
+                     th:data-bs-slide-to="${statusVar.index}">
             </div>
         </div>
 
-        <a th:href="@{/buyer/listings}" class="btn btn-primary">Back to Listings</a>
+        <a th:href="@{/buyer/listings}" class="btn btn-primary mb-4">Back to Listings</a>
     </div>
 
     <!-- Modal -->

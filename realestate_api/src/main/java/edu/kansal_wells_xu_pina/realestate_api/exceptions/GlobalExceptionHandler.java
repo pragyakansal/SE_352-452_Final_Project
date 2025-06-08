@@ -119,29 +119,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity<ApiExceptionDto> handleIOException(IOException ex, HttpServletRequest request) {
-        log.error("IO Exception: {}", ex.getMessage());
-        ApiExceptionDto error = new ApiExceptionDto(
-            "Error processing file",
-            HttpStatus.INTERNAL_SERVER_ERROR.value(),
-            request.getRequestURI(),
-            ex.getClass().getSimpleName()
-        );
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiExceptionDto> handleGenericException(Exception ex, HttpServletRequest request) {
         log.error("Unexpected error occurred: {}", ex.getMessage(), ex);
