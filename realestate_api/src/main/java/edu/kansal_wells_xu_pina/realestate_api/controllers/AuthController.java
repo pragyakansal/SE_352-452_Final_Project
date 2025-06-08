@@ -73,22 +73,6 @@ public class AuthController {
         }
     }
 
-    // Finish implementation
-    /* @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user, HttpServletResponse response, Model model) {
-        try {
-            log.info("Attempting login for user: {}", user.getEmail());
-            Cookie jwtCookie = authService.loginAndCreateJwtCookie(user);
-            response.addCookie(jwtCookie);
-            log.info("Login successful for user: {}", user.getEmail());
-            return "redirect:/landing-page/dashboard";
-        } catch (BadCredentialsException e) {
-            log.error("Login failed for user: {}", user.getEmail(), e);
-            model.addAttribute("error", "Invalid email or password");
-            return "login-form";
-        }
-    } */
-
     @PostMapping("/login")
     public String loginUser(@ModelAttribute User user, HttpServletResponse response, Model model) {
         try {
@@ -114,7 +98,6 @@ public class AuthController {
     @PreAuthorize("hasAnyRole('BUYER', 'AGENT', 'ADMIN')")
     public String displayDashboard(Model model) {
         userService.prepareDashboardModel(model);
-        //model.addAttribute("message", "Welcome to the dashboard");
         return "common/common-dashboard";
     }
 
