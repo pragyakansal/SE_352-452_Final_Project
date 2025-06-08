@@ -32,15 +32,18 @@ public class AgentServiceImpl implements AgentService {
 
     private final PropertyImageRepository propertyImageRepository;
     private final PropertyImageService propertyImageService;
+    private final PropertyService propertyService;
 
 
 
     @Autowired
-    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository, PropertyImageRepository imageRepository, PropertyImageService propertyImageService) {
+    public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository,
+                            PropertyImageRepository imageRepository, PropertyImageService propertyImageService, PropertyService propertyService) {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
         this.propertyImageRepository = imageRepository;
         this.propertyImageService = propertyImageService;
+        this.propertyService = propertyService;
 
     }
 
@@ -168,16 +171,28 @@ public class AgentServiceImpl implements AgentService {
         //return propertyRepository.save(newProperty);
 
     }
-
-    /*
     @Override
-    public Property editProperty(Property property) {
-        getAgentPropertyById(agentId, propertyId);
-        property.setAgent(getAgentById(agentId));
-        return propertyRepository.save(property);
+    public Property getCurrentProperty(Long propertyId) {
+        return propertyService.findById(propertyId);
     }
 
-     */
+    @Override
+    public void editProperty(Property propertyToUpdate, String title, Double price, String description,
+                                      String location, Integer size) {
+        Property property = propertyService.findById(propertyToUpdate.getId());
+        // Property propertyToUpdate = propertyRepository.findById(propertyId)
+        //        .orElseThrow(() -> new NotFoundException("Property not found with id: " + propertyId));
+
+        property.setTitle(title);
+        property.setPrice(price);
+        property.setDescription(description);
+        property.setLocation(location);
+        property.setSize(size);
+
+        //need to update for images too
+
+        propertyRepository.save(property);
+    }
 
     // @Override
     // TODO: Implement DeleteProperty method
