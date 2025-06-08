@@ -25,6 +25,17 @@ public class BuyerController {
     @PreAuthorize("hasRole('BUYER')")
     @GetMapping({"/listings", ""})
     public String viewListings(@ModelAttribute PropertyFilterDto filter, Model model) {
+        // Convert empty strings to null for numeric fields
+        if (filter.getMinSqFt() != null && filter.getMinSqFt() == 0) {
+            filter.setMinSqFt(null);
+        }
+        if (filter.getMinPrice() != null && filter.getMinPrice() == 0) {
+            filter.setMinPrice(null);
+        }
+        if (filter.getMaxPrice() != null && filter.getMaxPrice() == 0) {
+            filter.setMaxPrice(null);
+        }
+        
         model.addAttribute("properties", propertyService.getFilteredProperties(filter));
         model.addAttribute("filter", filter);
         return "buyer/listings";

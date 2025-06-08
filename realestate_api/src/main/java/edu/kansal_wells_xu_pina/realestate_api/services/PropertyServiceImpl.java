@@ -47,7 +47,7 @@ public class PropertyServiceImpl implements PropertyService{
     @Override
     public List<Property> getFilteredProperties(PropertyFilterDto filter) {
         Sort sort = Sort.unsorted();
-        if (filter.getSortBy() != null) {
+        if (filter.getSortBy() != null && !filter.getSortBy().isEmpty()) {
             switch (filter.getSortBy()) {
                 case "price_asc":
                     sort = Sort.by("price").ascending();
@@ -64,10 +64,16 @@ public class PropertyServiceImpl implements PropertyService{
             }
         }
 
-        return propertyRepo.findBySizeGreaterThanEqualAndPriceBetween(
-            filter.getMinSqFt(),
-            filter.getMinPrice(),
-            filter.getMaxPrice(),
+        // If no filters are set, return all properties with sorting
+        if (filter.getMinSqFt() == null && filter.getMinPrice() == null && filter.getMaxPrice() == null) {
+            return propertyRepo.findAll(sort);
+        }
+
+        // Use the repository method with the provided filters
+        return propertyRepo.findBySizeGreaterThanEqualAndPriceGreaterThanEqualAndPriceLessThanEqual(
+            filter.getMinSqFt() != null ? filter.getMinSqFt() : 0,
+            filter.getMinPrice() != null ? filter.getMinPrice() : 0.0,
+            filter.getMaxPrice() != null ? filter.getMaxPrice() : Double.MAX_VALUE,
             sort
         );
     }
