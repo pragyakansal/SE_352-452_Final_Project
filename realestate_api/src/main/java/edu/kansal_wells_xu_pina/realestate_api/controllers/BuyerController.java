@@ -1,7 +1,9 @@
 package edu.kansal_wells_xu_pina.realestate_api.controllers;
 
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
+import edu.kansal_wells_xu_pina.realestate_api.dtos.PropertyFilterDto;
 import edu.kansal_wells_xu_pina.realestate_api.services.PropertyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +17,27 @@ public class BuyerController {
 
     private final PropertyService propertyService;
 
+    @Autowired
     public BuyerController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
 
-   @PreAuthorize("hasRole('BUYER')")
+    @PreAuthorize("hasRole('BUYER')")
     @GetMapping({"/listings", ""})
-    public String viewListings(Model model) {
-        List<Property> props = propertyService.findAll();
-        model.addAttribute("properties", props);
+    public String viewListings(@ModelAttribute PropertyFilterDto filter, Model model) {
+        // Convert empty strings to null for numeric fields
+        if (filter.getMinSqFt() != null && filter.getMinSqFt() == 0) {
+            filter.setMinSqFt(null);
+        }
+        if (filter.getMinPrice() != null && filter.getMinPrice() == 0) {
+            filter.setMinPrice(null);
+        }
+        if (filter.getMaxPrice() != null && filter.getMaxPrice() == 0) {
+            filter.setMaxPrice(null);
+        }
+        
+        model.addAttribute("properties", propertyService.getFilteredProperties(filter));
+        model.addAttribute("filter", filter);
         return "buyer/listings";
     }
 
@@ -34,6 +48,4 @@ public class BuyerController {
         model.addAttribute("property", property);
         return "buyer/propertydetail";
     }
-
-
 }

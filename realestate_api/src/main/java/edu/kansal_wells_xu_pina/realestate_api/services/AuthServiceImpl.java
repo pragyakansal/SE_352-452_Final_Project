@@ -50,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
             // Get the user from database first to ensure we have the correct role
             User dbUser = userRepository.findByEmail(user.getEmail());
             if (dbUser == null) {
-                log.error("User not found in database: {}", user.getEmail());
+                log.error("User not in database: {}", user.getEmail());
                 throw new BadCredentialsException("Invalid email or password");
             }
             
@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
             
             // Set the authentication in the security context
             SecurityContextHolder.getContext().setAuthentication(auth);
-            log.info("Security context set for user: {}", user.getEmail());
+            log.info("Security context set for: {}", user.getEmail());
             
             // Generate JWT token using the database user's role
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(dbUser.getEmail());

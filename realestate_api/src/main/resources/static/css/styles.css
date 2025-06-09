@@ -50,10 +50,17 @@ html, body {
     gap: 20px;
 }
 
-#create-agent-page, #add-property-page {
+#create-agent-page {
     background-image: url('/images/common-bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+#add-property-page {
+    background-image: url('/images/common-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 120px;
 }
 
 #dashboard-page {
@@ -383,4 +390,50 @@ th, td {
 #properties-table-container {
     display: flex;
     flex-direction: column;
+}
+
+/* Filter Form Styles */
+.filter-form {
+    background-color: white;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-size: 14px;
+    color: #333;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.filter-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.filter-form button:hover {
+    background-color: #0056b3;
 }
