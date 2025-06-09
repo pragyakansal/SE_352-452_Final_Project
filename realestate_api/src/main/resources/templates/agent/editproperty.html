@@ -53,7 +53,7 @@
 
             <br/><br/>
 
-            <button class="submit-btn" type="submit">Update Property</button>
+            <button class="button edit-button" type="submit">Update Property</button>
             </div>
         </form>
 
@@ -65,7 +65,7 @@
                     <img th:src="@{/images/property_images/{propertyTitle}/{fileName}(propertyTitle=${property.title}, fileName=${image.imageFileName})}"
                          alt="Property Image" class="property-image" />
                     <form th:action="@{/agent/deleteimage/{propertyId}/{imageId}(propertyId=${property.id}, imageId=${image.id})}" method="post">
-                        <button type="submit" class="delete-image-btn">Delete</button>
+                        <button type="submit" class="button delete-button">Delete</button>
                 </div>
             </div>
         </div>
