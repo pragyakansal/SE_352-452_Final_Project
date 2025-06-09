@@ -15,6 +15,8 @@
 
     <div class="error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
     <div class="success" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+    <!-- Edit Property Form -->
     <form method="post" th:action="@{/agent/editproperty/{id}(id=${property.id})}" th:object="${property}" enctype="multipart/form-data">
         <div class="container" id="add-new-property-container">
             <h1>Edit Property</h1>
@@ -35,10 +37,8 @@
             </div>
 
             <div class="form-group">
-
                 <label for="size"></label>
                 <input id="size" required="" th:field="*{size}" type="number" class="form-control"  placeholder="Size" />
-
             </div>
 
             <div class="form-group">
@@ -47,17 +47,28 @@
             </div>
 
             <div class="form-group">
-                <label for="files">Upload Property Images:</label>
-                <!--form method="post" enctype="multipart/form-data" th:action="@{agent/addproperty}">
-                    <input id="files" type="file" name="files" accept="image/*" multiple/-->
+                <label for="files">Upload Additional Property Images:</label>
                 <input id="files" type="file" name="files" accept="image/*" multiple class="form-control"/>
             </div>
 
             <br/><br/>
 
-            <button class="button edit-button" type="submit">Update Property</button>
+            <button class="submit-btn" type="submit">Update Property</button>
+            </div>
+        </form>
+
+        <!-- Existing Images displayed here -->
+        <div class="property-images-container">
+            <h3>Existing Property Images</h3>
+            <div class="property-images-gallery">
+                <div th:each="image : ${property.images}" class="image-container">
+                    <img th:src="@{/images/property_images/{propertyTitle}/{fileName}(propertyTitle=${property.title}, fileName=${image.imageFileName})}"
+                         alt="Property Image" class="property-image" />
+                    <form th:action="@{/agent/deleteimage/{propertyId}/{imageId}(propertyId=${property.id}, imageId=${image.id})}" method="post">
+                        <button type="submit" class="delete-image-btn">Delete</button>
+                </div>
+            </div>
         </div>
-</div>
-    </form>
+    </div>
 </body>
 </html>

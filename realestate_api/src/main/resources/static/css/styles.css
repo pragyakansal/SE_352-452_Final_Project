@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,7 +155,7 @@ html, body {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     width: 400px;
-    padding: 30px;
+    padding: 80px;
     border: 0.5px solid #ccc;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 15px;

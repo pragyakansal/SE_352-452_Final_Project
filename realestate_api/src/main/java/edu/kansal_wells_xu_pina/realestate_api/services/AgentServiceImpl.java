@@ -3,6 +3,7 @@ package edu.kansal_wells_xu_pina.realestate_api.services;
 
 import edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;
 import edu.kansal_wells_xu_pina.realestate_api.entities.User;
+import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidPropertyImageParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;
@@ -69,7 +70,7 @@ public class AgentServiceImpl implements AgentService {
         Property property = propertyRepository.findById(propertyId)
                 .orElseThrow(() -> new NotFoundException("Property not found with id: " + propertyId));
         if (!property.getAgent().getId().equals(agentId)) {
-            throw new IllegalArgumentException("Property with id: " + propertyId + " does not belong to agent with id: " + agentId);
+            throw new IllegalArgumentException("Property id: " + propertyId + " does not belong to agent id: " + agentId);
         }
         return property;
     }
@@ -87,101 +88,40 @@ public class AgentServiceImpl implements AgentService {
         return agent;
     }
 
-    /*
-    @Override
-
-    public Property addNewProperty(Property property) {
-        User agent =  userService.getCurrentUser();
-        if (!agent.getRole().equals(Role.AGENT)) {
-            throw new IllegalArgumentException("User is not an agent.");
-        }
-        property.setAgent(agent);
-        Property savedProperty = propertyRepository.save(property);
-
-        for (PropertyImage image : property.getImages()) {}
-        return propertyRepository.save(property);
-
-
-    }
-        User agent = getAgentById(agentId);
-        property.setAgent(agent);
-        return propertyRepository.save(property);
-    }
-
-     */
-
     @Override
     public Property addNewProperty(Property newProperty, List<MultipartFile> imageFiles) {
         User agent = getCurrentAgent();
         newProperty.setAgent(agent);
 
-        // Save the property first to generate an ID
+        // Save the property to generate ID
         newProperty = propertyRepository.save(newProperty);
 
-        // Now handle the images
+        //  Handle images
         if (imageFiles != null && !imageFiles.isEmpty()) {
             for (MultipartFile file : imageFiles) {
                 if (!file.isEmpty()) {
                     try {
-                        //String imagePath = propertyImageRepository.saveImage(file);
                         String imageFileName = propertyImageService.storePropertyImage(newProperty.getId(), file);
-                        PropertyImage propertyImage = new PropertyImage(imageFileName, newProperty);
-                        propertyImageRepository.save(propertyImage);
-                        newProperty.getImages().add(propertyImage);
-                    } catch (IOException e) {
+                    } catch (InvalidPropertyImageParameterException e) {
                         throw new RuntimeException("Failed to store property image" + file.getOriginalFilename(), e);
                     }
                 }
             }
-            // Save the property again with images
+            // Save the property with images
             newProperty = propertyRepository.save(newProperty);
         }
-
         return newProperty;
-         /*
-            Set<PropertyImage> images = imageFiles.stream()
-                    .map(file -> {
-                        PropertyImage propertyImage = new PropertyImage();
-                        propertyImage.setImageFileName(file.getOriginalFilename());
-                        propertyImage.setProperty(newProperty);
-                        return propertyImageRepository.save(propertyImage);
-                    })
-                    .collect(Collectors.toSet());
-            newProperty.setImages(images);
-        }
-
-          */
-
-        // List<PropertyImage> propertyImages = newProperty.getImages();
-
-
-
-        /*List<PropertyImage> images = propertyImages.retainAll().stream()
-                .map(image -> {
-                    PropertyImage foundImage = propertyImageRepository.findByImageFileName(image.getImageFileName());
-                    if (foundImage == null) {
-                        throw new NotFoundException("Image not found: " + image.getImageFileName());
-                    }
-                    return foundImage;
-                })
-                .collect(Collectors.toSet   ());
-        newProperty.setImages((List<PropertyImage>) images);
-
-         */
-        //return propertyRepository.save(newProperty);
-
     }
+
     @Override
     public Property getCurrentProperty(Long propertyId) {
         return propertyService.findById(propertyId);
     }
 
     @Override
-    public void editProperty(Property propertyToUpdate, String title, Double price, String description,
+    public void updateProperty(Property propertyToUpdate, String title, Double price, String description,
                                       String location, Integer size) {
         Property property = propertyService.findById(propertyToUpdate.getId());
-        // Property propertyToUpdate = propertyRepository.findById(propertyId)
-        //        .orElseThrow(() -> new NotFoundException("Property not found with id: " + propertyId));
 
         property.setTitle(title);
         property.setPrice(price);
@@ -189,17 +129,9 @@ public class AgentServiceImpl implements AgentService {
         property.setLocation(location);
         property.setSize(size);
 
-        //need to update for images too
-
         propertyRepository.save(property);
     }
 
-    // @Override
-    // TODO: Implement DeleteProperty method
-    // public void DeleteProperty(Long agentId, Long propertyId) {
-    //     Property property = getAgentPropertyById(agentId, propertyId);
-    //     propertyRepository.delete(property);
-    // }
 
     @Override
     public String deletePropertyByPropertyId(Long propertyId, Long agentId) {
@@ -210,13 +142,15 @@ public class AgentServiceImpl implements AgentService {
         if (!propertyToDelete.getAgent().getId().equals(agentId)) {
             throw new IllegalArgumentException("Agents are only authorized to delete their own properties.");
         }
+
+        if (propertyToDelete.getImages() != null) {
+            for (PropertyImage image : propertyToDelete.getImages()) {
+                propertyImageRepository.delete(image);
+            }
+        }
+
         propertyRepository.delete(propertyToDelete);
         return "The property with the ID: " + propertyId + " was deleted successfully.";
     }
-
-
-    // ? PropertyImageRepository methods can be added here
-
-
 
 }

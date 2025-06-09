@@ -37,11 +37,12 @@
             <td th:text="${property.location}">Location</td>
             <td th:text="${property.size + ' sq ft'}">0 sq ft</td>
             <td>
-                <!-- Display the first image if available -->
-                <span th:if="${property.images != null and !property.images.empty}">
-                    <img th:src="@{/images/property_images/{propertyTitle}/{fileName}(propertyTitle=${property.title}, fileName=${property.images[0].imageFileName})}"
-                            alt="Property Image" width="100">
-                </span>
+                <!-- Display the images if available -->
+                <div th:if="${property.images != null and !property.images.empty}" style="display: flex; flex-direction: column; gap: 8px;">
+                    <img th:each="image : ${property.images}"
+                         th:src="@{/images/property_images/{propertyTitle}/{fileName}(propertyTitle=${property.title}, fileName=${image.imageFileName})}"
+                            alt="Property Image" width="60" style="border-radius: 5px; border: 1px solid #ccc;">
+                </div>
                 <span th:unless="${property.images != null and !property.images.empty}">No Image</span>
             </td>
             <td>

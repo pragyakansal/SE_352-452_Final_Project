@@ -2,6 +2,7 @@ package edu.kansal_wells_xu_pina.realestate_api.services;
 
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;
+import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidPropertyImageParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;
@@ -44,12 +45,20 @@ public class PropertyImageServiceImpl implements PropertyImageService {
 
     @Override
     public String storePropertyImage(Long propertyId, MultipartFile file) {
-        try {
+        // Allow only JPEG, PNG, or WEBP files
+        String fileType = file.getContentType();
+        if (fileType == null || !(fileType.equals("image/jpeg") || fileType.equals("image/png") || fileType.equals("image/webp"))) {
+            throw new InvalidPropertyImageParameterException("Only JPEG, PNG, or WEBP images are valid");
+        }
+        // Allow only files up to 10MB
+        if (file.getSize() > 10 * 1024 * 1024) {
+            throw new InvalidPropertyImageParameterException("File exceeds the max limit of 10MB");
+        }
 
+        try {
+            // Locate property
             Property property = propertyRepository.findById(propertyId).orElseThrow(()
                     -> new NotFoundException("Property not found"));
-
-            // String safeTitle = property.getTitle().replaceAll("[^a-zA-Z0-9]", "_");
 
             Path propertyFolder = baseImagePath.resolve(property.getTitle());
 
@@ -62,32 +71,46 @@ public class PropertyImageServiceImpl implements PropertyImageService {
             log.info("Saving image file: {}", filePath.toAbsolutePath());
             file.transferTo(filePath.toFile());
 
-            // Save the image metadata in the database
-            PropertyImage propertyImage = new PropertyImage();
-            propertyImage.setImageFileName(imageFileName);
-            propertyImage.setProperty(property);
-            propertyImageRepository.save(propertyImage);
+            PropertyImage propertyImage = new PropertyImage(imageFileName, property);
 
-            // Save the image file name and associate it with the property
+            // Add image to the prop
             property.addImage(propertyImage);
-            propertyRepository.save(property);
+
+            // Save the prop image entity to the repo
+            propertyImageRepository.save(propertyImage);
 
             log.info("Successfully saved image: {}", imageFileName);
             return imageFileName;
         } catch (IOException e) {
-            log.error("Error storing property image: {}", e.getMessage(), e);
-            throw new RuntimeException("Failed to store property image", e);
+            log.error("Error storing property image:", e);
+            throw new InvalidPropertyImageParameterException("Failed to store property image");
         }
     }
 
     @Override
-    public List<String> storeMultiplePropertyImages(Long propertyId, List<MultipartFile> images) {
-        List<String> uploadedFileNames = new ArrayList<>();
-        for (MultipartFile file : images) {
-            String fileName = storePropertyImage(propertyId, file);
-            uploadedFileNames.add(fileName);
+    public void deletePropertyImage(Long propertyId, Long imageId) {
+        // Locate property
+        Property property = propertyRepository.findById(propertyId)
+                .orElseThrow(() -> new NotFoundException("Property not found with id: " + propertyId));
+        // Locate image
+        PropertyImage image = propertyImageRepository.findById(imageId)
+                .orElseThrow(() -> new NotFoundException("Image not found with id: " + imageId));
+
+
+        // Delete the image file from the filesystem
+        Path propertyFolder = baseImagePath.resolve(image.getProperty().getTitle());
+        Path filePath = propertyFolder.resolve(image.getImageFileName());
+        try {
+            Files.deleteIfExists(filePath);
+        } catch (IOException e) {
+            log.error("Error deleting image file: {}", e.getMessage());
+            throw new InvalidPropertyImageParameterException("Failed to delete image file");
         }
-        return uploadedFileNames;
+
+        // Remove the image from the property and delete the property image entity
+        property.removeImage(image);
+        propertyRepository.save(property);
+        propertyImageRepository.delete(image);
     }
 
 }
