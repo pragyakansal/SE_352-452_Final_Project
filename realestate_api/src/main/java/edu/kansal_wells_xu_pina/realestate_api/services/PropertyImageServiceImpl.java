@@ -86,7 +86,7 @@ public class PropertyImageServiceImpl implements PropertyImageService {
         PropertyImage image = propertyImageRepository.findById(imageId)
                 .orElseThrow(() -> new NotFoundException("Image not found with id: " + imageId));
 
-        /*
+
         // Delete the image file from the filesystem
         Path propertyFolder = baseImagePath.resolve(image.getProperty().getTitle());
         Path filePath = propertyFolder.resolve(image.getImageFileName());
@@ -96,8 +96,6 @@ public class PropertyImageServiceImpl implements PropertyImageService {
             log.error("Error deleting image file: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to delete image file", e);
         }
-
-         */
 
         // Remove the image from the property and delete the property image entity
         property.removeImage(image);

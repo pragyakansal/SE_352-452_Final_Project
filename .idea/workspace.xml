@@ -6,11 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="4840c5a3-b6bf-4e76-a500-2325759bc6d4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/controllers/AgentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/AgentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/java/edu/kansal_wells_xu_pina/realestate_api/services/PropertyImageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/editproperty.html" beforeDir="false" afterPath="$PROJECT_DIR$/realestate_api/src/main/resources/templates/agent/editproperty.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/property_images/3818 N Christiana Ave/1743280986563_8c1815366539cf90fd6cb38dbb1b1e1e-cc_ft_960.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/property_images/3818 N Christiana Ave/1743280986573_b48577b143d2f0c5b79a4bb14dd7ec0d-cc_ft_960.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/property_images/537 N Ashland Ave/3b8869c5-08f4-4681-a318-908244c955a2_IMG_0901.HEIC" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/property_images/537 N Ashland Ave/72d3eaeb-d88a-4214-9cc2-a11f9fd82e41_IMG_0904.HEIC" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/property_images/537 N Ashland Ave/a6c69576-9f59-4914-a9f3-5562cf168d20_IMG_0891.HEIC" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +103,7 @@
       <updated>1749336912050</updated>
       <workItem from="1749336913623" duration="27529000" />
       <workItem from="1749414431744" duration="7976000" />
-      <workItem from="1749422861083" duration="4948000" />
+      <workItem from="1749422861083" duration="6590000" />
     </task>
     <servers />
   </component>
