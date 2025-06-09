@@ -3,6 +3,7 @@ package edu.kansal_wells_xu_pina.realestate_api.services;
 import edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;
 import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidPropertyImageParameterException;
+import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidUserParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;
@@ -42,7 +43,7 @@ public class AgentServiceImpl implements AgentService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Agent not found with id: " + id));
         if (!user.getRole().equals(Role.AGENT)) {
-            throw new IllegalArgumentException("User: " + id + " is not an agent.");
+            throw new InvalidUserParameterException("User: " + id + " is not an agent.");
         }
         return user;
     }
@@ -111,7 +112,7 @@ public class AgentServiceImpl implements AgentService {
                                       String location, Integer size) {
         Property property = propertyService.findById(propertyToUpdate.getId());
 
-        property.setTitle(title);
+        // property.setTitle(title);  //keep titl for image folder
         property.setPrice(price);
         property.setDescription(description);
         property.setLocation(location);

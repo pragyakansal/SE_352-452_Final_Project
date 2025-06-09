@@ -3,6 +3,7 @@ package edu.kansal_wells_xu_pina.realestate_api.services;
 import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidPropertyImageParameterException;
+import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidPropertyParameterException;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.NotFoundException;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyImageRepository;
 import edu.kansal_wells_xu_pina.realestate_api.repositories.PropertyRepository;
@@ -58,7 +59,7 @@ public class PropertyImageServiceImpl implements PropertyImageService {
         try {
             // Locate property
             Property property = propertyRepository.findById(propertyId).orElseThrow(()
-                    -> new NotFoundException("Property not found"));
+                    -> new InvalidPropertyParameterException("Property not found"));
 
             Path propertyFolder = baseImagePath.resolve(property.getTitle());
 
