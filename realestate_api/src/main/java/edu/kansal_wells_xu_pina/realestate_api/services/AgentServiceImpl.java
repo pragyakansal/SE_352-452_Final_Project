@@ -124,7 +124,7 @@ public class AgentServiceImpl implements AgentService {
                                       String location, Integer size) {
         Property property = propertyService.findById(propertyToUpdate.getId());
 
-        property.setTitle(title);
+        // property.setTitle(title);  //keep titl for image folder
         property.setPrice(price);
         property.setDescription(description);
         property.setLocation(location);
