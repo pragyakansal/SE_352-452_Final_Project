@@ -45,6 +45,11 @@ public class PropertyImageServiceImpl implements PropertyImageService {
 
     @Override
     public String storePropertyImage(Long propertyId, MultipartFile file) {
+        // Check if file is null
+        if (file == null || file.isEmpty()) {
+            throw new InvalidPropertyImageParameterException("Image file cannot be null");
+        }
+
         // Allow only JPEG, PNG, or WEBP files
         String fileType = file.getContentType();
         if (fileType == null || !(fileType.equals("image/jpeg") || fileType.equals("image/png") || fileType.equals("image/webp"))) {
