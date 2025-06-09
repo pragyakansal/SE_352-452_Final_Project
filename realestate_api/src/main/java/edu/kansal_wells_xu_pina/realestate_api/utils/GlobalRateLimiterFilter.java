@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class GlobalRateLimiterFilter extends OncePerRequestFilter {
-    private static final int MAX_REQUESTS = 100; // per time window
+    private static final int MAX_REQUESTS = 500; // per time window. increased due to images
     private static final long WINDOW_MS = 60_000; // 1 minute
 
     private static final Logger log = LoggerFactory.getLogger(GlobalRateLimiterFilter.class);
