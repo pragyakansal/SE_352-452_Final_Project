@@ -64,17 +64,10 @@ public class PropertyImageServiceImpl implements PropertyImageService {
             PropertyImage propertyImage = new PropertyImage(imageFileName, property);
 
             // Add image to the prop
-            property.addImage(propertyImage);               // new: test to see if duplicate images issue is fixed
-
-            // propertyImage.setImageFileName(imageFileName);
-            // propertyImage.setProperty(property);
+            property.addImage(propertyImage);
 
             // Save the prop image entity to the repo
-            propertyImageRepository.save(propertyImage);    // new: test to see if duplicate images issue is fixed
-
-            // Save the image file name and associate it with the property
-            // property.addImage(propertyImage);
-            // propertyRepository.save(property);
+            propertyImageRepository.save(propertyImage);
 
             log.info("Successfully saved image: {}", imageFileName);
             return imageFileName;
@@ -84,17 +77,32 @@ public class PropertyImageServiceImpl implements PropertyImageService {
         }
     }
 
-    /*
     @Override
-    public List<String> storeMultiplePropertyImages(Long propertyId, List<MultipartFile> images) {
-        List<String> uploadedFileNames = new ArrayList<>();
-        for (MultipartFile file : images) {
-            String fileName = storePropertyImage(propertyId, file);
-            uploadedFileNames.add(fileName);
-        }
-        return uploadedFileNames;
-    }
+    public void deletePropertyImage(Long propertyId, Long imageId) {
+        // Locate property
+        Property property = propertyRepository.findById(propertyId)
+                .orElseThrow(() -> new NotFoundException("Property not found with id: " + propertyId));
+        // Locate image
+        PropertyImage image = propertyImageRepository.findById(imageId)
+                .orElseThrow(() -> new NotFoundException("Image not found with id: " + imageId));
 
-     */
+        /*
+        // Delete the image file from the filesystem
+        Path propertyFolder = baseImagePath.resolve(image.getProperty().getTitle());
+        Path filePath = propertyFolder.resolve(image.getImageFileName());
+        try {
+            Files.deleteIfExists(filePath);
+        } catch (IOException e) {
+            log.error("Error deleting image file: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to delete image file", e);
+        }
+
+         */
+
+        // Remove the image from the property and delete the entity
+        property.removeImage(image);
+        propertyRepository.save(property);
+        propertyImageRepository.delete(image);
+    }
 
 }

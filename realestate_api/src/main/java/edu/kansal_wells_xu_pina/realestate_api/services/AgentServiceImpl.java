@@ -206,6 +206,13 @@ public class AgentServiceImpl implements AgentService {
         if (!propertyToDelete.getAgent().getId().equals(agentId)) {
             throw new IllegalArgumentException("Agents are only authorized to delete their own properties.");
         }
+
+        if (propertyToDelete.getImages() != null) {
+            for (PropertyImage image : propertyToDelete.getImages()) {
+                propertyImageRepository.delete(image);
+            }
+        }
+
         propertyRepository.delete(propertyToDelete);
         return "The property with the ID: " + propertyId + " was deleted successfully.";
     }

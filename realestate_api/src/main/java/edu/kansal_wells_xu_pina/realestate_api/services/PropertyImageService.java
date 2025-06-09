@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 public interface PropertyImageService {
 
-//    String saveImage(MultipartFile file) throws IOException;
-
     String storePropertyImage(Long propertyId, MultipartFile file) throws IOException;
+    void deletePropertyImage(Long propertyId, Long imageId) throws IOException;
 }

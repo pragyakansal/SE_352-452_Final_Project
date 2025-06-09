@@ -177,16 +177,14 @@ public class AgentController {
         }
     }
 
-    /*
+
     @PreAuthorize("hasRole('AGENT')")
     @PostMapping("/deleteimage/{propertyId}/{imageId}")
     public String deletePropImage(@PathVariable("propertyId") Long propertyId,
                                       @PathVariable("imageId") Long imageId,
-                                      RedirectAttributes redirectAttributes) {
+                                      RedirectAttributes redirectAttributes) throws NotFoundException{
         try {
-            User currentUser = userService.getCurrentUser();
-            Property property =
-            agentService.deletePropertyImage(propertyId, imageId);
+            propertyImageService.deletePropertyImage(propertyId, imageId);
             redirectAttributes.addFlashAttribute("successMessage", "Image deleted successfully");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete image: " + e.getMessage());
@@ -194,7 +192,6 @@ public class AgentController {
         return "redirect:/agent/editproperty/" + propertyId;
     }
 
-     */
 
 
 

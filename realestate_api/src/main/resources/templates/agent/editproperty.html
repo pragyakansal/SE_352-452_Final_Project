@@ -64,8 +64,8 @@
                 <div th:each="image : ${property.images}" class="image-container">
                     <img th:src="@{/images/property_images/{propertyTitle}/{fileName}(propertyTitle=${property.title}, fileName=${image.imageFileName})}"
                          alt="Property Image" class="property-image" />
-                    <!--form th:action="@{/agent/deleteimage/{propertyId}/{imageId}(propertyId=${property.id}, imageId=${image.id})}" method="post">
-                        <button type="submit" class="delete-image-btn">Delete</button-->
+                    <form th:action="@{/agent/deleteimage/{propertyId}/{imageId}(propertyId=${property.id}, imageId=${image.id})}" method="post">
+                        <button type="submit" class="delete-image-btn">Delete</button>
                 </div>
             </div>
         </div>
