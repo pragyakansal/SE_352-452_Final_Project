@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface PropertyImageRepository extends JpaRepository<PropertyImage, Long> {
     List<PropertyImage> findByProperty(Property property);
-    // void saveImage(PropertyImage propertyImage);
 }

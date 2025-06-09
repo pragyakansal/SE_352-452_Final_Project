@@ -18,15 +18,8 @@ public interface AgentService {
     List<Property> getAgentProperties(Long agentId);
     Property getAgentPropertyById(Long agentId, Long propertyId);
     Property getCurrentProperty(Long propertyId);
-
-    // public Property updateProperty(Property savedProperty);
-    // PropertyImage setImageFileName(String imageFileName);
-
     Property addNewProperty(Property newProperty, List<MultipartFile> imageFiles);
-
     public void updateProperty(Property propertyToUpdate, String title, Double price, String description,
                       String location, Integer size);
     String deletePropertyByPropertyId(Long propertyId, Long agentId);
-
-
 }

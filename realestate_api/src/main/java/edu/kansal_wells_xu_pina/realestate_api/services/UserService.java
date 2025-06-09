@@ -7,11 +7,7 @@ import org.springframework.ui.Model;
 
 public interface UserService {
 
-//    @PreAuthorize("isAuthenticated()")
     void prepareDashboardModel(Model model);
-
-//    @PreAuthorize("isAuthenticated()")
     User getCurrentUser();
-
     User updateUserProfile(UpdateProfileRequest request);
 }

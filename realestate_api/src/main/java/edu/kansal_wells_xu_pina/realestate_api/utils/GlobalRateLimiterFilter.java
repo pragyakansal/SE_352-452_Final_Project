@@ -1,5 +1,4 @@
 package edu.kansal_wells_xu_pina.realestate_api.utils;
-import edu.kansal_wells_xu_pina.realestate_api.config.SecurityConfig;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,8 +12,6 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Component
 public class GlobalRateLimiterFilter extends OncePerRequestFilter {

@@ -4,6 +4,7 @@ import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.MacAlgorithm;
 
 import javax.crypto.SecretKey;
+
 public class JwtSecretGenerator {
     public static void main(String[] args) {
         // Obtain the MacAlgorithm instance for HS256

@@ -1,6 +1,5 @@
 package edu.kansal_wells_xu_pina.realestate_api.services;
 
-
 import edu.kansal_wells_xu_pina.realestate_api.entities.PropertyImage;
 import edu.kansal_wells_xu_pina.realestate_api.entities.User;
 import edu.kansal_wells_xu_pina.realestate_api.exceptions.InvalidPropertyImageParameterException;
@@ -17,25 +16,16 @@ import edu.kansal_wells_xu_pina.realestate_api.entities.Property;
 import edu.kansal_wells_xu_pina.realestate_api.enums.Role;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 
 @Service
 public class AgentServiceImpl implements AgentService {
 
-
     private final UserRepository userRepository;
-
     private final PropertyRepository propertyRepository;
-
     private final PropertyImageRepository propertyImageRepository;
     private final PropertyImageService propertyImageService;
     private final PropertyService propertyService;
-
-
 
     @Autowired
     public AgentServiceImpl(UserRepository userRepository, PropertyRepository propertyRepository,
@@ -45,9 +35,7 @@ public class AgentServiceImpl implements AgentService {
         this.propertyImageRepository = imageRepository;
         this.propertyImageService = propertyImageService;
         this.propertyService = propertyService;
-
     }
-
 
     @Override
     public User getAgentById(Long id) {

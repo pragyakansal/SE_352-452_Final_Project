@@ -82,22 +82,6 @@ public class AdminServiceImpl implements AdminService {
         return user;
     }
 
-    /* Redundant profile method - now using common profile management
-    @Override
-    @Transactional
-    public User updateAdminProfile(User updatedAdminUser) {
-        User existingAdminUser = userRepository.findByEmail(updatedAdminUser.getEmail());
-        if (existingAdminUser == null) {
-            throw new NotFoundException("The admin with the email address: " + updatedAdminUser.getEmail() + " could not be found in the database." +
-                    " You can only update an admin with an existing email address. Please try again.");
-        }
-        validateEditProfileFormFields(updatedAdminUser);
-        return userRepository.save(updatedAdminUser);
-    }
-    */
-
-
-
     private void validateAgentFields(User agentUser) {
         if (agentUser.getFirstName() == null || agentUser.getFirstName().trim().isEmpty()) {
             throw new InvalidUserParameterException("The agent's first name should not be null or empty. Please try again with a valid input.");

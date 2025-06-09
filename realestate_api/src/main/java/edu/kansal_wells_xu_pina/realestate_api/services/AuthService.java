@@ -10,14 +10,9 @@ import org.springframework.stereotype.Service;
 
 public interface AuthService {
 
-//    JwtResponse authenticateAndGenerateToken(LoginRequest request);
     JwtAuthResponse loginUser(User user);
     User registerUser(User user);
     JwtResponse authenticateAndGenerateToken(User user);
-
     public Cookie loginAndCreateJwtCookie(User user) throws BadCredentialsException;
-
     void clearJwtCookie(HttpServletResponse response);
-
-
 }

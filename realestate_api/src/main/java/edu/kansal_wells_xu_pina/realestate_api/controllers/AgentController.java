@@ -21,8 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @Controller
 @RequestMapping("/agent")
 public class AgentController {
@@ -106,17 +104,6 @@ public class AgentController {
             return "redirect:/agent/managelistings?error=true";
         }
     }
-
-
-    // === EDIT PROPERTY ===
-    // TO-DO: template for editproperty.html and editProperty and saveProperty method to handle the form submission
-    // @PreAuthorize("hasRole('AGENT')")
-   /*
-    @PostMapping("/editproperty")
-    public String editProperty(@ModelAttribute Property property, Model model) {
-        return "temp";
-    }
-    */
 
     @PreAuthorize("hasRole('AGENT')")
     @GetMapping("/editproperty/{id}")
