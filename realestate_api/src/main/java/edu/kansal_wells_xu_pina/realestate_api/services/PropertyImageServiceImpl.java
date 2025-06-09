@@ -99,7 +99,7 @@ public class PropertyImageServiceImpl implements PropertyImageService {
 
          */
 
-        // Remove the image from the property and delete the entity
+        // Remove the image from the property and delete the property image entity
         property.removeImage(image);
         propertyRepository.save(property);
         propertyImageRepository.delete(image);
