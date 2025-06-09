@@ -17,8 +17,9 @@
     <div class="success" th:if="${successMessage}" th:text="${successMessage}"></div>
 
     <!-- Edit Property Form -->
+<div class="container" id="add-new-property-container">
     <form method="post" th:action="@{/agent/editproperty/{id}(id=${property.id})}" th:object="${property}" enctype="multipart/form-data">
-        <div class="container" id="add-new-property-container">
+
             <h1>Edit Property</h1>
         <div style="margin-bottom: 24px;">
             <div class="form-group">
@@ -54,7 +55,7 @@
             <br/><br/>
 
             <button class="button edit-button" type="submit">Update Property</button>
-            </div>
+
         </form>
 
         <!-- Existing Images displayed here -->
@@ -66,6 +67,7 @@
                          alt="Property Image" class="property-image" />
                     <form th:action="@{/agent/deleteimage/{propertyId}/{imageId}(propertyId=${property.id}, imageId=${image.id})}" method="post">
                         <button type="submit" class="button delete-button">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
