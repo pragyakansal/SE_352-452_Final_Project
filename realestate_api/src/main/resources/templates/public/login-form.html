@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body id="login-page">
+        <div id="login-page-container">
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+        </div>
+        <form method="post" th:action="@{/landing-page/login}" th:object="${user}">
+            <div class="container">
+            <h2>Login</h2>
+
+            <div class="form-controls-container">
+                <div class="input">
+                    <!-- <label for="email">Email:</label> -->
+                    <input type="text" class="form-control" id="email" name="email" th:field="*{email}" placeholder="Email" required>
+                </div>
+                <div class="input">
+                   <!-- <label for="password">Password:</label> -->
+                    <input type="password" class="form-control" id="password" name="password" th:field="*{password}" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="success-message" th:if="${message}" th:text="${message}"></div>
+            <div class="error-message" th:if="${error}" th:text="${error}"></div>
+            <button type="submit" class="button">Login</button>
+            <div class="register-link">
+                <a th:href="@{/landing-page/register}" class="link">
+                    Don't have an account? Register here.
+                </a>
+            </div>
+        </div>
+        </form>
+        </div>
+</body>
+</html>

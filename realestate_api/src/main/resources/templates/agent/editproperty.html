@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Listing</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body id="add-property-page">
+<div th:replace="common/header :: header"></div>
+
+    <div class="error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <div class="success" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+    <!-- Edit Property Form -->
+<div class="container" id="add-new-property-container">
+    <form method="post" th:action="@{/agent/editproperty/{id}(id=${property.id})}" th:object="${property}" enctype="multipart/form-data">
+
+            <h1>Edit Property</h1>
+        <div style="margin-bottom: 24px;">
+            <div class="form-group">
+                <label for="title"></label>
+                <input id="title" required="" th:field="*{title}" type="text" class="form-control" placeholder="Title" readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="price"></label>
+                <input id="price" required="" th:field="*{price}" type="number" class="form-control" placeholder="Price" />
+            </div>
+
+            <div class="form-group">
+                <label for="location"></label>
+                <input id="location" required="" th:field="*{location}" type="text" class="form-control" placeholder="Location" />
+            </div>
+
+            <div class="form-group">
+                <label for="size"></label>
+                <input id="size" required="" th:field="*{size}" type="number" class="form-control"  placeholder="Size" />
+            </div>
+
+            <div class="form-group">
+                <label for="description"></label>
+                <textarea id="description" name="description" class="form-control textarea-control" rows="5" th:field="*{description}" placeholder="Description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="files">Upload Additional Property Images:</label>
+                <input id="files" type="file" name="files" accept="image/*" multiple class="form-control"/>
+            </div>
+
+            <br/><br/>
+
+            <button class="button edit-button" type="submit">Update Property</button>
+
+        </form>
+
+        <!-- Existing Images displayed here -->
+        <div class="property-images-container">
+            <h3>Existing Property Images</h3>
+            <div class="property-images-gallery">
+                <div th:each="image : ${property.images}" class="image-container">
+                    <img th:src="@{/images/property_images/{propertyTitle}/{fileName}(propertyTitle=${property.title}, fileName=${image.imageFileName})}"
+                         alt="Property Image" class="property-image" />
+                    <form th:action="@{/agent/deleteimage/{propertyId}/{imageId}(propertyId=${property.id}, imageId=${image.id})}" method="post">
+                        <button type="submit" class="button delete-button">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

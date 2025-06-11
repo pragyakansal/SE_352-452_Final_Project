@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,ops,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body id="dashboard-page">
+    <div class="container" id="dashboard-container">
+        <div id="dashboard-heading">
+            <h1 th:text="'Welcome, User: ' + ${#authentication.name}">Welcome, User {}</h1>
+            <h3 th:text="'Your role: ' + ${user.role}">Your role: {}</h3>
+        </div>
+        <span th:text="${user.role + ' Dashboard'}">Dashboard</span>
+        <br>
+        <br>
+        <ul id="dashboard-options">
+            <li><a th:href="@{/landing-page/profile}" class="dashboard-link">My Profile</a></li>
+            <!-- BUYERS -->
+            <li sec:authorize="hasRole('BUYER')">
+                <a th:href="@{/buyer/listings}" class="dashboard-link">Browse Properties</a>
+            </li>
+            <!-- AGENTS -->
+            <li sec:authorize="hasRole('AGENT')">
+                <!--a th:href="@{/{id}/managelistings}" class="link">Manage Listings</a-->
+                <a th:href="@{/agent/managelistings}" class="dashboard-link">Manage Listings</a>
+            </li>
+            <li sec:authorize="hasRole('AGENT')">
+                <a th:href="@{/agent/addproperty}" class="dashboard-link">Create New Listing</a>
+            </li>
+            <!-- ADMINS -->
+            <li sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin/manage-users}" class="dashboard-link">Manage Users</a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin/create-agent}" class="dashboard-link">Create Agent</a>
+            </li>
+        </ul>
+        <a class="section-spacing" th:href="@{/landing-page/logout}" id="logout-button">Log Out</a>
+    </div>
+</body>
+</html>

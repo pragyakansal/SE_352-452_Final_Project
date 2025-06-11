@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Listings</title>  
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body id="listings-page">
+<div th:replace="common/header :: header"></div>
+    <div class="listings-container">
+        <div class="listings-dashboard">
+            <h1>Property Listings</h1>
+        </div>
+        <div th:if="${properties.empty}">
+            <p>No properties available at the moment.</p>
+        </div>
+        <!-- Filter Form -->
+        <form th:action="@{/buyer/listings}" method="get" class="filter-form">
+            <div class="filter-group">
+                <label for="minSqFt">Min Square Feet:</label>
+                <input type="number" id="minSqFt" name="minSqFt" th:value="${filter.minSqFt}" min="0">
+            </div>
+
+            <div class="filter-group">
+                <label for="minPrice">Min Price:</label>
+                <input type="number" id="minPrice" name="minPrice" th:value="${filter.minPrice}" min="0" step="0.01">
+            </div>
+
+            <div class="filter-group">
+                <label for="maxPrice">Max Price:</label>
+                <input type="number" id="maxPrice" name="maxPrice" th:value="${filter.maxPrice}" min="0" step="0.01">
+            </div>
+
+            <div class="filter-group">
+                <label for="sortBy">Sort By:</label>
+                <select id="sortBy" name="sortBy">
+                    <option value="">None</option>
+                    <option value="price_asc" th:selected="${filter.sortBy == 'price_asc'}">Price: Low to High</option>
+                    <option value="price_desc" th:selected="${filter.sortBy == 'price_desc'}">Price: High to Low</option>
+                    <option value="sqft_asc" th:selected="${filter.sortBy == 'sqft_asc'}">Square Feet: Low to High</option>
+                    <option value="sqft_desc" th:selected="${filter.sortBy == 'sqft_desc'}">Square Feet: High to Low</option>
+                </select>
+            </div>
+
+            <button type="submit">Apply Filters</button>
+        </form>
+
+        <!-- Property List -->
+        <div class="property-list">
+            <div th:each="property : ${properties}" class="property-card">
+                <img th:if="${!property.images.empty}" 
+                     th:src="@{/images/property_images/{folder}/{file}(folder=${property.title},file=${property.images[0].imageFileName})}"
+                     class="property-image">
+                     
+                <div class="property-content">
+                    <h2 th:text="${property.title}">Property Title</h2>
+                    <p class="price" th:text="${'$' + #numbers.formatDecimal(property.price, 1, 'COMMA', 2, 'POINT')}">$0.00</p>
+                    <p><strong>Location:</strong> <span th:text="${property.location}">Location</span></p>
+                    <p><strong>Size:</strong> <span th:text="${property.size + ' sq ft'}">0 sq ft</span></p>
+                    <p class="description" th:text="${property.description}">Short description...</p>
+                    <a th:href="@{/buyer/listings/{id}(id=${property.id})}" class="button">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+../.idea/workspace.xml
+../.idea/workspace.xml
+
+# macOS Finder files
+**/.DS_Store
+.DS_Store
